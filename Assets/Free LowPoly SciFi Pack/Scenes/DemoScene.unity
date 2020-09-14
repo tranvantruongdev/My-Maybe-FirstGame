@@ -1961,6 +1961,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: spider_pref
       objectReference: {fileID: 0}
+    - target: {fileID: 1715103906888602, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4251409082942358, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2013,7 +2017,8 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: f393bd98451ebe44e9dd26402f50e53f, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95681433750800818, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
 --- !u!1 &1629304909
 GameObject:
@@ -2030,6 +2035,7 @@ GameObject:
   - component: {fileID: 1629304914}
   - component: {fileID: 1629304915}
   - component: {fileID: 1629304916}
+  - component: {fileID: 1629304917}
   m_Layer: 0
   m_Name: Spidey
   m_TagString: Enemy
@@ -2191,6 +2197,19 @@ MonoBehaviour:
   directionVariable: Direction
   rotationLerpRate: 5
   minDistanceMoveThreshold: 15
+--- !u!65 &1629304917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629304909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.13172562, y: 0.10868065, z: 0.19646549}
+  m_Center: {x: 0.001904229, y: 0.076181166, z: 0.0038082516}
 --- !u!1 &1654592261
 GameObject:
   m_ObjectHideFlags: 0
