@@ -240,6 +240,8 @@ GameObject:
   - component: {fileID: 376086588}
   - component: {fileID: 376086589}
   - component: {fileID: 376086579}
+  - component: {fileID: 376086591}
+  - component: {fileID: 376086590}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -343,7 +345,7 @@ MonoBehaviour:
   - audioClip: {fileID: 8300000, guid: d9fbd40df37d34b57a63581db411006c, type: 3}
     audioVolume: 1
     audioPitch: 1
-    audioPitchRandomness: 1
+    audioPitchRandomness: 0
     loopAudio: 1
   spawnItemsOnStateEnter: 0
   itemSpawnMode: 0
@@ -366,9 +368,9 @@ MonoBehaviour:
   attackBasedOn: 0
   initialAttackTime: 0.5
   attackInterval: 0.5
-  attacksBeforeReload: 1
+  attacksBeforeReload: 0
   attackCount: 0
-  reloadState: {fileID: 376086585}
+  reloadState: {fileID: 376086578}
   noTargetState: {fileID: 376086586}
   animator: {fileID: 0}
   mecanimLayerIndex: 0
@@ -670,7 +672,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.83989036
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -778,6 +780,56 @@ MonoBehaviour:
   invertResult: 0
   distanceThreshold: 1.3
   negotiationMode: 0
+--- !u!114 &376086590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376086575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d11f46a235fcc408a3fe0055bd4fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveId: -1
+  transitionState: {fileID: 0}
+  parentTrigger: {fileID: 0}
+  subTriggers: []
+  ownsObjectFinder: 0
+  objectFinder:
+    useCustomTags: 0
+    tags:
+    - Player
+    cachePoint: 0
+  invertResult: 0
+  varIndex: 0
+  checkCondition: 0
+  numValue: 1
+  boolValue: 0
+--- !u!114 &376086591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376086575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d80311ad160ca4989c58f152650c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveId: -1
+  transitionState: {fileID: 0}
+  parentTrigger: {fileID: 0}
+  subTriggers: []
+  ownsObjectFinder: 0
+  objectFinder:
+    useCustomTags: 0
+    tags:
+    - Player
+    cachePoint: 0
+  invertResult: 0
 --- !u!1 &509934373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,7 +2087,7 @@ GameObject:
   - component: {fileID: 1629304914}
   - component: {fileID: 1629304915}
   - component: {fileID: 1629304916}
-  - component: {fileID: 1629304917}
+  - component: {fileID: 1629304918}
   m_Layer: 0
   m_Name: Spidey
   m_TagString: Enemy
@@ -2197,19 +2249,21 @@ MonoBehaviour:
   directionVariable: Direction
   rotationLerpRate: 5
   minDistanceMoveThreshold: 15
---- !u!65 &1629304917
-BoxCollider:
+--- !u!114 &1629304918
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629304909}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.13172562, y: 0.10868065, z: 0.19646549}
-  m_Center: {x: 0.001904229, y: 0.076181166, z: 0.0038082516}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6261e2abc89f6438feb8e15409fe1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  launchPointWeapon: {fileID: 0}
+  aimMetersAboveTarget: 1.5
 --- !u!1 &1654592261
 GameObject:
   m_ObjectHideFlags: 0

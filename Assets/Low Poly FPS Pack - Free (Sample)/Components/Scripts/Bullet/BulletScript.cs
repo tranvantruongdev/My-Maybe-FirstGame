@@ -49,16 +49,6 @@ public class BulletScript : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
-		//If bullet collides with "Enemy" tag
-		if (collision.transform.tag == "Enemy") 
-		{
-			//Toggle "isHit" on target object
-			//collision.transform.gameObject.GetComponent
-			//	<TargetScript>().isHit = true;
-			//Destroy bullet object
-			Destroy(gameObject);
-		}
-
 		//If bullet collides with "Target" tag
 		if (collision.transform.tag == "Target")
 		{
