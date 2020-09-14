@@ -239,37 +239,38 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			randomMuzzleflashValue = Random.Range (minRandomValue, maxRandomValue);
 		}
 
+		//Remove timescale cuz we dont need
 		//Timescale settings
 		//Change timescale to normal when 1 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha1)) 
-		{
-			Time.timeScale = 1.0f;
-			timescaleText.text = "1.0";
-		}
-		//Change timescale to 50% when 2 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha2)) 
-		{
-			Time.timeScale = 0.5f;
-			timescaleText.text = "0.5";
-		}
-		//Change timescale to 25% when 3 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha3)) 
-		{
-			Time.timeScale = 0.25f;
-			timescaleText.text = "0.25";
-		}
-		//Change timescale to 10% when 4 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha4)) 
-		{
-			Time.timeScale = 0.1f;
-			timescaleText.text = "0.1";
-		}
-		//Pause game when 5 key is pressed
-		if (Input.GetKeyDown (KeyCode.Alpha5)) 
-		{
-			Time.timeScale = 0.0f;
-			timescaleText.text = "0.0";
-		}
+		//if (Input.GetKeyDown (KeyCode.Alpha1)) 
+		//{
+		//	Time.timeScale = 1.0f;
+		//	timescaleText.text = "1.0";
+		//}
+		////Change timescale to 50% when 2 key is pressed
+		//if (Input.GetKeyDown (KeyCode.Alpha2)) 
+		//{
+		//	Time.timeScale = 0.5f;
+		//	timescaleText.text = "0.5";
+		//}
+		////Change timescale to 25% when 3 key is pressed
+		//if (Input.GetKeyDown (KeyCode.Alpha3)) 
+		//{
+		//	Time.timeScale = 0.25f;
+		//	timescaleText.text = "0.25";
+		//}
+		////Change timescale to 10% when 4 key is pressed
+		//if (Input.GetKeyDown (KeyCode.Alpha4)) 
+		//{
+		//	Time.timeScale = 0.1f;
+		//	timescaleText.text = "0.1";
+		//}
+		////Pause game when 5 key is pressed
+		//if (Input.GetKeyDown (KeyCode.Alpha5)) 
+		//{
+		//	Time.timeScale = 0.0f;
+		//	timescaleText.text = "0.0";
+		//}
 
 		//Set current ammo text from ammo int
 		currentAmmoText.text = currentAmmo.ToString ();
@@ -278,24 +279,25 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		//is currently playing
 		AnimationCheck ();
 
+		//Remove melee attack + grenade again, cuz we dont need
 		//Play knife attack 1 animation when Q key is pressed
-		if (Input.GetKeyDown (KeyCode.Q) && !isInspecting) 
-		{
-			anim.Play ("Knife Attack 1", 0, 0f);
-		}
-		//Play knife attack 2 animation when F key is pressed
-		if (Input.GetKeyDown (KeyCode.F) && !isInspecting) 
-		{
-			anim.Play ("Knife Attack 2", 0, 0f);
-		}
+		//if (Input.GetKeyDown (KeyCode.Q) && !isInspecting) 
+		//{
+		//	anim.Play ("Knife Attack 1", 0, 0f);
+		//}
+		////Play knife attack 2 animation when F key is pressed
+		//if (Input.GetKeyDown (KeyCode.F) && !isInspecting) 
+		//{
+		//	anim.Play ("Knife Attack 2", 0, 0f);
+		//}
 			
-		//Throw grenade when pressing G key
-		if (Input.GetKeyDown (KeyCode.G) && !isInspecting) 
-		{
-			StartCoroutine (GrenadeSpawnDelay ());
-			//Play grenade throw animation
-			anim.Play("GrenadeThrow", 0, 0.0f);
-		}
+		////Throw grenade when pressing G key
+		//if (Input.GetKeyDown (KeyCode.G) && !isInspecting) 
+		//{
+		//	StartCoroutine (GrenadeSpawnDelay ());
+		//	//Play grenade throw animation
+		//	anim.Play("GrenadeThrow", 0, 0.0f);
+		//}
 
 		//If out of ammo
 		if (currentAmmo == 0) 
@@ -326,7 +328,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Shooting 
-		if (Input.GetMouseButtonDown (0) && !outOfAmmo && !isReloading && !isInspecting && !isRunning) 
+		if (Input.GetMouseButtonDown (0) && !outOfAmmo && !isReloading && !isRunning) 
 		{
 			anim.Play ("Fire", 0, 0f);
 	
@@ -435,7 +437,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Reload 
-		if (Input.GetKeyDown (KeyCode.R) && !isReloading && !isInspecting) 
+		if (Input.GetKeyDown (KeyCode.R) && !isReloading) 
 		{
 			//Reload
 			Reload ();
@@ -529,6 +531,11 @@ public class HandgunScriptLPFP : MonoBehaviour {
 
 	//Reload
 	private void Reload () {
+		//Dont reload when full ammo!
+        if (currentAmmo == ammo)
+        {
+            return;
+        }
 		
 		if (outOfAmmo == true) 
 		{

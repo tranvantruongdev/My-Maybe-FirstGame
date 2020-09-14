@@ -205,7 +205,11 @@ namespace FPSControllerLPFP
 
         private void MoveCharacter()
         {
+            //My code
+            //Dont move when in-air!
             if (!_isGrounded) return;
+
+            //Original code below
             var direction = new Vector3(input.Move, 0f, input.Strafe).normalized;
             var worldDirection = transform.TransformDirection(direction);
             var velocity = worldDirection * (input.Run ? runningSpeed : walkingSpeed);
