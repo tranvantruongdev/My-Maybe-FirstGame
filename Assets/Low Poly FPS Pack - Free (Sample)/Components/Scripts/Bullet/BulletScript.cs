@@ -59,6 +59,13 @@ public class BulletScript : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
+		//If bullet collides with "Enemy" tag
+		if (collision.transform.tag == "Enemy")
+		{
+			//Destroy bullet object
+			Destroy(gameObject);
+		}
+
 		//If bullet collides with "ExplosiveBarrel" tag
 		if (collision.transform.tag == "ExplosiveBarrel") 
 		{

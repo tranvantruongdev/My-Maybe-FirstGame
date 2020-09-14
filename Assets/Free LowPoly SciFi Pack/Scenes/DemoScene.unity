@@ -233,15 +233,14 @@ GameObject:
   - component: {fileID: 376086577}
   - component: {fileID: 376086578}
   - component: {fileID: 376086582}
-  - component: {fileID: 376086581}
   - component: {fileID: 376086584}
   - component: {fileID: 376086583}
-  - component: {fileID: 376086580}
   - component: {fileID: 376086588}
-  - component: {fileID: 376086589}
   - component: {fileID: 376086579}
   - component: {fileID: 376086591}
   - component: {fileID: 376086590}
+  - component: {fileID: 376086580}
+  - component: {fileID: 376086581}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -329,7 +328,7 @@ MonoBehaviour:
   isEnabled: 1
   name: Mecanim Attack
   triggers:
-  - {fileID: 376086589}
+  - {fileID: 376086581}
   ownsObjectFinder: 0
   objectFinder:
     useCustomTags: 0
@@ -363,8 +362,8 @@ MonoBehaviour:
   attackAnimName: 
   attackPoint: 0.5
   inheritPreviousStateMovement: 0
-  scriptWithAttackMethod: {fileID: 0}
-  methodName: 
+  scriptWithAttackMethod: {fileID: 1629304918}
+  methodName: MeleeAttack
   attackBasedOn: 0
   initialAttackTime: 0.5
   attackInterval: 0.5
@@ -407,31 +406,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 376086575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e16c48c66fdd14b976ec4366310b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveId: -1
-  transitionState: {fileID: 376086578}
-  parentTrigger: {fileID: 0}
-  subTriggers: []
-  ownsObjectFinder: 0
-  objectFinder:
-    useCustomTags: 0
-    tags:
-    - Player
-    cachePoint: 0
-  invertResult: 0
-  distanceThreshold: 1.3
-  negotiationMode: 0
---- !u!114 &376086581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376086575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e29f56ac49b709147995fa56e95e39e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -447,6 +421,31 @@ MonoBehaviour:
     cachePoint: 0
   invertResult: 0
   sightTransformOverride: {fileID: 0}
+--- !u!114 &376086581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376086575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c46824ce97acd4d85d11318b8821d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveId: -1
+  transitionState: {fileID: 376086585}
+  parentTrigger: {fileID: 0}
+  subTriggers: []
+  ownsObjectFinder: 0
+  objectFinder:
+    useCustomTags: 0
+    tags:
+    - Player
+    cachePoint: 0
+  invertResult: 0
+  distanceThreshold: 1.4
+  negotiationMode: 0
 --- !u!114 &376086582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,8 +535,7 @@ MonoBehaviour:
   saveId: -1
   isEnabled: 1
   name: Seek
-  triggers:
-  - {fileID: 376086580}
+  triggers: []
   ownsObjectFinder: 0
   objectFinder:
     useCustomTags: 0
@@ -566,8 +564,8 @@ MonoBehaviour:
   specifySeekTarget: 0
   seekTarget: {fileID: 0}
   seekTargetReachedState: {fileID: 376086578}
-  noSeekTargetFoundState: {fileID: 376086578}
-  distanceToTargetThreshold: 1.3
+  noSeekTargetFoundState: {fileID: 376086586}
+  distanceToTargetThreshold: 1.4
   encircleTarget: 0
   destroyTargetWhenReached: 0
   getAsCloseAsPossible: 0
@@ -588,7 +586,7 @@ MonoBehaviour:
   isEnabled: 1
   name: Patrol
   triggers:
-  - {fileID: 376086581}
+  - {fileID: 376086580}
   ownsObjectFinder: 0
   objectFinder:
     useCustomTags: 0
@@ -648,7 +646,7 @@ MonoBehaviour:
   - audioClip: {fileID: 8300000, guid: c0da133be58e94bbd83a8fed86ec2f42, type: 3}
     audioVolume: 1
     audioPitch: 1
-    audioPitchRandomness: 1
+    audioPitchRandomness: 0.5
     loopAudio: 0
   spawnItemsOnStateEnter: 0
   itemSpawnMode: 0
@@ -672,7 +670,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.3236411
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -755,31 +753,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &376086589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376086575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25c46824ce97acd4d85d11318b8821d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveId: -1
-  transitionState: {fileID: 376086585}
-  parentTrigger: {fileID: 0}
-  subTriggers: []
-  ownsObjectFinder: 0
-  objectFinder:
-    useCustomTags: 0
-    tags:
-    - Player
-    cachePoint: 0
-  invertResult: 0
-  distanceThreshold: 1.3
-  negotiationMode: 0
 --- !u!114 &376086590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2088,6 +2061,7 @@ GameObject:
   - component: {fileID: 1629304915}
   - component: {fileID: 1629304916}
   - component: {fileID: 1629304918}
+  - component: {fileID: 1629304917}
   m_Layer: 0
   m_Name: Spidey
   m_TagString: Enemy
@@ -2249,6 +2223,19 @@ MonoBehaviour:
   directionVariable: Direction
   rotationLerpRate: 5
   minDistanceMoveThreshold: 15
+--- !u!65 &1629304917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629304909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1629304918
 MonoBehaviour:
   m_ObjectHideFlags: 0
