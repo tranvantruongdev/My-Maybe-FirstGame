@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AIBehavior;
 
 // ----- Low Poly FPS Pack Free Version -----
 public class BulletScript : MonoBehaviour {
@@ -13,6 +14,8 @@ public class BulletScript : MonoBehaviour {
 	public float minDestroyTime;
 	[Tooltip("Maximum time after impact that the bullet is destroyed")]
 	public float maxDestroyTime;
+	[Tooltip("Bullet damage")]
+	public float playerShootingDamage;
 
 	[Header("Impact Effect Prefabs")]
 	public Transform [] metalImpactPrefabs;
@@ -62,6 +65,9 @@ public class BulletScript : MonoBehaviour {
 		//If bullet collides with "Enemy" tag
 		if (collision.transform.tag == "Enemy")
 		{
+			//Send some damage via collider
+			collision.collider.SendMessage("Damage", playerShootingDamage);
+
 			//Destroy bullet object
 			Destroy(gameObject);
 		}
