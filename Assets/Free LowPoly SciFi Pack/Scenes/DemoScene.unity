@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2111223, g: 0.05814985, b: 0.03602645, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -365,9 +365,9 @@ MonoBehaviour:
   attackBasedOn: 0
   initialAttackTime: 0.5
   attackInterval: 0.5
-  attacksBeforeReload: 0
+  attacksBeforeReload: 1
   attackCount: 0
-  reloadState: {fileID: 376086578}
+  reloadState: {fileID: 376086585}
   noTargetState: {fileID: 376086586}
   animator: {fileID: 0}
   mecanimLayerIndex: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
     - Player
     cachePoint: 0
   invertResult: 0
-  duration: 3
+  duration: 0.5
   plusOrMinusDuration: 0
   timerResetMode: 0
 --- !u!114 &376086583
@@ -2397,6 +2397,24 @@ Transform:
   m_Father: {fileID: 132871604}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2125639108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1273765395313544, guid: c24fed9fa91f7634fbc8e5e12405008e, type: 3}
+  m_PrefabInstance: {fileID: 609193254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2125639115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125639108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95dd67d60898f594391be27322c291e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!4 &4251407896686789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4251409082942358, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}

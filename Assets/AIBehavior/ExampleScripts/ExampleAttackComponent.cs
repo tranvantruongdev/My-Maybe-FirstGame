@@ -10,11 +10,11 @@ namespace AIBehaviorExamples
 		public Transform launchPointWeapon;
 		public float aimMetersAboveTarget = 1.5f;
 
-
 		public void MeleeAttack(AttackData attackData)
 		{
 			Debug.Log ("Melee attack");
-			attackData.target.SendMessage("Damage", CalculateDamage(attackData));
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			player.SendMessage("Damage", CalculateDamage(attackData)/*, SendMessageOptions.DontRequireReceiver*/);
 		}
 
 
