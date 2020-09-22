@@ -6,7 +6,7 @@ namespace AIBehaviorExamples
 	public class PlayerStats : MonoBehaviour
 	{
 		public float health = 100.0f;
-
+		public Texture tex1;
 
 		public void SubtractHealth(float amount)
 		{
@@ -23,7 +23,15 @@ namespace AIBehaviorExamples
 			}
 		}
 
-		public void Damage(float damage)
+        private void OnGUI()
+        {
+            if (health<=90)
+            {
+				GUI.DrawTexture(Rect.zero, tex1, ScaleMode.ScaleToFit);
+            }
+        }
+
+        public void Damage(float damage)
 		{
 			Debug.Log("Got hit with " + damage + " damage points");
 			SubtractHealth(damage);

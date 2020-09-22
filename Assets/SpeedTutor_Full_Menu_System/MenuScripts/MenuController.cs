@@ -134,6 +134,9 @@ namespace SpeedTutorMainMenuSystem
             {
                 Debug.Log("YES QUIT!");
                 Application.Quit();
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
             }
 
             if (buttonType == "Options")
@@ -155,6 +158,7 @@ namespace SpeedTutorMainMenuSystem
                 menuDefaultCanvas.SetActive(false);
                 newGameDialog.SetActive(true);
                 menuNumber = 7;
+                Time.timeScale = 1;
             }
         }
         #endregion
