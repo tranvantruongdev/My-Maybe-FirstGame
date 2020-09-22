@@ -274,6 +274,8 @@ namespace GreatArcStudios
         //Boolean for if the blur effect was originally enabled
         //public Boolean blurBool;
 
+        [SerializeField] GameObject gunScript;
+
         /// <summary>
         /// The start method; you will need to place all of your inital value getting/setting here. 
         /// </summary>
@@ -362,6 +364,7 @@ namespace GreatArcStudios
         {
             Application.LoadLevel(Application.loadedLevel);
             uiEventSystem.firstSelectedGameObject = defualtSelectedMain;
+            Time.timeScale = 1;
         }
         /// <summary>
         /// Method to resume the game, so disable the pause menu and re-enable all other ui elements
@@ -388,6 +391,12 @@ namespace GreatArcStudios
                  //if you want to add in your own stuff do so here
                  return;
              } */
+
+            //My code
+            //Lock the mouse and enable gun script
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            gunScript.GetComponent<HandgunScriptLPFP>().enabled = true;
         }
         /// <summary>
         /// All the methods relating to qutting should be called here.
@@ -450,7 +459,7 @@ namespace GreatArcStudios
 
             if (Input.GetKeyDown(KeyCode.Escape) && mainPanel.active == false)
             {
-
+                //Original code
                 uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
                 mainPanel.SetActive(true);
                 vidPanel.SetActive(false);
@@ -466,8 +475,14 @@ namespace GreatArcStudios
                   {
                      blurEffect.enabled = true;
                  }  */
+
+                //My code
+                //Visible the mouse and disable gun script => make the gun dont shoot when click in pause mode
+                Cursor.lockState = CursorLockMode.None;
+                gunScript.GetComponent<HandgunScriptLPFP>().enabled = false;
             }
             else if(Input.GetKeyDown(KeyCode.Escape) && mainPanel.active == true) {
+                //Original code
                 Time.timeScale = timeScale;
                 mainPanel.SetActive(false);
                 vidPanel.SetActive(false);
@@ -478,6 +493,12 @@ namespace GreatArcStudios
                 {
                     otherUIElements[i].gameObject.SetActive(true);
                 }
+
+                //My code
+                //Lock the mouse and enable gun script
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false; 
+                gunScript.GetComponent<HandgunScriptLPFP>().enabled = true;
             }
 
 
