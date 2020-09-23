@@ -5,8 +5,14 @@ namespace AIBehaviorExamples
 {
 	public class PlayerStats : MonoBehaviour
 	{
+        private AudioSource _audioSource;
 		public float health = 100.0f;
-		public Texture tex1;
+		[SerializeField] AudioClip hurtSound;
+
+        private void Start()
+        {
+            _audioSource = GetComponent<AudioSource>();
+		}
 
 		public void SubtractHealth(float amount)
 		{
@@ -20,16 +26,10 @@ namespace AIBehaviorExamples
 			else
 			{
 				Debug.Log("Health is now: " + health);
+				//Play hurt sound
+				_audioSource.PlayOneShot(hurtSound);
 			}
 		}
-
-        private void OnGUI()
-        {
-            if (health<=90)
-            {
-				GUI.DrawTexture(Rect.zero, tex1, ScaleMode.ScaleToFit);
-            }
-        }
 
         public void Damage(float damage)
 		{

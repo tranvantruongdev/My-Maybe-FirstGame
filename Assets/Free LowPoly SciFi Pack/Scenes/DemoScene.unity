@@ -22287,7 +22287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  tex1: {fileID: 2800000, guid: 30fae34db543e8148bca00c5925965ad, type: 3}
+  hurtSound: {fileID: 8300000, guid: 0100ff51c214141e1b726485e4ae197e, type: 3}
 --- !u!1 &2130474111
 GameObject:
   m_ObjectHideFlags: 0
