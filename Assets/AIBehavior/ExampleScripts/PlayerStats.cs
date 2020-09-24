@@ -6,14 +6,10 @@ namespace AIBehaviorExamples
 	public class PlayerStats : MonoBehaviour
 	{
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioSource loopAudio;
 		public float health = 100.0f;
 		[SerializeField] AudioClip hurtSound;
 		[SerializeField] AudioClip deadSound;
-
-		private void Start()
-        {
-            //_audioSource = GetComponent<AudioSource>();
-		}
 
 		public void SubtractHealth(float amount)
 		{
@@ -31,6 +27,10 @@ namespace AIBehaviorExamples
 				Debug.Log("Health is now: " + health);
 				//Play hurt sound
 				_audioSource.PlayOneShot(hurtSound);
+                if (health<=50)
+                {
+					loopAudio.Play();
+                }
 			}
 		}
 
