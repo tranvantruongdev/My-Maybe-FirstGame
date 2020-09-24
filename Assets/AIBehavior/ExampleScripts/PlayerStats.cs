@@ -26,6 +26,10 @@ namespace AIBehaviorExamples
 				_audioSource.PlayOneShot(deadSound);
 				//Remove tag
 				gameObject.tag = "Untagged";
+				//Set time scale to 0
+				Time.timeScale = 0;
+				//Find Game Manager and put an end to this
+				FindObjectOfType<GameManager>().GameOver();
 			}
 			else
 			{
