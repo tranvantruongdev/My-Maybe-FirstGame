@@ -22,6 +22,8 @@ namespace AIBehaviorExamples
 				Debug.LogWarning("You're Dead!");
 				//Play dead sound
 				_audioSource.PlayOneShot(deadSound);
+				//Remove tag
+				
 			}
 			else
 			{
