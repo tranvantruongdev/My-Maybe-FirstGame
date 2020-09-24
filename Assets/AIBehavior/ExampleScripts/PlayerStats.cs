@@ -5,13 +5,14 @@ namespace AIBehaviorExamples
 {
 	public class PlayerStats : MonoBehaviour
 	{
-        private AudioSource _audioSource;
+        [SerializeField] private AudioSource _audioSource;
 		public float health = 100.0f;
 		[SerializeField] AudioClip hurtSound;
+		[SerializeField] AudioClip deadSound;
 
-        private void Start()
+		private void Start()
         {
-            _audioSource = GetComponent<AudioSource>();
+            //_audioSource = GetComponent<AudioSource>();
 		}
 
 		public void SubtractHealth(float amount)
@@ -22,6 +23,8 @@ namespace AIBehaviorExamples
 			{
 				health = 0.0f;
 				Debug.LogWarning("You're Dead!");
+				//Play dead sound
+				_audioSource.PlayOneShot(deadSound);
 			}
 			else
 			{
