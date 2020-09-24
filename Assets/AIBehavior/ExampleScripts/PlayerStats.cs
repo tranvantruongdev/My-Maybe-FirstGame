@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 
 namespace AIBehaviorExamples
 {
@@ -10,6 +10,7 @@ namespace AIBehaviorExamples
 		public float health = 100.0f;
 		[SerializeField] AudioClip hurtSound;
 		[SerializeField] AudioClip deadSound;
+		[SerializeField] GameObject hurtImg;
 
 		public void SubtractHealth(float amount)
 		{
@@ -30,6 +31,9 @@ namespace AIBehaviorExamples
                 if (health<=50)
                 {
 					loopAudio.Play();
+					var color = hurtImg.GetComponent<Image>().color;
+					color.a = 0.5f;
+					hurtImg.GetComponent<Image>().color = color;
                 }
 			}
 		}
