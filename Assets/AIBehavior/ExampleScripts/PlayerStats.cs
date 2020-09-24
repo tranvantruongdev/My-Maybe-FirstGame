@@ -23,7 +23,7 @@ namespace AIBehaviorExamples
 				//Play dead sound
 				_audioSource.PlayOneShot(deadSound);
 				//Remove tag
-				
+				gameObject.tag = "Untagged";
 			}
 			else
 			{
