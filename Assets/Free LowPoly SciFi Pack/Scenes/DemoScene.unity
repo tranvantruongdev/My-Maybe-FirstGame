@@ -22464,6 +22464,7 @@ MonoBehaviour:
   hurtSound: {fileID: 8300000, guid: 0100ff51c214141e1b726485e4ae197e, type: 3}
   deadSound: {fileID: 8300000, guid: 637162f47796b44ad8b65114350467e3, type: 3}
   hurtImg: {fileID: 1403144522}
+  scoreText: {fileID: 114376661441327554}
 --- !u!1 &2130474111
 GameObject:
   m_ObjectHideFlags: 0
@@ -23990,12 +23991,12 @@ GameObject:
   - component: {fileID: 222104533424447996}
   - component: {fileID: 114376661441327554}
   m_Layer: 5
-  m_Name: TimescaleText
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1913962150795626
 GameObject:
   m_ObjectHideFlags: 0
@@ -24042,12 +24043,12 @@ GameObject:
   - component: {fileID: 222520424799689332}
   - component: {fileID: 114730059883483606}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScoreTextLable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1958678064307890
 GameObject:
   m_ObjectHideFlags: 0
@@ -25588,7 +25589,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 0
 --- !u!114 &114466976028297728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25712,7 +25713,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'TIMESCALE:'
+  m_Text: 'Score:'
 --- !u!114 &114737826894031022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36041,7 +36042,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 245, y: -50}
+  m_AnchoredPosition: {x: 186.15, y: -50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224431392296232094

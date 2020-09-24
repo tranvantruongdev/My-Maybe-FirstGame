@@ -68,6 +68,10 @@ public class BulletScript : MonoBehaviour {
 			//Send some damage via collider
 			collision.collider.SendMessage("Damage", playerShootingDamage);
 
+			//Send score to player
+			var player = GameObject.FindGameObjectWithTag("Player");
+			player.SendMessage("Score", 10);
+
 			//Destroy bullet object
 			Destroy(gameObject);
 		}

@@ -11,6 +11,8 @@ namespace AIBehaviorExamples
 		[SerializeField] AudioClip hurtSound;
 		[SerializeField] AudioClip deadSound;
 		[SerializeField] GameObject hurtImg;
+		[SerializeField] Text scoreText;
+		[SerializeField] int _score;
 
 		public void SubtractHealth(float amount)
 		{
@@ -45,5 +47,11 @@ namespace AIBehaviorExamples
 			Debug.Log("Got hit with " + damage + " damage points");
 			SubtractHealth(damage);
 		}
+
+		void Score(int score)
+        {
+			_score += score;
+			scoreText.text = _score.ToString();
+        }
 	}
 }
