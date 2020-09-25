@@ -1,4 +1,5 @@
 ﻿using AIBehavior;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] private AudioClip gameOverSound;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] Transform[] enemySpawnPosArr;
+    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] private float waitTime;
+
+    private void Start()
+    {
+        StartCoroutine(EnemySpawn());
+    }
+
+    private IEnumerator EnemySpawn()
+    {
+        while (true)
+        {
+            var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
+            Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
 
     public void GameOver()
     {
