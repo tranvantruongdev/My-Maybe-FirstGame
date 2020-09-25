@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     bool gameOver = false;
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject gunScript;
-    [SerializeField] GameObject enemyScript;
     [SerializeField] GameObject pauseMenu;
 
     public void GameOver()
@@ -17,8 +16,6 @@ public class GameManager : MonoBehaviour
         gameOverPanel.SetActive(true);
         //Disable gunScript
         gunScript.GetComponent<HandgunScriptLPFP>().enabled = false;
-        //Disable enemyScript
-        enemyScript.GetComponent<AudioSource>().enabled = false;
         //Disable pauseMenu
         pauseMenu.gameObject.SetActive(false);
         //Set time scale to 0

@@ -4339,6 +4339,8 @@ GameObject:
   - component: {fileID: 376086581}
   - component: {fileID: 376086584}
   - component: {fileID: 376086579}
+  - component: {fileID: 376086590}
+  - component: {fileID: 376086589}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -4443,7 +4445,7 @@ MonoBehaviour:
     audioVolume: 1
     audioPitch: 1
     audioPitchRandomness: 0
-    loopAudio: 1
+    loopAudio: 0
   spawnItemsOnStateEnter: 0
   itemSpawnMode: 0
   itemSpawnPoint: {x: 0, y: 0, z: 0}
@@ -4787,7 +4789,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.88545215
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -4870,6 +4872,55 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &376086589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376086575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbea14a4b5b21f46b024b2508e9e205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveId: -1
+  transitionState: {fileID: 0}
+  parentTrigger: {fileID: 0}
+  subTriggers: []
+  ownsObjectFinder: 0
+  objectFinder:
+    useCustomTags: 0
+    tags:
+    - Player
+    cachePoint: 0
+  invertResult: 0
+  duration: 1
+  plusOrMinusDuration: 0
+  timerResetMode: 0
+--- !u!114 &376086590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376086575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d80311ad160ca4989c58f152650c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveId: -1
+  transitionState: {fileID: 0}
+  parentTrigger: {fileID: 0}
+  subTriggers: []
+  ownsObjectFinder: 0
+  objectFinder:
+    useCustomTags: 0
+    tags:
+    - Player
+    cachePoint: 0
+  invertResult: 0
 --- !u!1 &376287606
 GameObject:
   m_ObjectHideFlags: 0
@@ -11809,7 +11860,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverPanel: {fileID: 1525931327}
   gunScript: {fileID: 1986869108608814}
-  enemyScript: {fileID: 1629304909}
   pauseMenu: {fileID: 2111946239}
 --- !u!1 &1139786415
 GameObject:
