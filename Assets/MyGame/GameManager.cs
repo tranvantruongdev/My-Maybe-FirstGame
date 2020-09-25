@@ -9,9 +9,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject gunScript;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] private AudioClip gameOverSound;
+    [SerializeField] AudioSource audioSource;
 
     public void GameOver()
     {
+        audioSource.PlayOneShot(gameOverSound);
         gameOver = true;
         gameOverPanel.SetActive(true);
         //Disable gunScript
