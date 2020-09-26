@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] Transform[] enemySpawnPosArr;
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] private float waitTime;
+    [SerializeField] private float minWaitTime;
+    [SerializeField] private float maxWaitTime;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
             Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minWaitTime, maxWaitTime));
         }
     }
 

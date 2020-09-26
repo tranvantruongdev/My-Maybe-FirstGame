@@ -88,7 +88,8 @@ MonoBehaviour:
   - {fileID: 6281074840400526173}
   - {fileID: 6281074840400526167}
   - {fileID: 6281074840400526174}
-  triggers: []
+  triggers:
+  - {fileID: 5384370435297452207}
   objectFinder:
     useCustomTags: 0
     tags:
@@ -119,7 +120,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6281074839008633634}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.21
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -467,6 +468,8 @@ GameObject:
   - component: {fileID: 6281074840400526172}
   - component: {fileID: 6281074840400526161}
   - component: {fileID: 6281074840400526162}
+  - component: {fileID: 6311458160142067381}
+  - component: {fileID: 5384370435297452207}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -554,7 +557,7 @@ MonoBehaviour:
     tags:
     - Player
     cachePoint: 0
-  movementSpeed: 1
+  movementSpeed: 2
   rotationSpeed: 360
   animationStatesComponent: {fileID: 6281074839008633662}
   animationStates:
@@ -572,7 +575,7 @@ MonoBehaviour:
   pointDistanceThreshold: 5
   useAccurateCornering: 0
   corneringError: 10
-  patrolMode: 3
+  patrolMode: 1
   continuePatrolMode: 3
   patrolEndedState: {fileID: 0}
 --- !u!114 &6281074840400526166
@@ -597,7 +600,7 @@ MonoBehaviour:
     tags:
     - Player
     cachePoint: 0
-  movementSpeed: 1
+  movementSpeed: 2
   rotationSpeed: 360
   animationStatesComponent: {fileID: 6281074839008633662}
   animationStates:
@@ -673,8 +676,8 @@ MonoBehaviour:
   componentsToDestroy: []
   destroyGameObjects: 0
   gameObjectsToDestroy: []
-  changeTag: 0
-  deadTag: 
+  changeTag: 1
+  deadTag: Untagged
 --- !u!114 &6281074840400526173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1047,6 +1050,56 @@ MonoBehaviour:
   duration: 1
   plusOrMinusDuration: 0
   timerResetMode: 0
+--- !u!114 &6311458160142067381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281074840400526144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d80311ad160ca4989c58f152650c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveId: -1
+  transitionState: {fileID: 0}
+  parentTrigger: {fileID: 0}
+  subTriggers: []
+  ownsObjectFinder: 0
+  objectFinder:
+    useCustomTags: 0
+    tags:
+    - Player
+    cachePoint: 0
+  invertResult: 0
+--- !u!114 &5384370435297452207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281074840400526144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad89b67d3a48a5489c1b1cd34831ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveId: -1
+  transitionState: {fileID: 6281074840400526166}
+  parentTrigger: {fileID: 0}
+  subTriggers: []
+  ownsObjectFinder: 0
+  objectFinder:
+    useCustomTags: 0
+    tags:
+    - Player
+    cachePoint: 0
+  invertResult: 0
+  audioCachePoint: 1
+  volumeTriggerLevel: 1
+  setAudioTransformAsSeekTarget: 0
+  seekState: {fileID: 0}
 --- !u!1001 &6281074839139182652
 PrefabInstance:
   m_ObjectHideFlags: 0

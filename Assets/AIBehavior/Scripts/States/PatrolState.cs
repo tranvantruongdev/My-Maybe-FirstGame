@@ -58,6 +58,9 @@ namespace AIBehavior
 		{
 			base.Awake();
 
+			var patrolPointsGroup = GameObject.FindGameObjectWithTag("PatrolGroup").transform;
+			SetPatrolPoints(patrolPointsGroup);
+
 			previousPosition = transform.position;
 
 			if ( isEnabled )
