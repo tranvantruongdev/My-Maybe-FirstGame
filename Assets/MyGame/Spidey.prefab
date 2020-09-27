@@ -120,7 +120,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6281074839008633634}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.25
+  m_Radius: 0.21
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -208,7 +208,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.075, z: 0}
 --- !u!82 &6281074839008633656
 AudioSource:
   m_ObjectHideFlags: 0
@@ -676,7 +676,7 @@ MonoBehaviour:
   componentsToDestroy: []
   destroyGameObjects: 0
   gameObjectsToDestroy: []
-  changeTag: 1
+  changeTag: 0
   deadTag: Untagged
 --- !u!114 &6281074840400526173
 MonoBehaviour:

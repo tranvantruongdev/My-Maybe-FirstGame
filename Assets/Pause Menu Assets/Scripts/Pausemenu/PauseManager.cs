@@ -480,6 +480,7 @@ namespace GreatArcStudios
                 //My code
                 //Visible the mouse and disable gun script => make the gun dont shoot when click in pause mode
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true; 
                 gunScript.GetComponent<HandgunScriptLPFP>().enabled = false;
             }
             else if(Input.GetKeyDown(KeyCode.Escape) && mainPanel.activeInHierarchy == true) {
