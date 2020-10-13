@@ -32,6 +32,7 @@ namespace SpeedTutorMainMenuSystem
         [SerializeField] private GameObject gameplayMenu;
         [SerializeField] private GameObject controlsMenu;
         [SerializeField] private GameObject confirmationMenu;
+        [SerializeField] private GameObject stageCanvas;
         [Space(10)]
         [Header("Menu Popout Dialogs")]
         [SerializeField] private GameObject noSaveDialog;
@@ -74,7 +75,7 @@ namespace SpeedTutorMainMenuSystem
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (menuNumber == 2 || menuNumber == 7 || menuNumber == 8)
+                if (menuNumber == 2 || menuNumber == 7 || menuNumber == 8 || menuNumber == 9)
                 {
                     GoBackToMainMenu();
                     ClickSound();
@@ -250,14 +251,22 @@ namespace SpeedTutorMainMenuSystem
         #region Dialog Options - This is where we load what has been saved in player prefs!
         public void ClickNewGameDialog(string ButtonType)
         {
+            //Hide main menu and show stageCanvas
             if (ButtonType == "Yes")
             {
-                SceneManager.LoadScene(_newGameButtonLevel);
+                menuDefaultCanvas.SetActive(false);
+                stageCanvas.SetActive(true);
+                menuNumber = 9;
             }
 
             if (ButtonType == "No")
             {
                 GoBackToMainMenu();
+            }
+            //Load stage 1
+            if (ButtonType == "1")
+            {
+                SceneManager.LoadScene(_newGameButtonLevel);
             }
         }
 
@@ -314,6 +323,7 @@ namespace SpeedTutorMainMenuSystem
             graphicsMenu.SetActive(false);
             soundMenu.SetActive(false);
             gameplayMenu.SetActive(false);
+            stageCanvas.SetActive(false);
             menuNumber = 1;
         }
 
