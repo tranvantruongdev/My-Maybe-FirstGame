@@ -17,11 +17,14 @@ namespace SpeedTutorMainMenuSystem
         [SerializeField] private bool defaultInvertY;
 
         [Header("Levels To Load")]
-        public string _newGameButtonLevel;
-        private string levelToLoad;
+        public string stage1; 
+        public string stage2; 
+        public string stage3;
+        private string levelToLoad; //use when load saved game
 
-        private int menuNumber;
-        #endregion
+        private int menuNumber; //1 - default menu || 2 - option || 3 - graphics
+        #endregion              //4 - sounds || 5 - gameplay || 6 - controls
+                                //7 - new game || 8 - load game || 9 - stage select
 
         #region Menu Dialogs
         [Header("Main Menu Components")]
@@ -31,7 +34,7 @@ namespace SpeedTutorMainMenuSystem
         [SerializeField] private GameObject soundMenu;
         [SerializeField] private GameObject gameplayMenu;
         [SerializeField] private GameObject controlsMenu;
-        [SerializeField] private GameObject confirmationMenu;
+        [SerializeField] private GameObject confirmationBox;
         [SerializeField] private GameObject stageCanvas;
         [Space(10)]
         [Header("Menu Popout Dialogs")]
@@ -64,30 +67,31 @@ namespace SpeedTutorMainMenuSystem
         #endregion
 
         //MAIN SECTION
-        public IEnumerator ConfirmationBox()
+        public IEnumerator ConfirmationBox() //hide confirm box after 2 sec visual
         {
-            confirmationMenu.SetActive(true);
+            confirmationBox.SetActive(true);
             yield return new WaitForSeconds(2);
-            confirmationMenu.SetActive(false);
+            confirmationBox.SetActive(false);
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                //options, new game, load game, stage select
                 if (menuNumber == 2 || menuNumber == 7 || menuNumber == 8 || menuNumber == 9)
                 {
                     GoBackToMainMenu();
                     ClickSound();
                 }
-
+                //graphics, sounds, gameplay
                 else if (menuNumber == 3 || menuNumber == 4 || menuNumber == 5)
                 {
                     GoBackToOptionsMenu();
                     ClickSound();
                 }
-
-                else if (menuNumber == 6) //CONTROLS MENU
+                //controls
+                else if (menuNumber == 6) 
                 {
                     GoBackToGameplayMenu();
                     ClickSound();
@@ -133,11 +137,11 @@ namespace SpeedTutorMainMenuSystem
 
             if (buttonType == "Exit")
             {
-                Debug.Log("YES QUIT!");
+                #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+                #endif
+
                 Application.Quit();
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#endif
             }
 
             if (buttonType == "Options")
@@ -159,6 +163,7 @@ namespace SpeedTutorMainMenuSystem
                 menuDefaultCanvas.SetActive(false);
                 newGameDialog.SetActive(true);
                 menuNumber = 7;
+                //set time scale back to normal in case return from pause menu or gameover
                 Time.timeScale = 1;
             }
         }
@@ -263,10 +268,20 @@ namespace SpeedTutorMainMenuSystem
             {
                 GoBackToMainMenu();
             }
-            //Load stage 1
+
             if (ButtonType == "1")
             {
-                SceneManager.LoadScene(_newGameButtonLevel);
+                SceneManager.LoadScene(stage1);
+            }
+
+            if (ButtonType == "2")
+            {
+                SceneManager.LoadScene(stage2);
+            }
+
+            if (ButtonType == "3")
+            {
+                SceneManager.LoadScene(stage3);
             }
         }
 

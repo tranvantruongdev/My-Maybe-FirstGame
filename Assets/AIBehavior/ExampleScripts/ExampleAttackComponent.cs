@@ -9,6 +9,7 @@ namespace AIBehaviorExamples
 		public GameObject projectilePrefab;
 		public Transform launchPointWeapon;
 		public float aimMetersAboveTarget = 1.5f;
+		[SerializeField] private float touchDmg = 5;
 
 		public void MeleeAttack(AttackData attackData)
 		{
@@ -17,8 +18,17 @@ namespace AIBehaviorExamples
 			player.SendMessage("Damage", CalculateDamage(attackData)/*, SendMessageOptions.DontRequireReceiver*/);
 		}
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+				GameObject player = GameObject.FindGameObjectWithTag("Player");
+				player.SendMessage("Damage", touchDmg);
+			}
+        }
 
-		public void RangedAttack(AttackData attackData)
+
+        public void RangedAttack(AttackData attackData)
 		{
 			if ( attackData.target != null )
 			{

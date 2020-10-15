@@ -670,12 +670,14 @@ MonoBehaviour:
   spawnableItems: []
   variables: []
   destroyGameObject: 1
-  destroyAfterTime: 3
+  destroyAfterTime: 2
   destroyColliders: 1
-  destroyComponents: 0
-  componentsToDestroy: []
+  destroyComponents: 1
+  componentsToDestroy:
+  - {fileID: 6281074839008633632}
   destroyGameObjects: 0
-  gameObjectsToDestroy: []
+  gameObjectsToDestroy:
+  - {fileID: 0}
   changeTag: 0
   deadTag: Untagged
 --- !u!114 &6281074840400526173
