@@ -59,5 +59,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spidey Humanoid
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6601544399637690271, guid: fa5e3189878986649a4d2a7873428972, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fa5e3189878986649a4d2a7873428972, type: 3}

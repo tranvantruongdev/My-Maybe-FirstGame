@@ -5,14 +5,14 @@ namespace AIBehaviorExamples
 {
     public class PlayerStats : MonoBehaviour
     {
-        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioSource loopAudio;
-        public float health = 100.0f;
+        private float health = 100.0f;
         [SerializeField] AudioClip hurtSound;
         [SerializeField] AudioClip deadSound;
         [SerializeField] GameObject hurtImg;
         [SerializeField] Text scoreText;
-        [SerializeField] int _score;
+        [SerializeField] int score;
 
         public void SubtractHealth(float amount)
         {
@@ -25,7 +25,7 @@ namespace AIBehaviorExamples
                 //Disable loop audio
                 loopAudio.enabled = false;
                 //Play dead sound
-                _audioSource.PlayOneShot(deadSound);
+                audioSource.PlayOneShot(deadSound);
                 //Remove tag
                 gameObject.tag = "Untagged";
                 //Find Game Manager and put an end to this
@@ -35,7 +35,7 @@ namespace AIBehaviorExamples
             {
                 Debug.Log("Health is now: " + health);
                 //Play hurt sound
-                _audioSource.PlayOneShot(hurtSound);
+                audioSource.PlayOneShot(hurtSound);
                 if (health <= 50)
                 {
                     loopAudio.Play();
@@ -54,8 +54,8 @@ namespace AIBehaviorExamples
 
         void Score(int score)
         {
-            _score += score;
-            scoreText.text = _score.ToString();
+            this.score += score;
+            scoreText.text = this.score.ToString();
         }
     }
 }

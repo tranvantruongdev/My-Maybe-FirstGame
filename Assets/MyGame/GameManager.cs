@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    bool gameOver = false;
+    private bool gameOver = false;
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject gunScript;
     [SerializeField] GameObject pauseMenu;
