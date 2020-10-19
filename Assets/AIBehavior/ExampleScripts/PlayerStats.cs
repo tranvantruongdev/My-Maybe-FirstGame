@@ -12,7 +12,9 @@ namespace AIBehaviorExamples
         [SerializeField] AudioClip deadSound;
         [SerializeField] GameObject hurtImg;
         [SerializeField] Text scoreText;
-        [SerializeField] int score;
+        [SerializeField] private int score;
+
+        public int Score1 { get => score; set => score = value; }
 
         public void SubtractHealth(float amount)
         {

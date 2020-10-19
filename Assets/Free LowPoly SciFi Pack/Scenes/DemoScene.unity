@@ -150,6 +150,18 @@ PrefabInstance:
       propertyPath: m_Text
       value: Confirm
       objectReference: {fileID: 0}
+    - target: {fileID: 7736404089862921955, guid: 756b92c588dcb7b41b4d2935ed97d6fc, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736404089862921955, guid: 756b92c588dcb7b41b4d2935ed97d6fc, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736404089862921955, guid: 756b92c588dcb7b41b4d2935ed97d6fc, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7736404089862921964, guid: 756b92c588dcb7b41b4d2935ed97d6fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
