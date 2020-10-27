@@ -1,13 +1,16 @@
 ﻿using AIBehavior;
+using AIBehaviorExamples;
 using BayatGames.SaveGameFree;
 using BayatGames.SaveGameFree.Encoders;
 using BayatGames.SaveGameFree.Serializers;
 using BayatGames.SaveGameFree.Types;
+using GreatArcStudios;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +26,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float minWaitTime;
     [SerializeField] private float maxWaitTime;
 
-    [SerializeField] private string stageName;
+    private string stageName;
+    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private GameObject player;
+    [SerializeField] private int enemyCounter = 0;
 
     private void Start()
     {
@@ -36,6 +42,7 @@ public class GameManager : MonoBehaviour
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
             Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
+            enemyCounter += 1;
             yield return new WaitForSeconds(UnityEngine.Random.Range(minWaitTime, maxWaitTime));
         }
     }
@@ -54,6 +61,17 @@ public class GameManager : MonoBehaviour
         //Unlock the mouse
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        //set save flag to 0 to delete it
+        SaveGame.Save<int>(
+            flagIdentifier,
+            0,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
     }
 
     public enum SaveFormat
@@ -98,6 +116,24 @@ public class GameManager : MonoBehaviour
     /// The score identifier.
     /// </summary>
     public string scoreIdentifier = "enter the score identifier";
+
+    [Tooltip("You must specify a value for this to be able to save it.")]
+    /// <summary>
+    /// The score identifier.
+    /// </summary>
+    public string flagIdentifier = "enter the flag identifier";
+
+    [Tooltip("You must specify a value for this to be able to save it.")]
+    /// <summary>
+    /// The score identifier.
+    /// </summary>
+    public string stageIdentifier = "enter the flag identifier";
+
+    [Tooltip("You must specify a value for this to be able to save it.")]
+    /// <summary>
+    /// The score identifier.
+    /// </summary>
+    public string enemyCounterIdentifier = "enter the enemy counter identifier";
 
     [Tooltip("Encode the data?")]
     /// <summary>
@@ -160,6 +196,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public Vector3 defaultRotation = Quaternion.identity.eulerAngles;
 
+    [Tooltip("Default Score Value")]
+    /// <summary>
+    /// The default score.
+    /// </summary>
+    public int defaultScore = 0;
+
     protected virtual void Awake()
     {
         if (resetBlanks)
@@ -193,6 +235,21 @@ public class GameManager : MonoBehaviour
                 serializer = new SaveGameXmlSerializer();
                 break;
         }
+
+        var checkLoad = SaveGame.Load<int>(
+            flagIdentifier,
+            0,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        if (checkLoad == 1)
+        {
+            Load();
+        }
     }
 
     /// <summary>
@@ -219,6 +276,52 @@ public class GameManager : MonoBehaviour
             encoder,
             encoding,
             savePath);
+
+        SaveGame.Save<int>(
+            scoreIdentifier,
+            playerStats.Score1,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        SaveGame.Save<int>(
+            flagIdentifier,
+            1,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        var stage = SceneManager.GetActiveScene();
+
+        SaveGame.Save<string>(
+            stageIdentifier,
+            stage.name,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        SaveGame.Save<int>(
+            enemyCounterIdentifier,
+            0,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        Debug.Log("Saved!");
+
+        pauseMenu.GetComponent<PauseManager>().returnToMenu();
     }
 
     /// <summary>
@@ -226,7 +329,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public virtual void Load()
     {
-        transform.position = SaveGame.Load<Vector3Save>(
+        player.transform.position = SaveGame.Load<Vector3Save>(
             positionIdentifier,
             defaultPosition,
             encode,
@@ -236,7 +339,7 @@ public class GameManager : MonoBehaviour
             encoding,
             savePath);
 
-        transform.rotation = SaveGame.Load<QuaternionSave>(
+        player.transform.rotation = SaveGame.Load<QuaternionSave>(
             rotationIdentifier,
             Quaternion.Euler(defaultRotation),
             encode,
@@ -245,5 +348,37 @@ public class GameManager : MonoBehaviour
             encoder,
             encoding,
             savePath);
+
+        playerStats.Score1 = SaveGame.Load<int>(
+            scoreIdentifier,
+            defaultScore,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        //update score
+        playerStats.Score(0);
+
+        enemyCounter = SaveGame.Load<int>(
+            enemyCounterIdentifier,
+            0,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        while (enemyCounter > 0)
+        {
+            var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
+            Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
+            enemyCounter--;
+        }
+
+        Time.timeScale = 1;
     }
 }

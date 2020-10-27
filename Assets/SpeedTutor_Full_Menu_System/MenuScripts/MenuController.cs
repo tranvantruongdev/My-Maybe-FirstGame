@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using BayatGames.SaveGameFree;
+using BayatGames.SaveGameFree.Serializers;
+using BayatGames.SaveGameFree.Encoders;
+using System.Text;
 
 namespace SpeedTutorMainMenuSystem
 {
@@ -285,15 +289,152 @@ namespace SpeedTutorMainMenuSystem
             }
         }
 
+        public enum SaveFormat
+        {
+
+            /// <summary>
+            /// The XML.
+            /// </summary>
+            XML,
+
+            /// <summary>
+            /// The JSON.
+            /// </summary>
+            JSON,
+
+            /// <summary>
+            /// The Ninary.
+            /// </summary>
+            Binary
+
+        }
+
+        [Header("Save/Load Settings")]
+        [Space]
+
+        [Tooltip("You must specify a value for this to be able to save it.")]
+        /// <summary>
+        /// The position identifier.
+        /// </summary>
+        public string positionIdentifier = "enter the position identifier";
+
+        [Tooltip("You must specify a value for this to be able to save it.")]
+        /// <summary>
+        /// The rotation identifier.
+        /// </summary>
+        public string rotationIdentifier = "enter the rotation identifier";
+
+        [Tooltip("You must specify a value for this to be able to save it.")]
+        /// <summary>
+        /// The score identifier.
+        /// </summary>
+        public string scoreIdentifier = "enter the score identifier";
+
+        [Tooltip("You must specify a value for this to be able to save it.")]
+        /// <summary>
+        /// The score identifier.
+        /// </summary>
+        public string flagIdentifier = "enter the flag identifier";
+
+        [Tooltip("You must specify a value for this to be able to save it.")]
+        /// <summary>
+        /// The score identifier.
+        /// </summary>
+        public string stageIdentifier = "enter the flag identifier";
+
+        [Tooltip("Encode the data?")]
+        /// <summary>
+        /// The encode.
+        /// </summary>
+        public bool encode = false;
+
+        [Tooltip("If you leave it blank this will reset to it's default value.")]
+        /// <summary>
+        /// The encode password.
+        /// </summary>
+        public string encodePassword = "";
+
+        [Tooltip("Which serialization format?")]
+        public SaveFormat format = SaveFormat.JSON;
+
+        [Tooltip("If you leave it blank this will reset to it's default value.")]
+        /// <summary>
+        /// The serializer.
+        /// </summary>
+        public ISaveGameSerializer serializer;
+
+        [Tooltip("If you leave it blank this will reset to it's default value.")]
+        /// <summary>
+        /// The encoder.
+        /// </summary>
+        public ISaveGameEncoder encoder;
+
+        [Tooltip("If you leave it blank this will reset to it's default value.")]
+        /// <summary>
+        /// The encoding.
+        /// </summary>
+        public Encoding encoding;
+
+        [Tooltip("Where to save? (PersistentDataPath highly recommended).")]
+        /// <summary>
+        /// The save path.
+        /// </summary>
+        public SaveGamePath savePath = SaveGamePath.PersistentDataPath;
+
+        [Tooltip("Reset the empty fields to their default value.")]
+        /// <summary>
+        /// The reset blanks.
+        /// </summary>
+        public bool resetBlanks = true;
+
+        private void Awake()
+        {
+            if (resetBlanks)
+            {
+                if (string.IsNullOrEmpty(encodePassword))
+                {
+                    encodePassword = SaveGame.EncodePassword;
+                }
+                if (serializer == null)
+                {
+                    serializer = SaveGame.Serializer;
+                }
+                if (encoder == null)
+                {
+                    encoder = SaveGame.Encoder;
+                }
+                if (encoding == null)
+                {
+                    encoding = SaveGame.DefaultEncoding;
+                }
+            }
+            switch (format)
+            {
+                case SaveFormat.Binary:
+                    serializer = new SaveGameBinarySerializer();
+                    break;
+                case SaveFormat.JSON:
+                    serializer = new SaveGameJsonSerializer();
+                    break;
+                case SaveFormat.XML:
+                    serializer = new SaveGameXmlSerializer();
+                    break;
+            }
+        }
+
         public void ClickLoadGameDialog(string ButtonType)
         {
             if (ButtonType == "Yes")
             {
-                if (PlayerPrefs.HasKey("SavedLevel"))
+                var checkLoad = SaveGame.Load<int>(flagIdentifier, 0, encode, encodePassword,
+                                                    serializer, encoder, encoding, savePath);
+
+                if (checkLoad == 1)
                 {
                     Debug.Log("I WANT TO LOAD THE SAVED GAME");
                     //LOAD LAST SAVED SCENE
-                    levelToLoad = PlayerPrefs.GetString("SavedLevel");
+                    levelToLoad = SaveGame.Load<string>(stageIdentifier, "", encode, encodePassword,
+                                                        serializer, encoder, encoding, savePath);
                     SceneManager.LoadScene(levelToLoad);
                 }
 

@@ -54,7 +54,7 @@ namespace AIBehaviorExamples
             SubtractHealth(damage);
         }
 
-        void Score(int score)
+        public void Score(int score)
         {
             this.score += score;
             scoreText.text = this.score.ToString();
