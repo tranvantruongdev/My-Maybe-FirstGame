@@ -1378,15 +1378,15 @@ PrefabInstance:
       objectReference: {fileID: 1518231419575073559}
     - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: positionIdentifier
-      value: save/player/position
+      value: save/playerPosition
       objectReference: {fileID: 0}
     - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: rotationIdentifier
-      value: save/player/rotation
+      value: save/playerRotation
       objectReference: {fileID: 0}
     - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: scoreIdentifier
-      value: save/player/score
+      value: save/playerScore
       objectReference: {fileID: 0}
     - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: flagIdentifier
@@ -1398,7 +1398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: enemyCounterIdentifier
-      value: save/stage/enemyCounter
+      value: save/enemyCounter
       objectReference: {fileID: 0}
     - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: player
@@ -1468,6 +1468,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1518231420540638941, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1518231419575073562}
     - target: {fileID: 1519209600400639398, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
       propertyPath: m_Volume
       value: 0.4
@@ -1496,6 +1500,11 @@ MonoBehaviour:
 --- !u!1 &1518231419575073560 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1519209600400639416, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+  m_PrefabInstance: {fileID: 1518231419575073558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1518231419575073562 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1519209600400639398, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
   m_PrefabInstance: {fileID: 1518231419575073558}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4147808175377415253

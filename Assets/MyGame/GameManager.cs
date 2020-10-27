@@ -113,6 +113,12 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
+    /// The rotation identifier.
+    /// </summary>
+    public string hpIdentifier = "enter the hp identifier";
+
+    [Tooltip("You must specify a value for this to be able to save it.")]
+    /// <summary>
     /// The score identifier.
     /// </summary>
     public string scoreIdentifier = "enter the score identifier";
@@ -188,7 +194,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// The default position.
     /// </summary>
-    public Vector3 defaultPosition = Vector3.zero;
+    public Vector3 defaultPosition;
 
     [Tooltip("Default Rotation Value")]
     /// <summary>
@@ -259,7 +265,7 @@ public class GameManager : MonoBehaviour
     {
         SaveGame.Save<Vector3Save>(
             positionIdentifier,
-            transform.position,
+            player.transform.position,
             encode,
             encodePassword,
             serializer,
@@ -269,7 +275,17 @@ public class GameManager : MonoBehaviour
 
         SaveGame.Save<QuaternionSave>(
             rotationIdentifier,
-            transform.rotation,
+            player.transform.rotation,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        SaveGame.Save<float>(
+            hpIdentifier,
+            playerStats.Health,
             encode,
             encodePassword,
             serializer,
@@ -342,6 +358,16 @@ public class GameManager : MonoBehaviour
         player.transform.rotation = SaveGame.Load<QuaternionSave>(
             rotationIdentifier,
             Quaternion.Euler(defaultRotation),
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        playerStats.Health = SaveGame.Load<float>(
+            hpIdentifier,
+            playerStats.Health,
             encode,
             encodePassword,
             serializer,

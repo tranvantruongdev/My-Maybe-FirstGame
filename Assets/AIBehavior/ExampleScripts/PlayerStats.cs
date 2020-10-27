@@ -7,7 +7,7 @@ namespace AIBehaviorExamples
     {
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioSource loopAudio;
-        private float health = 100.0f;
+        [SerializeField] private float health = 100.0f;
         [SerializeField] AudioClip hurtSound;
         [SerializeField] AudioClip deadSound;
         [SerializeField] GameObject hurtImg;
@@ -15,6 +15,7 @@ namespace AIBehaviorExamples
         [SerializeField] private int score;
 
         public int Score1 { get => score; set => score = value; }
+        public float Health { get => health; set => health = value; }
 
         public void SubtractHealth(float amount)
         {
