@@ -426,10 +426,9 @@ namespace SpeedTutorMainMenuSystem
         {
             if (ButtonType == "Yes")
             {
-                var checkLoad = SaveGame.Load<int>(flagIdentifier, 0, encode, encodePassword,
-                                                    serializer, encoder, encoding, savePath);
+                GameSetting.loadType = GameSetting.LoadType.Load;
 
-                if (checkLoad == 1)
+                if (GameSetting.loadType == GameSetting.LoadType.Load)
                 {
                     Debug.Log("I WANT TO LOAD THE SAVED GAME");
                     //LOAD LAST SAVED SCENE
@@ -501,4 +500,15 @@ namespace SpeedTutorMainMenuSystem
         }
         #endregion
     }
+}
+
+public static class GameSetting
+{
+    public enum LoadType
+    {
+        New,
+        Load
+    }
+
+    public static LoadType loadType;
 }

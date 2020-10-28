@@ -61,17 +61,6 @@ public class GameManager : MonoBehaviour
         //Unlock the mouse
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        //set save flag to 0 to delete it
-        SaveGame.Save<int>(
-            flagIdentifier,
-            0,
-            encode,
-            encodePassword,
-            serializer,
-            encoder,
-            encoding,
-            savePath);
     }
 
     public enum SaveFormat
@@ -122,12 +111,6 @@ public class GameManager : MonoBehaviour
     /// The score identifier.
     /// </summary>
     public string scoreIdentifier = "enter the score identifier";
-
-    [Tooltip("You must specify a value for this to be able to save it.")]
-    /// <summary>
-    /// The score identifier.
-    /// </summary>
-    public string flagIdentifier = "enter the flag identifier";
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
@@ -189,7 +172,6 @@ public class GameManager : MonoBehaviour
     [Header("Defaults")]
     [Space]
 
-
     [Tooltip("Default Position Value")]
     /// <summary>
     /// The default position.
@@ -242,19 +224,13 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        var checkLoad = SaveGame.Load<int>(
-            flagIdentifier,
-            0,
-            encode,
-            encodePassword,
-            serializer,
-            encoder,
-            encoding,
-            savePath);
-
-        if (checkLoad == 1)
+        switch (GameSetting.loadType)
         {
-            Load();
+            case GameSetting.LoadType.Load:
+                Load();
+                break;
+            case GameSetting.LoadType.New:
+                break;
         }
     }
 
@@ -296,16 +272,6 @@ public class GameManager : MonoBehaviour
         SaveGame.Save<int>(
             scoreIdentifier,
             playerStats.Score1,
-            encode,
-            encodePassword,
-            serializer,
-            encoder,
-            encoding,
-            savePath);
-
-        SaveGame.Save<int>(
-            flagIdentifier,
-            1,
             encode,
             encodePassword,
             serializer,
