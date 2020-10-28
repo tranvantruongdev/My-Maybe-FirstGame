@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     private string stageName;
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private GameObject player;
-    [SerializeField] private int enemyCounter = 0;
 
     private void Start()
     {
@@ -42,7 +41,7 @@ public class GameManager : MonoBehaviour
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
             Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
-            enemyCounter += 1;
+            GameSetting.enemyCounter++;
             yield return new WaitForSeconds(UnityEngine.Random.Range(minWaitTime, maxWaitTime));
         }
     }
@@ -52,12 +51,19 @@ public class GameManager : MonoBehaviour
         audioSource.PlayOneShot(gameOverSound);
         gameOver = true;
         gameOverPanel.SetActive(true);
+
         //Disable gunScript
         gunScript.GetComponent<HandgunScriptLPFP>().enabled = false;
+
         //Disable pauseMenu
         pauseMenu.gameObject.SetActive(false);
+
         //Set time scale to 0
         Time.timeScale = 0;
+
+        //Set enemyCounter to 0
+        GameSetting.enemyCounter = 0;
+
         //Unlock the mouse
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -354,7 +360,7 @@ public class GameManager : MonoBehaviour
         //update score
         playerStats.Score(0);
 
-        enemyCounter = SaveGame.Load<int>(
+        GameSetting.enemyCounter = SaveGame.Load<int>(
             enemyCounterIdentifier,
             0,
             encode,
@@ -364,11 +370,11 @@ public class GameManager : MonoBehaviour
             encoding,
             savePath);
 
-        while (enemyCounter > 0)
+        while (GameSetting.enemyCounter > 0)
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
             Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
-            enemyCounter--;
+            GameSetting.enemyCounter--;
         }
 
         Time.timeScale = 1;
