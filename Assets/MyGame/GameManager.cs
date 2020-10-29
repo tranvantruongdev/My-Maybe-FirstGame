@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private string stageName;
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private GameObject player;
+    [SerializeField] private int enemiesLeft;
 
     private void Start()
     {
@@ -41,7 +42,6 @@ public class GameManager : MonoBehaviour
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
             Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
-            GameSetting.enemyCounter++;
             yield return new WaitForSeconds(UnityEngine.Random.Range(minWaitTime, maxWaitTime));
         }
     }
@@ -60,9 +60,6 @@ public class GameManager : MonoBehaviour
 
         //Set time scale to 0
         Time.timeScale = 0;
-
-        //Set enemyCounter to 0
-        GameSetting.enemyCounter = 0;
 
         //Unlock the mouse
         Cursor.lockState = CursorLockMode.None;
@@ -297,9 +294,12 @@ public class GameManager : MonoBehaviour
             encoding,
             savePath);
 
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemiesLeft = enemies.Length;
+
         SaveGame.Save<int>(
             enemyCounterIdentifier,
-            GameSetting.enemyCounter,
+            enemiesLeft,
             encode,
             encodePassword,
             serializer,
@@ -360,7 +360,7 @@ public class GameManager : MonoBehaviour
         //update score
         playerStats.Score(0);
 
-        GameSetting.enemyCounter = SaveGame.Load<int>(
+        enemiesLeft = SaveGame.Load<int>(
             enemyCounterIdentifier,
             0,
             encode,
@@ -370,11 +370,11 @@ public class GameManager : MonoBehaviour
             encoding,
             savePath);
 
-        while (GameSetting.enemyCounter > 0)
+        while (enemiesLeft > 0)
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
             Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
-            GameSetting.enemyCounter--;
+            enemiesLeft--;
         }
 
         Time.timeScale = 1;

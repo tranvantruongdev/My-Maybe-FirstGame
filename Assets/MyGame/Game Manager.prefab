@@ -293,7 +293,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 12d1b38b31809714a9e53e77f79ac789, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -400,6 +400,22 @@ MonoBehaviour:
   enemyPrefab: {fileID: 6281074839008633634, guid: fa5e3189878986649a4d2a7873428972, type: 3}
   minWaitTime: 5
   maxWaitTime: 10
+  playerStats: {fileID: 0}
+  player: {fileID: 0}
+  positionIdentifier: save/playerPosition
+  rotationIdentifier: save/playerRotation
+  hpIdentifier: enter the hp identifier
+  scoreIdentifier: save/playerScore
+  stageIdentifier: save/stage
+  enemyCounterIdentifier: save/enemyCounter
+  encode: 0
+  encodePassword: 
+  format: 1
+  savePath: 0
+  resetBlanks: 1
+  defaultPosition: {x: -1.239576, y: 1.53, z: -7.738159}
+  defaultRotation: {x: -0, y: 0, z: 0}
+  defaultScore: 0
 --- !u!82 &719478943697544660
 AudioSource:
   m_ObjectHideFlags: 0

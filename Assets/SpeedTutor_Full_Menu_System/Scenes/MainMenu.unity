@@ -477,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 32f55b7199a684749b62c1b004182435, type: 3}
     - target: {fileID: 114208141391937272, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
       propertyPath: m_Text
-      value: Save game will be override. Do you want to start a new game?
+      value: Do you want to start a new game?
       objectReference: {fileID: 0}
     - target: {fileID: 114221732574626354, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
       propertyPath: m_Interactable

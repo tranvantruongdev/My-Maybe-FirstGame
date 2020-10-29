@@ -511,5 +511,4 @@ public static class GameSetting
     }
 
     public static LoadType loadType;
-    public static int enemyCounter = 0;
 }
