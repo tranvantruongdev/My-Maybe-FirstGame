@@ -299,7 +299,7 @@ public class GameManager : MonoBehaviour
 
         SaveGame.Save<int>(
             enemyCounterIdentifier,
-            0,
+            GameSetting.enemyCounter,
             encode,
             encodePassword,
             serializer,
