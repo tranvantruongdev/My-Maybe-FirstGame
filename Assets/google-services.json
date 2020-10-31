@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "112557014506",
+    "firebase_url": "https://mymaybefirstgame.firebaseio.com",
+    "project_id": "mymaybefirstgame",
+    "storage_bucket": "mymaybefirstgame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112557014506:android:deb18825dd2d4fe1fc0693",
+        "android_client_info": {
+          "package_name": "com.TranVanTruongDev.MymaybeFirstGame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112557014506-r9h52qm1hpp4tr9psrh6gp0ggkvhgcf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_4jeCwF-C2fnpxny24dyvz19cdVYkhAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112557014506-r9h52qm1hpp4tr9psrh6gp0ggkvhgcf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
