@@ -5,12 +5,16 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Networking;
+using Firebase;
+using Firebase.Auth;
 
 namespace DevionGames.LoginSystem
 {
     public class LoginManager : MonoBehaviour
     {
 		private static LoginManager m_Current;
+
+		private static FirebaseAuth auth;
 
 		/// <summary>
 		/// The LoginManager singleton object. This object is set inside Awake()
@@ -47,6 +51,8 @@ namespace DevionGames.LoginSystem
 
         private void Start()
         {
+			auth = FirebaseAuth.DefaultInstance;
+
 			if (LoginManager.DefaultSettings.skipLogin)
 			{
 				if (LoginManager.DefaultSettings.debug)
@@ -158,38 +164,60 @@ namespace DevionGames.LoginSystem
 			if (LoginManager.DefaultSettings.debug)
 				Debug.Log("[CreateAccount]: Trying to register a new account with username: " + username + " and password: " + password + "!");
 
-			WWWForm newForm = new WWWForm();
-			newForm.AddField("name", username);
-			newForm.AddField("password", password);
-			newForm.AddField("email", email);
-
-			using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.createAccount, newForm)) {
-				yield return www.SendWebRequest();
-				if (www.isNetworkError || www.isHttpError)
+			auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
+				if (task.IsCanceled)
 				{
-					Debug.Log(www.error);
+					Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+					return;
 				}
-				else {
-					if (www.downloadHandler.text.Contains("true"))
-					{
-						if (LoginManager.DefaultSettings.debug)
-							Debug.Log("[CreateAccount] Account creation was successfull!");
-						EventHandler.Execute("OnAccountCreated");
-					}else {
-						if (LoginManager.DefaultSettings.debug)
-							Debug.Log("[CreateAccount] Failed to create account.");
-						EventHandler.Execute("OnFailedToCreateAccount");
-					}
+				if (task.IsFaulted)
+				{
+					Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+					return;
 				}
-			}
+
+				// Firebase user has been created.
+				FirebaseUser newUser = task.Result;
+				Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+					newUser.DisplayName, newUser.UserId);
+			});
+
+			EventHandler.Execute("OnAccountCreated");
+
+			#region old code
+			//WWWForm newForm = new WWWForm();
+			//newForm.AddField("name", username);
+			//newForm.AddField("password", password);
+			//newForm.AddField("email", email);
+
+			//using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.createAccount, newForm)) {
+			//	yield return www.SendWebRequest();
+			//	if (www.isNetworkError || www.isHttpError)
+			//	{
+			//		Debug.Log(www.error);
+			//	}
+			//	else {
+			//		if (www.downloadHandler.text.Contains("true"))
+			//		{
+			//			if (LoginManager.DefaultSettings.debug)
+			//				Debug.Log("[CreateAccount] Account creation was successfull!");
+			//			EventHandler.Execute("OnAccountCreated");
+			//		}else {
+			//			if (LoginManager.DefaultSettings.debug)
+			//				Debug.Log("[CreateAccount] Failed to create account.");
+			//			EventHandler.Execute("OnFailedToCreateAccount");
+			//		}
+			//	}
+			//}
+			#endregion
 		}
 
-		/// <summary>
-		/// Logins the account.
-		/// </summary>
-		/// <param name="username">Username.</param>
-		/// <param name="password">Password.</param>
-		public static void LoginAccount(string username, string password)
+        /// <summary>
+        /// Logins the account.
+        /// </summary>
+        /// <param name="username">Username.</param>
+        /// <param name="password">Password.</param>
+        public static void LoginAccount(string username, string password)
 		{
 			if (LoginManager.current != null)
 			{
@@ -207,42 +235,68 @@ namespace DevionGames.LoginSystem
 			if (LoginManager.DefaultSettings.debug)
 				Debug.Log("[LoginAccount] Trying to login using username: " + username + " and password: " + password + "!");
 
-			WWWForm newForm = new WWWForm();
-			newForm.AddField("name", username);
-			newForm.AddField("password", password);
+			auth = FirebaseAuth.DefaultInstance;
+
+			auth.SignInWithEmailAndPasswordAsync(username, password).ContinueWith(task => {
+				if (task.IsCanceled)
+				{
+					Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+					return;
+				}
+				if (task.IsFaulted)
+				{
+					Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+					return;
+				}
+
+				FirebaseUser newUser = task.Result;
+				
+				PlayerPrefs.SetString(LoginManager.Server.accountKey, username);
+
+                if (DefaultSettings.debug)
+					Debug.LogFormat("User signed in successfully: {0} ({1})",
+					newUser.DisplayName, newUser.UserId);
+            });
+			EventHandler.Execute("OnLogin");
+
+			#region old code
+			//WWWForm newForm = new WWWForm();
+			//newForm.AddField("name", username);
+			//newForm.AddField("password", password);
 
 
-			using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.login, newForm))
-			{
-				yield return www.SendWebRequest();
-				if (www.isNetworkError || www.isHttpError)
-				{
-					Debug.Log(www.error);
-				}
-				else
-				{
-					if (www.downloadHandler.text.Contains("true"))
-					{
-						PlayerPrefs.SetString(LoginManager.Server.accountKey, username);
-						if (LoginManager.DefaultSettings.debug)
-							Debug.Log("[LoginAccount] Login was successfull!");
-						EventHandler.Execute("OnLogin");
-					}
-					else
-					{
-						if (LoginManager.DefaultSettings.debug)
-							Debug.Log("[LoginAccount] Failed to login.");
-						EventHandler.Execute("OnFailedToLogin");
-					}
-				}
-			}
+			//using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.login, newForm))
+			//{
+			//	yield return www.SendWebRequest();
+			//	if (www.isNetworkError || www.isHttpError)
+			//	{
+			//		Debug.Log(www.error);
+			//	}
+			//	else
+			//	{
+			//		if (www.downloadHandler.text.Contains("true"))
+			//		{
+			//			PlayerPrefs.SetString(LoginManager.Server.accountKey, username);
+			//			if (LoginManager.DefaultSettings.debug)
+			//				Debug.Log("[LoginAccount] Login was successfull!");
+			//			EventHandler.Execute("OnLogin");
+			//		}
+			//		else
+			//		{
+			//			if (LoginManager.DefaultSettings.debug)
+			//				Debug.Log("[LoginAccount] Failed to login.");
+			//			EventHandler.Execute("OnFailedToLogin");
+			//		}
+			//	}
+			//}
+			#endregion
 		}
 
-		/// <summary>
-		/// Recovers the password.
-		/// </summary>
-		/// <param name="email">Email.</param>
-		public static void RecoverPassword(string email)
+        /// <summary>
+        /// Recovers the password.
+        /// </summary>
+        /// <param name="email">Email.</param>
+        public static void RecoverPassword(string email)
 		{
 			if (LoginManager.current != null)
 			{
