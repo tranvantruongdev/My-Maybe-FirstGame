@@ -69,7 +69,7 @@ namespace DevionGames.LoginSystem.Configuration
         public NotificationOptions userExists = new NotificationOptions()
         {
             title = "Error",
-            text = "Username already exists!"
+            text = "Username or Email already exists!"
         };
 
         public NotificationOptions accountCreated = new NotificationOptions()
@@ -88,6 +88,12 @@ namespace DevionGames.LoginSystem.Configuration
         {
             title = "Password Recovered",
             text = "Your password has beed send to your email address. You may login now."
+        };
+
+        public NotificationOptions weakPassword = new NotificationOptions()
+        {
+            title = "Weak Password",
+            text = "Your password need to be more than 6 characters."
         };
     }
 }

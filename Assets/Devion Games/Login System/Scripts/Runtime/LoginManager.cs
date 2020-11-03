@@ -194,6 +194,7 @@ namespace DevionGames.LoginSystem
                 }
                 if (DefaultSettings.debug) 
                     Debug.Log(message);
+                EventHandler.Execute("OnFailedToCreateAccount");
             }
             else
             {
@@ -220,6 +221,7 @@ namespace DevionGames.LoginSystem
                         AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
                         if (DefaultSettings.debug) 
                             Debug.Log("Username Set Failed!");
+                        EventHandler.Execute("OnFailedToCreateAccount");
                     }
                     else
                     {

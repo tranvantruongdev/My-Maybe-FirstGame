@@ -83,6 +83,13 @@ namespace DevionGames.LoginSystem
                 return;
             }
 
+            if (password.text.Length < 6)
+            {
+                LoginManager.Notifications.weakPassword.Show(delegate (int result) { Show(); }, "OK");
+                Close();
+                return;
+            }
+
             if (password.text != confirmPassword.text)
             {
                 password.text = "";
@@ -128,7 +135,6 @@ namespace DevionGames.LoginSystem
 
         private void OnFailedToCreateAccount() {
             Execute("OnFailedToCreateAccount", new CallbackEventData());
-            username.text = "";
             LoginManager.Notifications.userExists.Show( delegate (int result) { Show(); }, "OK");
             registerButton.interactable = true;
             if (loadingIndicator != null)
