@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skipLogin: 0
   loadSceneOnLogin: 1
-  sceneToLoad: DemoScene
+  sceneToLoad: MainMenu
   debug: 1
 --- !u!114 &-6335041345592972870
 MonoBehaviour:
