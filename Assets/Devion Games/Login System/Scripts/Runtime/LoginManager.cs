@@ -179,15 +179,6 @@ namespace DevionGames.LoginSystem
                 string message = "Register Failed!";
                 switch (errorCode)
                 {
-                    case AuthError.MissingEmail:
-                        message = "Missing Email";
-                        break;
-                    case AuthError.MissingPassword:
-                        message = "Missing Password";
-                        break;
-                    case AuthError.WeakPassword:
-                        message = "Weak Password";
-                        break;
                     case AuthError.EmailAlreadyInUse:
                         message = "Email Already In Use";
                         break;
