@@ -15,6 +15,7 @@ namespace DevionGames.LoginSystem
                 List<string> callbacks = new List<string>(base.Callbacks);
                 callbacks.Add("OnLogin");
                 callbacks.Add("OnFailedToLogin");
+                callbacks.Add("OnFailedToLoginAccountNotExist");
                 return callbacks.ToArray();
             }
         }
@@ -60,11 +61,26 @@ namespace DevionGames.LoginSystem
 
             EventHandler.Register("OnLogin", OnLogin);
             EventHandler.Register("OnFailedToLogin", OnFailedToLogin);
+            EventHandler.Register("OnFailedToLoginAccountNotExist", OnFailedToLoginAccountNotExist);
 
             loginButton.onClick.AddListener(LoginUsingFields);
         }
 
-        public void LoginUsingFields() {
+        public void LoginUsingFields()
+        {
+            if (string.IsNullOrEmpty(username.text) ||
+                string.IsNullOrEmpty(password.text))
+            {
+                LoginManager.Notifications.emptyField.Show(delegate (int result) { Show(); }, "OK");
+                Close();
+                return;
+            }
+            if (!LoginManager.ValidateEmail(username.text))
+            {
+                LoginManager.Notifications.invalidEmail.Show(delegate (int result) { Show(); }, "OK");
+                Close();
+                return;
+            }
             LoginManager.LoginAccount(username.text, password.text);
             loginButton.interactable = false;
             if (loadingIndicator != null) {
@@ -92,9 +108,20 @@ namespace DevionGames.LoginSystem
 
         private void OnFailedToLogin() {
             Execute("OnFailedToLogin", new CallbackEventData());
-            username.text = "";
             password.text = "";
             LoginManager.Notifications.loginFailed.Show( delegate (int result) { Show(); }, "OK");
+            loginButton.interactable = true;
+            if (loadingIndicator != null)
+            {
+                loadingIndicator.SetActive(false);
+            }
+            Close();
+        }
+
+        private void OnFailedToLoginAccountNotExist()
+        {
+            Execute("OnFailedToLoginAccountNotExist", new CallbackEventData());
+            LoginManager.Notifications.loginFailedAccountNotExist.Show(delegate (int result) { Show(); }, "OK");
             loginButton.interactable = true;
             if (loadingIndicator != null)
             {

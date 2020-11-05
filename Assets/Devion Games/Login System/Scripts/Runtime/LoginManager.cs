@@ -298,24 +298,17 @@ namespace DevionGames.LoginSystem
                 string message = "Login Failed!";
                 switch (errorCode)
                 {
-                    case AuthError.MissingEmail:
-                        message = "Missing Email";
-                        break;
-                    case AuthError.MissingPassword:
-                        message = "Missing Password";
-                        break;
                     case AuthError.WrongPassword:
                         message = "Wrong Password";
-                        break;
-                    case AuthError.InvalidEmail:
-                        message = "Invalid Email";
+                        EventHandler.Execute("OnFailedToLogin");
                         break;
                     case AuthError.UserNotFound:
                         message = "Account does not exist";
+                        EventHandler.Execute("OnFailedToLoginAccountNotExist");
                         break;
                 }
-                Debug.Log(message);
-                EventHandler.Execute("OnFailedToLogin");
+                if (DefaultSettings.debug)
+                    Debug.Log(message);
             }
             else
             {

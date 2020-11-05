@@ -39,7 +39,13 @@ namespace DevionGames.LoginSystem.Configuration
         public NotificationOptions loginFailed = new NotificationOptions()
         {
             title = "Login Failed",
-            text = "Username or password wrong! You may need to activate your account.!"
+            text = "Something wrong happened please try again."
+        };
+
+        public NotificationOptions loginFailedAccountNotExist = new NotificationOptions()
+        {
+            title = "Login Failed",
+            text = "Account not exist."
         };
 
         public NotificationOptions emptyField = new NotificationOptions()

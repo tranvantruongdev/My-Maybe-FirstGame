@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loginFailed:
     title: Login Failed
-    text: Username or password wrong! You may need to activate your account!
+    text: Something wrong happened please try again.
     color: {r: 1, g: 1, b: 1, a: 1}
     icon: {fileID: 0}
     delay: 2
@@ -88,7 +88,7 @@ MonoBehaviour:
     ignoreTimeScale: 1
   userExists:
     title: Error
-    text: Username already exists!
+    text: Username or Email already exists!
     color: {r: 1, g: 1, b: 1, a: 1}
     icon: {fileID: 0}
     delay: 2
@@ -113,6 +113,14 @@ MonoBehaviour:
   passwordRecovered:
     title: Password Recovered
     text: Your password has beed send to your email address. You may login now.
+    color: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    delay: 2
+    duration: 2
+    ignoreTimeScale: 1
+  weakPassword:
+    title: Weak Password
+    text: Your password need to be more than 6 characters.
     color: {r: 1, g: 1, b: 1, a: 1}
     icon: {fileID: 0}
     delay: 2
