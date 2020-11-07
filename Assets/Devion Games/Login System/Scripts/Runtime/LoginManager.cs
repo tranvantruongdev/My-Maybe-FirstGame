@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 using UnityEngine.Networking;
 using Firebase;
 using Firebase.Auth;
+using UnityEditor;
 
 namespace DevionGames.LoginSystem
 {
@@ -310,6 +311,11 @@ namespace DevionGames.LoginSystem
                 if (DefaultSettings.debug)
                     Debug.LogFormat("User signed in successfully: {0} ({1})",
                     newUser.DisplayName, newUser.UserId);
+
+                //hold info of user
+                GameSetting.username = newUser.DisplayName;
+                GameSetting.uid = newUser.UserId;
+
                 EventHandler.Execute("OnLogin");
             }
             #region old code

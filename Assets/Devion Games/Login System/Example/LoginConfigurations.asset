@@ -128,7 +128,7 @@ MonoBehaviour:
     ignoreTimeScale: 1
   weakPassword:
     title: Weak Password
-    text: Your password need to be more than 6 characters.
+    text: Your password need to be 6 or more characters.
     color: {r: 1, g: 1, b: 1, a: 1}
     icon: {fileID: 0}
     delay: 2

@@ -64,6 +64,9 @@ public class GameManager : MonoBehaviour
         //Unlock the mouse
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        //send score to firebase
+
     }
 
     public enum SaveFormat
