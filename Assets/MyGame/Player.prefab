@@ -1800,7 +1800,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519209600400639416}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2395763, y: 1.53, z: -7.7381587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1977,14 +1977,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95dd67d60898f594391be27322c291e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 1519209600400639417}
+  audioSource: {fileID: 1519209600400639398}
   loopAudio: {fileID: 1519209600400639398}
   health: 100
   hurtSound: {fileID: 8300000, guid: 0100ff51c214141e1b726485e4ae197e, type: 3}
   deadSound: {fileID: 8300000, guid: 637162f47796b44ad8b65114350467e3, type: 3}
   hurtImg: {fileID: 1518231420894032476}
   scoreText: {fileID: 1479308890198100692}
-  _score: 0
+  score: 0
 --- !u!82 &1519209600400639417
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1997,7 +1997,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2093,7 +2093,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d2f2903c4e9a34c6a88c14afe9a668f4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0

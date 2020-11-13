@@ -511,6 +511,6 @@ public static class GameSetting
     }
 
     public static LoadType loadType;
-    public static string username;
-    public static string uid;
+    public static string username = "test";
+    public static string uid = "123456";
 }

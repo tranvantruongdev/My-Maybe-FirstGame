@@ -4,6 +4,7 @@ using BayatGames.SaveGameFree;
 using BayatGames.SaveGameFree.Encoders;
 using BayatGames.SaveGameFree.Serializers;
 using BayatGames.SaveGameFree.Types;
+using Firebase.Database;
 using GreatArcStudios;
 using System;
 using System.Collections;
@@ -31,9 +32,31 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private int enemiesLeft;
 
+    DatabaseReference reference;
+
     private void Start()
     {
+
         StartCoroutine(EnemySpawn());
+        // Get the root reference location of the database.
+        reference = FirebaseDatabase.DefaultInstance.RootReference;
+    }
+
+    public void SaveData()
+    {
+        reference.Child("users").Child(GameSetting.uid).Child("username").SetValueAsync(GameSetting.username);
+    }
+
+    public void LoadData()
+    {
+        FirebaseDatabase.DefaultInstance
+        .GetReference("users")
+        .ValueChanged += Script_ValueChaned;
+    }
+
+    public void Script_ValueChaned(object sender, ValueChangedEventArgs e)
+    {
+        Debug.Log(e.Snapshot.Child("username").Child("username").GetValue(true).ToString());
     }
 
     private IEnumerator EnemySpawn()
@@ -66,7 +89,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         //send score to firebase
-
+        SaveData();
     }
 
     public enum SaveFormat
