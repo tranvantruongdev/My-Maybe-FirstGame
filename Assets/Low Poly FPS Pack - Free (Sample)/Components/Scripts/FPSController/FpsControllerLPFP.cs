@@ -83,7 +83,7 @@ namespace FPSControllerLPFP
             _rotationY = new SmoothRotation(RotationYRaw);
             _velocityX = new SmoothVelocity();
             _velocityZ = new SmoothVelocity();
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
             ValidateRotationRestriction();
         }
 			
@@ -339,7 +339,7 @@ namespace FPSControllerLPFP
 
             [Tooltip("The name of the virtual button mapped to run."),
              SerializeField]
-            private string run = "Fire3";
+            private string run = "Run";
 
             [Tooltip("The name of the virtual button mapped to jump."),
              SerializeField]
@@ -348,37 +348,37 @@ namespace FPSControllerLPFP
             /// Returns the value of the virtual axis mapped to rotate the camera around the y axis.
             public float RotateX
             {
-                get { return Input.GetAxisRaw(rotateX); }
+                get { return SimpleInput.GetAxisRaw(rotateX); }
             }
 				         
             /// Returns the value of the virtual axis mapped to rotate the camera around the x axis.        
             public float RotateY
             {
-                get { return Input.GetAxisRaw(rotateY); }
+                get { return SimpleInput.GetAxisRaw(rotateY); }
             }
 				        
             /// Returns the value of the virtual axis mapped to move the character back and forth.        
             public float Move
             {
-                get { return Input.GetAxisRaw(move); }
+                get { return SimpleInput.GetAxisRaw(move); }
             }
 				       
             /// Returns the value of the virtual axis mapped to move the character left and right.         
             public float Strafe
             {
-                get { return Input.GetAxisRaw(strafe); }
+                get { return SimpleInput.GetAxisRaw(strafe); }
             }
 				    
             /// Returns true while the virtual button mapped to run is held down.          
             public bool Run
             {
-                get { return Input.GetButton(run); }
+                get { return SimpleInput.GetButton(run); }
             }
 				     
             /// Returns true during the frame the user pressed down the virtual button mapped to jump.          
             public bool Jump
             {
-                get { return Input.GetButtonDown(jump); }
+                get { return SimpleInput.GetButtonDown(jump); }
             }
         }
     }

@@ -52,21 +52,21 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	private bool isReloading;
 
 	//Holstering weapon
-	private bool hasBeenHolstered = false;
-	//If weapon is holstered
-	private bool holstered;
+	//private bool hasBeenHolstered = false;
+	////If weapon is holstered
+	//private bool holstered;
 	//Check if running
 	private bool isRunning;
 	//Check if aiming
 	private bool isAiming;
 	//Check if walking
-	private bool isWalking;
+	//private bool isWalking;
 	//Check if inspecting weapon
 	private bool isInspecting;
 
 	//How much ammo is currently left
 	private int currentAmmo;
-	//Totalt amount of ammo
+	//Total amount of ammo
 	[Tooltip("How much ammo the weapon should have.")]
 	public int ammo;
 	//Check if out of ammo
@@ -204,9 +204,8 @@ public class HandgunScriptLPFP : MonoBehaviour {
 
 		//Aiming
 		//Toggle camera FOV when right click is held down
-		if(Input.GetButton("Fire2") && !isReloading && !isRunning && !isInspecting) 
-		{
-			
+		if(SimpleInput.GetButtonDown("Aim") && !isReloading && !isRunning && !isInspecting && !isAiming) 
+		{			
 			gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
 				aimFov, fovSpeed * Time.deltaTime);
 			
@@ -222,7 +221,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				soundHasPlayed = true;
 			}
 		} 
-		else 
+		else if(SimpleInput.GetButtonDown("Aim") && isAiming)
 		{
 			//When right click is released
 			gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView,
@@ -328,7 +327,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Shooting 
-		if (Input.GetMouseButtonDown (0) && !outOfAmmo && !isReloading && !isRunning) 
+		if (SimpleInput.GetButtonDown ("Fire") && !outOfAmmo && !isReloading && !isRunning) 
 		{
 			anim.Play ("Fire", 0, 0f);
 	
@@ -401,43 +400,43 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Inspect weapon when pressing T key
-		if (Input.GetKeyDown (KeyCode.T)) 
-		{
-			anim.SetTrigger ("Inspect");
-		}
+		//if (Input.GetKeyDown (KeyCode.T)) 
+		//{
+		//	anim.SetTrigger ("Inspect");
+		//}
 
 		//Toggle weapon holster when pressing E key
-		if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
-		{
-			holstered = true;
+		//if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
+		//{
+		//	holstered = true;
 
-			mainAudioSource.clip = SoundClips.holsterSound;
-			mainAudioSource.Play();
+		//	mainAudioSource.clip = SoundClips.holsterSound;
+		//	mainAudioSource.Play();
 
-			hasBeenHolstered = true;
-		} 
-		else if (Input.GetKeyDown (KeyCode.E) && hasBeenHolstered) 
-		{
-			holstered = false;
+		//	hasBeenHolstered = true;
+		//} 
+		//else if (Input.GetKeyDown (KeyCode.E) && hasBeenHolstered) 
+		//{
+		//	holstered = false;
 
-			mainAudioSource.clip = SoundClips.takeOutSound;
-			mainAudioSource.Play ();
+		//	mainAudioSource.clip = SoundClips.takeOutSound;
+		//	mainAudioSource.Play ();
 
-			hasBeenHolstered = false;
-		}
+		//	hasBeenHolstered = false;
+		//}
 
-		//Holster anim toggle
-		if (holstered == true) 
-		{
-			anim.SetBool ("Holster", true);
-		} 
-		else 
-		{
-			anim.SetBool ("Holster", false);
-		}
+		////Holster anim toggle
+		//if (holstered == true) 
+		//{
+		//	anim.SetBool ("Holster", true);
+		//} 
+		//else 
+		//{
+		//	anim.SetBool ("Holster", false);
+		//}
 
 		//Reload 
-		if (Input.GetKeyDown (KeyCode.R) && !isReloading) 
+		if (SimpleInput.GetButtonDown ("Reload") && !isReloading) 
 		{
 			//Reload
 			Reload ();
@@ -450,10 +449,10 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Walking when pressing down WASD keys
-		if (Input.GetKey (KeyCode.W) && !isRunning || 
-			Input.GetKey (KeyCode.A) && !isRunning || 
-			Input.GetKey (KeyCode.S) && !isRunning || 
-			Input.GetKey (KeyCode.D) && !isRunning) 
+		if (SimpleInput.GetKey (KeyCode.W) && !isRunning ||
+			SimpleInput.GetKey (KeyCode.A) && !isRunning ||
+			SimpleInput.GetKey (KeyCode.S) && !isRunning ||
+			SimpleInput.GetKey (KeyCode.D) && !isRunning) 
 		{
 			anim.SetBool ("Walk", true);
 		} else {
@@ -461,7 +460,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Running when pressing down W and Left Shift key
-		if ((Input.GetKey (KeyCode.W) && Input.GetKey (KeyCode.LeftShift))) 
+		if ((SimpleInput.GetKey (KeyCode.W) && SimpleInput.GetButton ("Run"))) 
 		{
 			isRunning = true;
 		} else {
@@ -487,14 +486,14 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		hasStartedSliderBack = false;
 	}
 
-	private IEnumerator GrenadeSpawnDelay () {
-		//Wait for set amount of time before spawning grenade
-		yield return new WaitForSeconds (grenadeSpawnDelay);
-		//Spawn grenade prefab at spawnpoint
-		Instantiate(Prefabs.grenadePrefab, 
-			Spawnpoints.grenadeSpawnPoint.transform.position, 
-			Spawnpoints.grenadeSpawnPoint.transform.rotation);
-	}
+	//private IEnumerator GrenadeSpawnDelay () {
+	//	//Wait for set amount of time before spawning grenade
+	//	yield return new WaitForSeconds (grenadeSpawnDelay);
+	//	//Spawn grenade prefab at spawnpoint
+	//	Instantiate(Prefabs.grenadePrefab, 
+	//		Spawnpoints.grenadeSpawnPoint.transform.position, 
+	//		Spawnpoints.grenadeSpawnPoint.transform.rotation);
+	//}
 
 	private IEnumerator AutoReload () {
 
@@ -607,14 +606,14 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Check if inspecting weapon
-		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Inspect")) 
-		{
-			isInspecting = true;
-		} 
-		else 
-		{
-			isInspecting = false;
-		}
+		//if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Inspect")) 
+		//{
+		//	isInspecting = true;
+		//} 
+		//else 
+		//{
+		//	isInspecting = false;
+		//}
 	}
 }
 // ----- Low Poly FPS Pack Free Version -----
