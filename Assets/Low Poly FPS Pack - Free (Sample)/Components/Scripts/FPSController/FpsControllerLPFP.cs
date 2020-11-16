@@ -345,16 +345,18 @@ namespace FPSControllerLPFP
              SerializeField]
             private string jump = "Jump";
 
+            public FixedTouchField fixedTouchField;
+
             /// Returns the value of the virtual axis mapped to rotate the camera around the y axis.
             public float RotateX
             {
-                get { return SimpleInput.GetAxisRaw(rotateX); }
+                get { return fixedTouchField.TouchDist.x; }
             }
 				         
             /// Returns the value of the virtual axis mapped to rotate the camera around the x axis.        
             public float RotateY
             {
-                get { return SimpleInput.GetAxisRaw(rotateY); }
+                get { return fixedTouchField.TouchDist.y; }
             }
 				        
             /// Returns the value of the virtual axis mapped to move the character back and forth.        
