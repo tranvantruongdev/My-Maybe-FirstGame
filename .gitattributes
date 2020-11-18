@@ -1,13 +1,11 @@
 # Auto detect text files and perform LF normalization
 # https://www.davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
 *    text=auto
-
 *.cs text diff=csharp
 # Unity
 *.cginc              text
 *.cs                 text diff=csharp
 *.shader             text
-
 # Unity YAML
 *.mat                merge=unityyamlmerge eol=lf
 *.anim               merge=unityyamlmerge eol=lf
@@ -16,20 +14,16 @@
 *.asset              merge=unityyamlmerge eol=lf
 *.meta               merge=unityyamlmerge eol=lf
 *.controller         merge=unityyamlmerge eol=lf
-
 # "physic" for 3D but "physics" for 2D
 *.physicMaterial2D   merge=unityyamlmerge eol=lf
 *.physicMaterial     merge=unityyamlmerge eol=lf
 *.physicsMaterial2D  merge=unityyamlmerge eol=lf
 *.physicsMaterial    merge=unityyamlmerge eol=lf
-
 # Using Git LFS
 # Add diff=lfs merge=lfs to the binary files
-
 # Unity LFS
 *.cubemap            binary
 *.unitypackage       binary
-
 # 3D models
 *.3dm                binary
 *.3ds                binary
@@ -51,18 +45,16 @@
 *.skp                binary
 *.stl                binary
 *.ztl                binary
-
 # Audio
 *.aif                binary
 *.aiff               binary
 *.it                 binary
 *.mod                binary
 *.mp3                binary
-*.ogg                binary
+*.ogg filter=lfs diff=lfs merge=lfs -text
 *.s3m                binary
 *.wav                binary
 *.xm                 binary
-
 # Video
 *.asf                binary
 *.avi                binary
@@ -73,7 +65,6 @@
 *.mpg                binary
 *.ogv                binary
 *.wmv                binary
-
 # Images
 *.bmp                binary
 *.exr                binary
@@ -88,7 +79,6 @@
 *.tga                binary
 *.tif                binary
 *.tiff               binary
-
 # Compressed Archive
 *.7z                binary
 *.bz2               binary
@@ -96,28 +86,22 @@
 *.rar               binary
 *.tar               binary
 *.zip               binary
-
 # Compiled Dynamic Library
 *.dll               binary
 *.pdb               binary
-*.so                binary
-
+*.so filter=lfs diff=lfs merge=lfs -text
 # Fonts
 *.otf               binary
 *.ttf               binary
-
 # Executable/Installer
 *.apk               binary
 *.exe               binary
-
 # Documents
 *.pdf               binary
-
 # ETC
 *.a                 binary
 *.rns               binary
 *.reason            binary
-
 # Collapse Unity-generated files on GitHub
 *.asset             linguist-generated
 *.mat               linguist-generated
@@ -128,7 +112,6 @@
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
 *            text=auto
-
 ###############################################################################
 # Set the merge driver for project and solution files
 #
@@ -140,7 +123,6 @@
 # intervention with every merge. To do so, just comment the entries below and
 # uncomment the group further below
 ###############################################################################
-
 *.sln        text eol=crlf
 *.csproj     text eol=crlf
 *.vbproj     text eol=crlf
@@ -153,13 +135,10 @@
 *.modelproj  text eol=crlf
 *.sqlproj    text eol=crlf
 *.wmaproj    text eol=crlf
-
 *.xproj      text eol=crlf
 *.props      text eol=crlf
 *.filters    text eol=crlf
 *.vcxitems   text eol=crlf
-
-
 #*.sln       merge=binary
 #*.csproj    merge=binary
 #*.vbproj    merge=binary
@@ -172,8 +151,9 @@
 #*.modelproj merge=binary
 #*.sqlproj   merge=binary
 #*.wwaproj   merge=binary
-
 #*.xproj     merge=binary
 #*.props     merge=binary
 #*.filters   merge=binary
 #*.vcxitems  merge=binary
+Tracking filter=lfs diff=lfs merge=lfs -text
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-6_16_1.so filter=lfs diff=lfs merge=lfs -text
