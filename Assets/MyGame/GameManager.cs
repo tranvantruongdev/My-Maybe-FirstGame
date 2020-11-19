@@ -44,19 +44,31 @@ public class GameManager : MonoBehaviour
 
     public void SaveData()
     {
-        reference.Child("users").Child(GameSetting.uid).Child("username").SetValueAsync(GameSetting.username);
+        reference.Child("Users").Child(GameSetting.uid).Child("Score").SetValueAsync(playerStats.Score1);
     }
 
-    public void LoadData()
+    public int LoadData()
     {
+        int score = 0;
         FirebaseDatabase.DefaultInstance
-        .GetReference("users")
-        .ValueChanged += Script_ValueChaned;
+      .GetReference("Score")
+      .GetValueAsync().ContinueWith(task => {
+          if (task.IsFaulted)
+          {
+              // Handle the error...
+          }
+          else if (task.IsCompleted)
+          {
+              DataSnapshot snapshot = task.Result;
+              score = (int)snapshot.Value;
+          }
+      });
+        return score;
     }
 
     public void Script_ValueChaned(object sender, ValueChangedEventArgs e)
     {
-        Debug.Log(e.Snapshot.Child("username").Child("username").GetValue(true).ToString());
+        Debug.Log(e.Snapshot.Child("username").Child("Score").GetValue(true).ToString());
     }
 
     private IEnumerator EnemySpawn()
@@ -84,9 +96,11 @@ public class GameManager : MonoBehaviour
         //Set time scale to 0
         Time.timeScale = 0;
 
-        //Unlock the mouse
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //score in firebase large then return
+        if (LoadData() > playerStats.Score1)
+        {
+            return;
+        }
 
         //send score to firebase
         SaveData();
