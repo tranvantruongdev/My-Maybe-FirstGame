@@ -62,3 +62,8 @@ namespace AIBehaviorExamples
         }
     }
 }
+
+public class PlayerScore
+{
+    public int score;
+}
