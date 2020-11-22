@@ -57,12 +57,12 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	//private bool holstered;
 	//Check if running
 	private bool isRunning;
-	//Check if aiming
-	private bool isAiming;
-	//Check if walking
-	//private bool isWalking;
-	//Check if inspecting weapon
-	private bool isInspecting;
+    //Check if aiming
+    private bool isAiming;
+    //Check if walking
+    private bool isWalking;
+    //Check if inspecting weapon
+    private bool isInspecting;
 
 	//How much ammo is currently left
 	private int currentAmmo;

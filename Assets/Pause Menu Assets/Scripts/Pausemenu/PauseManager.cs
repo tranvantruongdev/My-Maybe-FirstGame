@@ -281,8 +281,7 @@ namespace GreatArcStudios
         /// The start method; you will need to place all of your inital value getting/setting here. 
         /// </summary>
         public void Start()
-        {
-           
+        {           
             readUseSimpleTerrain = useSimpleTerrain;
             if (useSimpleTerrain)
             {
@@ -395,8 +394,8 @@ namespace GreatArcStudios
 
             //My code
             //Lock the mouse and enable gun script
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
             gunScript.GetComponent<HandgunScriptLPFP>().enabled = true;
         }
         /// <summary>

@@ -12,10 +12,14 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     private bool gameOver = false;
+
+    private static int highScore;
+    private static int yourScore;
 
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject gunScript;
@@ -36,7 +40,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        //set back while restart level
+        gameOver = false;
         StartCoroutine(EnemySpawn());
         // Get the root reference location of the database.
         reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -44,19 +49,46 @@ public class GameManager : MonoBehaviour
 
     public void SaveData()
     {
-        reference.Child("users").Child(GameSetting.uid).Child("username").SetValueAsync(GameSetting.username);
+        reference.Child("Users").Child(GameSetting.uid).Child("Score").SetValueAsync(playerStats.Score1);
     }
 
-    public void LoadData()
+    IEnumerator LoadData()
     {
-        FirebaseDatabase.DefaultInstance
-        .GetReference("users")
-        .ValueChanged += Script_ValueChaned;
+        var task = reference.Child("Users").Child(GameSetting.uid).Child("Score").GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted || task.IsFaulted);
+
+        if (task.IsFaulted)
+        {
+            Debug.Log("Error");
+        }
+        else if (task.IsCompleted)
+        {
+            DataSnapshot snapshot = task.Result;
+            Debug.Log(snapshot.Value.ToString());
+            int score = int.Parse(snapshot.Value.ToString());
+            //send score to firebase
+            if (score < playerStats.Score1)
+            {
+                //highScore = playerStats.Score1;
+                //yourScore = playerStats.Score1;
+                SetScore(playerStats.Score1, playerStats.Score1);
+                SaveData();
+            }
+            else
+            {
+                //highScore = score;
+                //yourScore = playerStats.Score1;
+                SetScore(score, playerStats.Score1);
+            }
+        }
+        yield return new WaitUntil(() => task.IsCompleted || task.IsFaulted);
     }
 
-    public void Script_ValueChaned(object sender, ValueChangedEventArgs e)
+    private void SetScore(int highScore, int yourScore)
     {
-        Debug.Log(e.Snapshot.Child("username").Child("username").GetValue(true).ToString());
+        highScoreText.text = "High Score: " + highScore.ToString();
+        yourScoreText.text = "Your Score: " + yourScore.ToString();
     }
 
     private IEnumerator EnemySpawn()
@@ -68,6 +100,11 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(UnityEngine.Random.Range(minWaitTime, maxWaitTime));
         }
     }
+
+    [SerializeField]
+    private Text highScoreText;
+    [SerializeField]
+    private Text yourScoreText;
 
     public void GameOver()
     {
@@ -84,12 +121,8 @@ public class GameManager : MonoBehaviour
         //Set time scale to 0
         Time.timeScale = 0;
 
-        //Unlock the mouse
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        //send score to firebase
-        SaveData();
+        StartCoroutine(LoadData());
+        //SetScore(highScore, yourScore);
     }
 
     public enum SaveFormat

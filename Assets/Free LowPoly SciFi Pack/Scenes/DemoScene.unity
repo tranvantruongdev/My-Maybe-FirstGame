@@ -183,6 +183,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2.16, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &569005398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 569005398, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
+  m_PrefabInstance: {fileID: 4147808175377415253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1325257254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1325257254, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
+  m_PrefabInstance: {fileID: 4147808175377415253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1436991994
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +949,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1518231419575073560}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: highScoreText
+      value: 
+      objectReference: {fileID: 569005398}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: yourScoreText
+      value: 
+      objectReference: {fileID: 1325257254}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
 --- !u!114 &719478944748889457 stripped
@@ -989,6 +1019,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1513707739819746910, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518231420666041584, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518231420666041587, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1519209600400639416, guid: 8a3785359836a594d8a13e991369aea9, type: 3}

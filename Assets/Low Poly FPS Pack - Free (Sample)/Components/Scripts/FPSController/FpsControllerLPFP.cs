@@ -321,14 +321,6 @@ namespace FPSControllerLPFP
         [Serializable]
         private class FpsInput
         {
-            [Tooltip("The name of the virtual axis mapped to rotate the camera around the y axis."),
-             SerializeField]
-            private string rotateX = "Mouse X";
-
-            [Tooltip("The name of the virtual axis mapped to rotate the camera around the x axis."),
-             SerializeField]
-            private string rotateY = "Mouse Y";
-
             [Tooltip("The name of the virtual axis mapped to move the character back and forth."),
              SerializeField]
             private string move = "Horizontal";
