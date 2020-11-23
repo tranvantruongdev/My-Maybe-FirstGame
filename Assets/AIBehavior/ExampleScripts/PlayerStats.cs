@@ -6,15 +6,17 @@ namespace AIBehaviorExamples
     public class PlayerStats : MonoBehaviour
     {
         [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioSource loopAudio;
-        [SerializeField] private float health = 100.0f;
+        [SerializeField] private AudioSource loopAudio; //for breath scare sound
         [SerializeField] AudioClip hurtSound;
         [SerializeField] AudioClip deadSound;
         [SerializeField] GameObject hurtImg;
         [SerializeField] Text scoreText;
         [SerializeField] private int score;
 
+        private float health = 100.0f;
+
         public int Score1 { get => score; set => score = value; }
+
         public float Health { get => health; set => health = value; }
 
         public void SubtractHealth(float amount)
@@ -61,9 +63,4 @@ namespace AIBehaviorExamples
             scoreText.text = this.score.ToString();
         }
     }
-}
-
-public class PlayerScore
-{
-    public int score;
 }

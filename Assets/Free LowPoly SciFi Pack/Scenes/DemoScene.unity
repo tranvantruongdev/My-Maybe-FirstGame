@@ -977,6 +977,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1479872617703442538, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+      propertyPath: swayAmount
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479872617703442538, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+      propertyPath: maxSwayAmount
+      value: 0.006
+      objectReference: {fileID: 0}
     - target: {fileID: 1513707739819746910, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2395763

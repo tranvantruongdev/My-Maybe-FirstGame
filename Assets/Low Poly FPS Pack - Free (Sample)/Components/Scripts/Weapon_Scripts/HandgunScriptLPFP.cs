@@ -82,8 +82,8 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	[Tooltip("The bullet model inside the mag, not used for all weapons.")]
 	public SkinnedMeshRenderer bulletInMagRenderer;
 
-	[Header("Grenade Settings")]
-	public float grenadeSpawnDelay = 0.35f;
+	//[Header("Grenade Settings")]
+	//public float grenadeSpawnDelay = 0.35f;
 
 	[Header("Muzzleflash Settings")]
 	public bool randomMuzzleflash = false;
@@ -113,7 +113,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	public AudioSource shootAudioSource;
 
 	[Header("UI Components")]
-	public Text timescaleText;
+	//public Text timescaleText;
 	public Text currentWeaponText;
 	public Text currentAmmoText;
 	public Text totalAmmoText;
@@ -237,67 +237,14 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		if (randomMuzzleflash == true) {
 			randomMuzzleflashValue = Random.Range (minRandomValue, maxRandomValue);
 		}
-
-		//Remove timescale cuz we dont need
-		//Timescale settings
-		//Change timescale to normal when 1 key is pressed
-		//if (Input.GetKeyDown (KeyCode.Alpha1)) 
-		//{
-		//	Time.timeScale = 1.0f;
-		//	timescaleText.text = "1.0";
-		//}
-		////Change timescale to 50% when 2 key is pressed
-		//if (Input.GetKeyDown (KeyCode.Alpha2)) 
-		//{
-		//	Time.timeScale = 0.5f;
-		//	timescaleText.text = "0.5";
-		//}
-		////Change timescale to 25% when 3 key is pressed
-		//if (Input.GetKeyDown (KeyCode.Alpha3)) 
-		//{
-		//	Time.timeScale = 0.25f;
-		//	timescaleText.text = "0.25";
-		//}
-		////Change timescale to 10% when 4 key is pressed
-		//if (Input.GetKeyDown (KeyCode.Alpha4)) 
-		//{
-		//	Time.timeScale = 0.1f;
-		//	timescaleText.text = "0.1";
-		//}
-		////Pause game when 5 key is pressed
-		//if (Input.GetKeyDown (KeyCode.Alpha5)) 
-		//{
-		//	Time.timeScale = 0.0f;
-		//	timescaleText.text = "0.0";
-		//}
-
+		
 		//Set current ammo text from ammo int
 		currentAmmoText.text = currentAmmo.ToString ();
 
 		//Continosuly check which animation 
 		//is currently playing
 		AnimationCheck ();
-
-		//Remove melee attack + grenade again, cuz we dont need
-		//Play knife attack 1 animation when Q key is pressed
-		//if (Input.GetKeyDown (KeyCode.Q) && !isInspecting) 
-		//{
-		//	anim.Play ("Knife Attack 1", 0, 0f);
-		//}
-		////Play knife attack 2 animation when F key is pressed
-		//if (Input.GetKeyDown (KeyCode.F) && !isInspecting) 
-		//{
-		//	anim.Play ("Knife Attack 2", 0, 0f);
-		//}
-			
-		////Throw grenade when pressing G key
-		//if (Input.GetKeyDown (KeyCode.G) && !isInspecting) 
-		//{
-		//	StartCoroutine (GrenadeSpawnDelay ());
-		//	//Play grenade throw animation
-		//	anim.Play("GrenadeThrow", 0, 0.0f);
-		//}
-
+		
 		//If out of ammo
 		if (currentAmmo == 0) 
 		{
@@ -399,42 +346,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				Spawnpoints.casingSpawnPoint.transform.rotation);
 		}
 
-		//Inspect weapon when pressing T key
-		//if (Input.GetKeyDown (KeyCode.T)) 
-		//{
-		//	anim.SetTrigger ("Inspect");
-		//}
-
-		//Toggle weapon holster when pressing E key
-		//if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
-		//{
-		//	holstered = true;
-
-		//	mainAudioSource.clip = SoundClips.holsterSound;
-		//	mainAudioSource.Play();
-
-		//	hasBeenHolstered = true;
-		//} 
-		//else if (Input.GetKeyDown (KeyCode.E) && hasBeenHolstered) 
-		//{
-		//	holstered = false;
-
-		//	mainAudioSource.clip = SoundClips.takeOutSound;
-		//	mainAudioSource.Play ();
-
-		//	hasBeenHolstered = false;
-		//}
-
-		////Holster anim toggle
-		//if (holstered == true) 
-		//{
-		//	anim.SetBool ("Holster", true);
-		//} 
-		//else 
-		//{
-		//	anim.SetBool ("Holster", false);
-		//}
-
 		//Reload 
 		if (SimpleInput.GetButtonDown ("Reload") && !isReloading) 
 		{
@@ -449,10 +360,10 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Walking when pressing down WASD keys
-		if (SimpleInput.GetKey (KeyCode.W) && !isRunning ||
-			SimpleInput.GetKey (KeyCode.A) && !isRunning ||
-			SimpleInput.GetKey (KeyCode.S) && !isRunning ||
-			SimpleInput.GetKey (KeyCode.D) && !isRunning) 
+		if (SimpleInput.GetAxis ("Horizontal") > 0 && !isRunning ||
+			SimpleInput.GetAxis("Horizontal") < 0 && !isRunning ||
+			SimpleInput.GetAxis("Vertical") > 0 && !isRunning ||
+			SimpleInput.GetAxis("Vertical") < 0 && !isRunning) 
 		{
 			anim.SetBool ("Walk", true);
 		} else {
@@ -460,7 +371,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Running when pressing down W and Left Shift key
-		if ((SimpleInput.GetKey (KeyCode.W) && SimpleInput.GetButton ("Run"))) 
+		if ((SimpleInput.GetAxis("Vertical") > 0 && SimpleInput.GetButton ("Run"))) 
 		{
 			isRunning = true;
 		} else {
@@ -485,15 +396,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 
 		hasStartedSliderBack = false;
 	}
-
-	//private IEnumerator GrenadeSpawnDelay () {
-	//	//Wait for set amount of time before spawning grenade
-	//	yield return new WaitForSeconds (grenadeSpawnDelay);
-	//	//Spawn grenade prefab at spawnpoint
-	//	Instantiate(Prefabs.grenadePrefab, 
-	//		Spawnpoints.grenadeSpawnPoint.transform.position, 
-	//		Spawnpoints.grenadeSpawnPoint.transform.rotation);
-	//}
 
 	private IEnumerator AutoReload () {
 
@@ -604,16 +506,5 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		{
 			isReloading = false;
 		}
-
-		//Check if inspecting weapon
-		//if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Inspect")) 
-		//{
-		//	isInspecting = true;
-		//} 
-		//else 
-		//{
-		//	isInspecting = false;
-		//}
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----
