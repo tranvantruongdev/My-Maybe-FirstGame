@@ -32,7 +32,7 @@ namespace AIBehaviorExamples
                 //Play dead sound
                 audioSource.PlayOneShot(deadSound);
                 //Remove tag
-                gameObject.tag = "Untagged";
+                //gameObject.tag = "Untagged";
                 //Find Game Manager and put an end to this
                 FindObjectOfType<GameManager>().GameOver();
             }

@@ -127,7 +127,6 @@ public class GameManager : MonoBehaviour
 
     public enum SaveFormat
     {
-
         /// <summary>
         /// The XML.
         /// </summary>
@@ -142,13 +141,10 @@ public class GameManager : MonoBehaviour
         /// The Ninary.
         /// </summary>
         Binary
-
     }
-
 
     [Header("Save/Load Settings")]
     [Space]
-
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
