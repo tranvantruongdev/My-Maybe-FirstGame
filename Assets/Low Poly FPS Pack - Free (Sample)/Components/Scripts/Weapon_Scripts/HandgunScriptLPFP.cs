@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class HandgunScriptLPFP : MonoBehaviour {
 	//Crosshair ref
 	[SerializeField] Image crosshairImage;
@@ -27,18 +26,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	[Header("UI Weapon Name")]
 	[Tooltip("Name of the current weapon, shown in the game UI.")]
 	public string weaponName;
-	private string storedWeaponName;
-
-	[Header("Weapon Sway")]
-	//Enables weapon sway
-	[Tooltip("Toggle weapon sway.")]
-	public bool weaponSway;
-
-	public float swayAmount = 0.02f;
-	public float maxSwayAmount = 0.06f;
-	public float swaySmoothValue = 4.0f;
-
-	private Vector3 initialSwayPosition;
+	private string storedWeaponName; //change back with out of ammo text
 
 	[Header("Weapon Settings")]
 
@@ -53,18 +41,10 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	//Check if reloading
 	private bool isReloading;
 
-	//Holstering weapon
-	//private bool hasBeenHolstered = false;
-	////If weapon is holstered
-	//private bool holstered;
 	//Check if running
 	private bool isRunning;
     //Check if aiming
     private bool isAiming;
-    //Check if walking
-    private bool isWalking;
-    //Check if inspecting weapon
-    private bool isInspecting;
 
 	//How much ammo is currently left
 	private int currentAmmo;
@@ -83,9 +63,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	public float showBulletInMagDelay = 0.6f;
 	[Tooltip("The bullet model inside the mag, not used for all weapons.")]
 	public SkinnedMeshRenderer bulletInMagRenderer;
-
-	//[Header("Grenade Settings")]
-	//public float grenadeSpawnDelay = 0.35f;
 
 	[Header("Muzzleflash Settings")]
 	public bool randomMuzzleflash = false;
@@ -126,7 +103,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		[Header("Prefabs")]
 		public Transform bulletPrefab;
 		public Transform casingPrefab;
-		public Transform grenadePrefab;
 	}
 	public prefabs Prefabs;
 	
@@ -139,8 +115,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		public Transform casingSpawnPoint;
 		//Bullet prefab spawn from this point
 		public Transform bulletSpawnPoint;
-		//Grenade prefab spawn from this point
-		public Transform grenadeSpawnPoint;
 	}
 	public spawnpoints Spawnpoints;
 
@@ -149,7 +123,6 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	{
 		public AudioClip shootSound;
 		public AudioClip takeOutSound;
-		public AudioClip holsterSound;
 		public AudioClip reloadSoundOutOfAmmo;
 		public AudioClip reloadSoundAmmoLeft;
 		public AudioClip aimSound;
@@ -175,38 +148,14 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		currentWeaponText.text = weaponName;
 		//Set total ammo text from total ammo int
 		totalAmmoText.text = ammo.ToString();
-
-		//Weapon sway
-		initialSwayPosition = transform.localPosition;
-
 		//Set the shoot sound to audio source
 		shootAudioSource.clip = SoundClips.shootSound;
 	}
-
-	private void LateUpdate () {
-		//Weapon sway
-		if (weaponSway == true) {
-			float movementX = -Input.GetAxis ("Mouse X") * swayAmount;
-			float movementY = -Input.GetAxis ("Mouse Y") * swayAmount;
-			//Clamp movement to min and max values
-			movementX = Mathf.Clamp 
-				(movementX, -maxSwayAmount, maxSwayAmount);
-			movementY = Mathf.Clamp 
-				(movementY, -maxSwayAmount, maxSwayAmount);
-			//Lerp local pos
-			Vector3 finalSwayPosition = new Vector3 
-				(movementX, movementY, 0);
-			transform.localPosition = Vector3.Lerp 
-				(transform.localPosition, finalSwayPosition + 
-				initialSwayPosition, Time.deltaTime * swaySmoothValue);
-		}
-	}
 	
 	private void Update () {
-
 		//Aiming
-		//Toggle camera FOV when right click is held down
-		if(SimpleInput.GetButtonDown("Aim") && !isReloading && !isRunning && !isInspecting && !isAiming) 
+		//Toggle camera FOV when right click is clicked
+		if(SimpleInput.GetButtonDown("Aim") && !isReloading && !isRunning && !isAiming) 
 		{
 			crosshairImage.enabled = false;
 			gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
@@ -363,7 +312,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			}
 		}
 
-		//Walking when pressing down WASD keys
+		//Walking when using joystick
 		if (SimpleInput.GetAxis ("Horizontal") > 0 && !isRunning ||
 			SimpleInput.GetAxis("Horizontal") < 0 && !isRunning ||
 			SimpleInput.GetAxis("Vertical") > 0 && !isRunning ||
@@ -374,7 +323,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			anim.SetBool ("Walk", false);
 		}
 
-		//Running when pressing down W and Left Shift key
+		//Running when move ahead and run key
 		if ((SimpleInput.GetAxis("Vertical") > 0 && SimpleInput.GetButton ("Run"))) 
 		{
 			isRunning = true;

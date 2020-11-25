@@ -2923,7 +2923,7 @@ MonoBehaviour:
   defaultFov: 40
   aimFov: 16
   weaponName: USP
-  weaponSway: 1
+  weaponSway: 0
   swayAmount: 0.002
   maxSwayAmount: 0.006
   swaySmoothValue: 10
