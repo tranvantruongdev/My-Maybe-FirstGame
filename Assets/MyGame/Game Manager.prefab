@@ -278,6 +278,7 @@ Transform:
   m_Children:
   - {fileID: 1416784942}
   - {fileID: 132871604}
+  - {fileID: 599915738824979983}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -402,6 +403,10 @@ MonoBehaviour:
   maxWaitTime: 10
   playerStats: {fileID: 0}
   player: {fileID: 0}
+  enemiesLeft: 0
+  playerSpawnPos: {fileID: 599915738824979983}
+  highScoreText: {fileID: 0}
+  yourScoreText: {fileID: 0}
   positionIdentifier: save/playerPosition
   rotationIdentifier: save/playerRotation
   hpIdentifier: enter the hp identifier
@@ -512,3 +517,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6042987315493744236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599915738824979983}
+  m_Layer: 0
+  m_Name: PlayerSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &599915738824979983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042987315493744236}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2395763, y: 1.53, z: -7.7381587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 719478943697544657}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

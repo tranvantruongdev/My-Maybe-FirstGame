@@ -18,9 +18,6 @@ public class GameManager : MonoBehaviour
 {
     private bool gameOver = false;
 
-    private static int highScore;
-    private static int yourScore;
-
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject gunScript;
     [SerializeField] GameObject pauseMenu;
@@ -37,6 +34,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int enemiesLeft;
 
     DatabaseReference reference;
+
+    [SerializeField] private Transform playerSpawnPos;
 
     private void Start()
     {
@@ -70,15 +69,11 @@ public class GameManager : MonoBehaviour
             //send score to firebase
             if (score < playerStats.Score1)
             {
-                //highScore = playerStats.Score1;
-                //yourScore = playerStats.Score1;
                 SetScore(playerStats.Score1, playerStats.Score1);
                 SaveData();
             }
             else
             {
-                //highScore = score;
-                //yourScore = playerStats.Score1;
                 SetScore(score, playerStats.Score1);
             }
         }
@@ -288,6 +283,8 @@ public class GameManager : MonoBehaviour
                 Load();
                 break;
             case GameSetting.LoadType.New:
+                //re-assign pos to player to prevent false pos when replay different stage
+                player.GetComponent<Transform>().position = playerSpawnPos.position;
                 break;
         }
     }
