@@ -234,7 +234,6 @@ namespace GreatArcStudios
             audioPanel.SetActive(false);
             quitPanelAnimator.enabled = true;
             quitPanelAnimator.Play("QuitPanelIn");
-
         }
         /// <summary>
         /// Method to quit the game. Call methods such as auto saving before qutting here.

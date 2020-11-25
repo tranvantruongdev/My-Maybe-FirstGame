@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 // ----- Low Poly FPS Pack Free Version -----
 public class HandgunScriptLPFP : MonoBehaviour {
+	//Crosshair ref
+	[SerializeField] Image crosshairImage;
 
 	//Animator component attached to weapon
 	Animator anim;
@@ -205,7 +207,8 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		//Aiming
 		//Toggle camera FOV when right click is held down
 		if(SimpleInput.GetButtonDown("Aim") && !isReloading && !isRunning && !isInspecting && !isAiming) 
-		{			
+		{
+			crosshairImage.enabled = false;
 			gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
 				aimFov, fovSpeed * Time.deltaTime);
 			
@@ -223,6 +226,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		} 
 		else if(SimpleInput.GetButtonDown("Aim") && isAiming)
 		{
+			crosshairImage.enabled = true;
 			//When right click is released
 			gunCamera.fieldOfView = Mathf.Lerp(gunCamera.fieldOfView,
 				defaultFov,fovSpeed * Time.deltaTime);
