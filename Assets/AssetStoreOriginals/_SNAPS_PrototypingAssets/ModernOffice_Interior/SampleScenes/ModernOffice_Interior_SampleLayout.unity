@@ -648,6 +648,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
+--- !u!114 &83239146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1325257254, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
+  m_PrefabInstance: {fileID: 83239145}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &83239147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 569005398, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
+  m_PrefabInstance: {fileID: 83239145}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &85841074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12996,6 +13018,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 343155594}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: highScoreText
+      value: 
+      objectReference: {fileID: 83239147}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: yourScoreText
+      value: 
+      objectReference: {fileID: 83239146}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
 --- !u!1001 &2112799240
