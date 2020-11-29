@@ -957,6 +957,10 @@ PrefabInstance:
       propertyPath: yourScoreText
       value: 
       objectReference: {fileID: 1325257254}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: hpIdentifier
+      value: save/playerHp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
 --- !u!114 &719478944748889457 stripped

@@ -291,22 +291,9 @@ namespace SpeedTutorMainMenuSystem
 
         public enum SaveFormat
         {
-
-            /// <summary>
-            /// The XML.
-            /// </summary>
             XML,
-
-            /// <summary>
-            /// The JSON.
-            /// </summary>
             JSON,
-
-            /// <summary>
-            /// The Ninary.
-            /// </summary>
             Binary
-
         }
 
         [Header("Save/Load Settings")]
@@ -434,9 +421,14 @@ namespace SpeedTutorMainMenuSystem
                     //LOAD LAST SAVED SCENE
                     levelToLoad = SaveGame.Load<string>(stageIdentifier, "", encode, encodePassword,
                                                         serializer, encoder, encoding, savePath);
+                    if (levelToLoad == "")
+                    {
+                        loadGameDialog.SetActive(false);
+                        noSaveDialog.SetActive(true);
+                        return;
+                    }
                     SceneManager.LoadScene(levelToLoad);
                 }
-
                 else
                 {
                     Debug.Log("Load Game Dialog");
