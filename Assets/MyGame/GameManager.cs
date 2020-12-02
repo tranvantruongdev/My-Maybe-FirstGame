@@ -336,10 +336,11 @@ public class GameManager : MonoBehaviour
 
         var stage = SceneManager.GetActiveScene();
 
+        //dont encode the stage name
         SaveGame.Save<string>(
             stageIdentifier,
             stage.name,
-            encode,
+            false,
             encodePassword,
             serializer,
             encoder,

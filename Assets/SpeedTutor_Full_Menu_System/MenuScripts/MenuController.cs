@@ -260,8 +260,8 @@ namespace SpeedTutorMainMenuSystem
                 if (GameSetting.loadType == GameSetting.LoadType.Load)
                 {
                     Debug.Log("I WANT TO LOAD THE SAVED GAME");
-                    //LOAD LAST SAVED SCENE
-                    levelToLoad = SaveGame.Load<string>(stageIdentifier, "", encode, encodePassword,
+                    //LOAD LAST SAVED SCENE NOT DECODE
+                    levelToLoad = SaveGame.Load<string>(stageIdentifier, "", false, encodePassword,
                                                         serializer, encoder, encoding, savePath);
                     //if dont have any saved scene then show dialog and return
                     if (levelToLoad == "" || levelToLoad == null)
