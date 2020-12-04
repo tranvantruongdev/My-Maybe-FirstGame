@@ -12946,6 +12946,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.7158551
       objectReference: {fileID: 0}
+    - target: {fileID: 599915738824979983, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 599915738824979983, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 599915738824979983, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 719478943697544656, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: m_Name
       value: Game Manager
@@ -13029,6 +13041,26 @@ PrefabInstance:
     - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
       propertyPath: hpIdentifier
       value: save/playerHp
+      objectReference: {fileID: 0}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: encode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: format
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: defaultPosition.x
+      value: 21.03108
+      objectReference: {fileID: 0}
+    - target: {fileID: 719478943697544659, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: defaultPosition.z
+      value: -1.715855
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042987315493744236, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1983d9fc1694dd945bc467cc1ea410c2, type: 3}

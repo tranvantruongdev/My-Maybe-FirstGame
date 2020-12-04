@@ -34,9 +34,9 @@ public class ShareScoreManager : MonoBehaviour
     public void ShareSheet(Texture2D texture)
     {
         ShareSheet shareSheet = new ShareSheet();
-        shareSheet.Text = "Share Sheet";
+        shareSheet.Text = "I've got new highscore, can't you beat it?";
         shareSheet.AttachImage(texture);
-        shareSheet.URL = "https://twiiter.com/RoixoGames";
+        shareSheet.URL = "https://twiiter.com/";
 
         NPBinding.Sharing.ShowView(shareSheet, FinishSharing);
     }

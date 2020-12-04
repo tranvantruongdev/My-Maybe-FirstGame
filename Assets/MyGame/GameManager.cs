@@ -16,8 +16,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private bool gameOver = false;
-
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject gunScript;
     [SerializeField] GameObject pauseMenu;
@@ -39,11 +37,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //set back while restart level
-        gameOver = false;
         StartCoroutine(EnemySpawn());
         // Get the root reference location of the database.
         reference = FirebaseDatabase.DefaultInstance.RootReference;
+        player.transform.position = playerSpawnPos.position;
     }
 
     public void SaveData()
@@ -104,7 +101,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         audioSource.PlayOneShot(gameOverSound);
-        gameOver = true;
         gameOverPanel.SetActive(true);
 
         //Disable gunScript
@@ -117,25 +113,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
 
         StartCoroutine(LoadData());
-        //SetScore(highScore, yourScore);
     }
 
     public enum SaveFormat
     {
-        /// <summary>
-        /// The XML.
-        /// </summary>
-        XML,
-
-        /// <summary>
-        /// The JSON.
-        /// </summary>
-        JSON,
-
-        /// <summary>
-        /// The Ninary.
-        /// </summary>
-        Binary
+        JSON
     }
 
     [Header("Save/Load Settings")]
@@ -143,37 +125,37 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
-    /// The position identifier.
+    /// The position identifier in save folder.
     /// </summary>
     public string positionIdentifier = "enter the position identifier";
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
-    /// The rotation identifier.
+    /// The rotation identifier in save folder.
     /// </summary>
     public string rotationIdentifier = "enter the rotation identifier";
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
-    /// The rotation identifier.
+    /// The rotation identifier in save folder.
     /// </summary>
     public string hpIdentifier = "enter the hp identifier";
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
-    /// The score identifier.
+    /// The score identifier in save folder.
     /// </summary>
     public string scoreIdentifier = "enter the score identifier";
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
-    /// The score identifier.
+    /// The score identifier in save folder.
     /// </summary>
     public string stageIdentifier = "enter the flag identifier";
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
-    /// The score identifier.
+    /// The score identifier in save folder.
     /// </summary>
     public string enemyCounterIdentifier = "enter the enemy counter identifier";
 
@@ -266,14 +248,8 @@ public class GameManager : MonoBehaviour
         }
         switch (format)
         {
-            case SaveFormat.Binary:
-                serializer = new SaveGameBinarySerializer();
-                break;
             case SaveFormat.JSON:
                 serializer = new SaveGameJsonSerializer();
-                break;
-            case SaveFormat.XML:
-                serializer = new SaveGameXmlSerializer();
                 break;
         }
 
@@ -283,8 +259,6 @@ public class GameManager : MonoBehaviour
                 Load();
                 break;
             case GameSetting.LoadType.New:
-                //re-assign pos to player to prevent false pos when replay different stage
-                player.GetComponent<Transform>().position = playerSpawnPos.position;
                 break;
         }
     }
@@ -372,7 +346,7 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = SaveGame.Load<Vector3Save>(
             positionIdentifier,
-            defaultPosition,
+            playerSpawnPos.position,
             encode,
             encodePassword,
             serializer,
