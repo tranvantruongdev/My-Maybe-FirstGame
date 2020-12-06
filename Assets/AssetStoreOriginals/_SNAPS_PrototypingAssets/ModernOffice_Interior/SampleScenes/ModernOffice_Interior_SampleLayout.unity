@@ -582,6 +582,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1473722679, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
+      propertyPath: txtHomeScore
+      value: 
+      objectReference: {fileID: 1920287882}
     - target: {fileID: 4147808175551496789, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
       propertyPath: mainCam
       value: 
@@ -11727,6 +11731,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+--- !u!114 &1920287882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1479308890198100692, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+  m_PrefabInstance: {fileID: 1920287881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1925298088
 PrefabInstance:
   m_ObjectHideFlags: 0

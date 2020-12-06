@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShareScoreManager : MonoBehaviour
 {
-	//[SerializeField] GameObject Panel_share;
-	//[SerializeField] Text txtPanelScore;
-	//[SerializeField] Text txtHomeScore;
-	//[SerializeField] Text txtDate;
+    [SerializeField] GameObject Panel_share;
+    [SerializeField] Text txtPanelScore;
+    [SerializeField] Text txtHomeScore;
+    [SerializeField] Text txtDate;
 
-	public void ShareScore()
+    public void ShareScore()
 	{
-		//txtPanelScore.text = txtHomeScore.text; //get the same score in home sceen
-		//DateTime dt = DateTime.Now; //get the current date
+        txtPanelScore.text = txtHomeScore.text; //get the same score in home sceen
+        System.DateTime dt = System.DateTime.Now; //get the current date
 
-		//txtDate.text = string.Format("{0}/{1}/{2}", dt.Month, dt.Day, dt.Year);
+        txtDate.text = string.Format("{0}/{1}/{2}", dt.Day, dt.Month, dt.Year);
 
-		////open the score panel
-		//Panel_share.SetActive(true);//show the panel
-		StartCoroutine("TakeScreenShotAndShare");
+        //open the score panel
+        Panel_share.SetActive(true);//show the panel
+        StartCoroutine("TakeScreenShotAndShare");
 	}
 
 	IEnumerator TakeScreenShotAndShare()
@@ -41,6 +42,6 @@ public class ShareScoreManager : MonoBehaviour
 			.Share();
 
 
-		//Panel_share.SetActive(false); //hide the panel
-	}
+        Panel_share.SetActive(false); //hide the panel
+    }
 }
