@@ -4138,6 +4138,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5968046898050456451, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShareSocial
+      objectReference: {fileID: 0}
     - target: {fileID: 5968046899396741728, guid: 83ebcb4ed12df444083ede6744534073, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(EnemySpawn());
         // Get the root reference location of the database.
         reference = FirebaseDatabase.DefaultInstance.RootReference;
+        //reload player's position to prevent wrong position spawm
         player.transform.position = playerSpawnPos.position;
     }
 
