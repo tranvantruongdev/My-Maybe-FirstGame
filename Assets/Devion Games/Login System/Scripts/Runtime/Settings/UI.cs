@@ -23,8 +23,6 @@ namespace DevionGames.LoginSystem.Configuration
         public string loginWindowName = "Login";
         [InspectorLabel("Registration Window", "Name of the registration window.")]
         public string registrationWindowName = "Registration";
-        [InspectorLabel("Recover Password Window", "Name of the recover password window.")]
-        public string recoverPasswordWindowName = "Recover Password";
         [InspectorLabel("Dialog Box", "Name of the dialog box widget.")]
         public string dialogBoxName = "Dialog Box";
         [InspectorLabel("Tooltip", "Name of the tooltip widget.")]
@@ -56,20 +54,6 @@ namespace DevionGames.LoginSystem.Configuration
                 }
                 Assert.IsNotNull(this.m_RegistrationWindow, "Registration Window with name " + this.registrationWindowName + " is not present in scene.");
                 return this.m_RegistrationWindow;
-            }
-        }
-
-        private RecoverPasswordWindow m_RecoverPasswordWindow;
-        public RecoverPasswordWindow recoverPasswordWindow
-        {
-            get
-            {
-                if (this.m_RecoverPasswordWindow == null)
-                {
-                    this.m_RecoverPasswordWindow = WidgetUtility.Find<RecoverPasswordWindow>(this.recoverPasswordWindowName);
-                }
-                Assert.IsNotNull(this.m_RecoverPasswordWindow, "Recover Password Window with name " + this.recoverPasswordWindowName + " is not present in scene.");
-                return this.m_RecoverPasswordWindow;
             }
         }
 

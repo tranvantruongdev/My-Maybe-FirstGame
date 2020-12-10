@@ -52,15 +52,7 @@ namespace DevionGames.LoginSystem
         private void Start()
         {
             auth = FirebaseAuth.DefaultInstance;
-
-            if (DefaultSettings.skipLogin)
-            {
-                if (DefaultSettings.debug)
-                    Debug.Log("Login System is disabled...Loading " + LoginManager.DefaultSettings.sceneToLoad + " scene.");
-                UnityEngine.SceneManagement.SceneManager.LoadScene(LoginManager.DefaultSettings.sceneToLoad);
-            }
         }
-
 
         [SerializeField]
         private LoginConfigurations m_Configurations = null;
@@ -81,7 +73,6 @@ namespace DevionGames.LoginSystem
                 return null;
             }
         }
-
 
         private static Default m_DefaultSettings;
         public static Default DefaultSettings
@@ -223,32 +214,6 @@ namespace DevionGames.LoginSystem
                     }
                 }
             }
-            #region old code
-            //WWWForm newForm = new WWWForm();
-            //newForm.AddField("name", username);
-            //newForm.AddField("password", password);
-            //newForm.AddField("email", email);
-
-            //using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.createAccount, newForm)) {
-            //	yield return www.SendWebRequest();
-            //	if (www.isNetworkError || www.isHttpError)
-            //	{
-            //		Debug.Log(www.error);
-            //	}
-            //	else {
-            //		if (www.downloadHandler.text.Contains("true"))
-            //		{
-            //			if (LoginManager.DefaultSettings.debug)
-            //				Debug.Log("[CreateAccount] Account creation was successfull!");
-            //			EventHandler.Execute("OnAccountCreated");
-            //		}else {
-            //			if (LoginManager.DefaultSettings.debug)
-            //				Debug.Log("[CreateAccount] Failed to create account.");
-            //			EventHandler.Execute("OnFailedToCreateAccount");
-            //		}
-            //	}
-            //}
-            #endregion
         }
 
         /// <summary>
@@ -317,140 +282,6 @@ namespace DevionGames.LoginSystem
                 GameSetting.uid = newUser.UserId;
 
                 EventHandler.Execute("OnLogin");
-            }
-            #region old code
-            //WWWForm newForm = new WWWForm();
-            //newForm.AddField("name", username);
-            //newForm.AddField("password", password);
-
-
-            //using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.login, newForm))
-            //{
-            //	yield return www.SendWebRequest();
-            //	if (www.isNetworkError || www.isHttpError)
-            //	{
-            //		Debug.Log(www.error);
-            //	}
-            //	else
-            //	{
-            //		if (www.downloadHandler.text.Contains("true"))
-            //		{
-            //			PlayerPrefs.SetString(LoginManager.Server.accountKey, username);
-            //			if (LoginManager.DefaultSettings.debug)
-            //				Debug.Log("[LoginAccount] Login was successfull!");
-            //			EventHandler.Execute("OnLogin");
-            //		}
-            //		else
-            //		{
-            //			if (LoginManager.DefaultSettings.debug)
-            //				Debug.Log("[LoginAccount] Failed to login.");
-            //			EventHandler.Execute("OnFailedToLogin");
-            //		}
-            //	}
-            //}
-            #endregion
-        }
-
-        /// <summary>
-        /// Recovers the password.
-        /// </summary>
-        /// <param name="email">Email.</param>
-        public static void RecoverPassword(string email)
-        {
-            if (current != null)
-            {
-                current.StartCoroutine(RecoverPasswordInternal(email));
-            }
-        }
-
-        private static IEnumerator RecoverPasswordInternal(string email)
-        {
-            if (Configurations == null)
-            {
-                EventHandler.Execute("OnFailedToRecoverPassword");
-                yield break;
-            }
-            if (DefaultSettings.debug)
-                Debug.Log("[RecoverPassword] Trying to recover password using email: " + email + "!");
-
-            WWWForm newForm = new WWWForm();
-            newForm.AddField("email", email);
-
-            using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.recoverPassword, newForm))
-            {
-                yield return www.SendWebRequest();
-                if (www.isNetworkError || www.isHttpError)
-                {
-                    Debug.Log(www.error);
-                }
-                else
-                {
-                    if (www.downloadHandler.text.Contains("true"))
-                    {
-                        EventHandler.Execute("OnPasswordRecovered");
-                        if (LoginManager.DefaultSettings.debug)
-                            Debug.Log("[RecoverPassword] Password recovered successfull!");
-                    }
-                    else
-                    {
-                        if (LoginManager.DefaultSettings.debug)
-                            Debug.Log("[RecoverPassword] Failed to recover password.");
-                        EventHandler.Execute("OnFailedToRecoverPassword");
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Resets the password.
-        /// </summary>
-        /// <param name="username">Username.</param>
-        /// <param name="password">Password.</param>
-        public static void ResetPassword(string username, string password)
-        {
-            if (LoginManager.current != null)
-            {
-                LoginManager.current.StartCoroutine(ResetPasswordInternal(username, password));
-            }
-        }
-
-        private static IEnumerator ResetPasswordInternal(string username, string password)
-        {
-            if (LoginManager.Configurations == null)
-            {
-                EventHandler.Execute("OnFailedToResetPassword");
-                yield break;
-            }
-            if (LoginManager.DefaultSettings.debug)
-                Debug.Log("[ResetPassword] Trying to reset password using username: " + username + " and password: " + password + "!");
-
-            WWWForm newForm = new WWWForm();
-            newForm.AddField("name", username);
-            newForm.AddField("password", password);
-
-            using (UnityWebRequest www = UnityWebRequest.Post(LoginManager.Server.serverAddress + "/" + LoginManager.Server.resetPassword, newForm))
-            {
-                yield return www.SendWebRequest();
-                if (www.isNetworkError || www.isHttpError)
-                {
-                    Debug.Log(www.error);
-                }
-                else
-                {
-                    if (www.downloadHandler.text.Contains("true"))
-                    {
-                        if (LoginManager.DefaultSettings.debug)
-                            Debug.Log("[RecoverPassword] Password resetted!");
-                        EventHandler.Execute("OnPasswordResetted");
-
-                    }
-                    else
-                    {
-                        if (LoginManager.DefaultSettings.debug)
-                            Debug.Log("Failed to reset password.");
-                        EventHandler.Execute("OnFailedToResetPassword");
-                    }
-                }
             }
         }
 

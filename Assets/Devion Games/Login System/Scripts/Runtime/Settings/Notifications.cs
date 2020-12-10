@@ -66,12 +66,6 @@ namespace DevionGames.LoginSystem.Configuration
             text = "Please enter a valid email!"
         };
 
-        public NotificationOptions termsOfUse = new NotificationOptions()
-        {
-            title = "Error",
-            text = "You need to accept the terms of use!"
-        };
-
         public NotificationOptions userExists = new NotificationOptions()
         {
             title = "Error",

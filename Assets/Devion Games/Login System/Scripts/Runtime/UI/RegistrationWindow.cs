@@ -107,12 +107,6 @@ namespace DevionGames.LoginSystem
                 return;
             }
 
-            if (!termsOfUse.isOn)
-            {
-                LoginManager.Notifications.termsOfUse.Show( delegate (int result) { Show(); }, "OK");
-                Close();
-                return;
-            }
             registerButton.interactable = false;
             if (loadingIndicator != null)
             {

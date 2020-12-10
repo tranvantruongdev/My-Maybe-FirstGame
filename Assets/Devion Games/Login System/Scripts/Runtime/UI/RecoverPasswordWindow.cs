@@ -52,7 +52,7 @@ namespace DevionGames.LoginSystem
             {
                 loadingIndicator.SetActive(true);
             }
-            LoginManager.RecoverPassword(email.text);
+            //LoginManager.RecoverPassword(email.text);
         }
 
         private void OnPasswordRecovered() {

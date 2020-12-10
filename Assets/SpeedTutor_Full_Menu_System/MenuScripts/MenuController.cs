@@ -55,8 +55,8 @@ namespace SpeedTutorMainMenuSystem
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                //options, new game, load game, stage select
-                if (menuNumber == 2 || menuNumber == 7 || menuNumber == 8 || menuNumber == 9)
+                //new game, load game, stage select
+                if (menuNumber == 7 || menuNumber == 8 || menuNumber == 9)
                 {
                     GoBackToMainMenu();
                     ClickSound();
@@ -133,43 +133,41 @@ namespace SpeedTutorMainMenuSystem
 
         public enum SaveFormat
         {
-            XML,
             JSON,
-            Binary
         }
 
         [Header("Save/Load Settings")]
         [Space]
 
-        [Tooltip("You must specify a value for this to be able to save it.")]
+        [Tooltip("Position path.")]
         /// <summary>
         /// The position identifier.
         /// </summary>
         public string positionIdentifier = "enter the position identifier";
 
-        [Tooltip("You must specify a value for this to be able to save it.")]
+        [Tooltip("Rotation path.")]
         /// <summary>
         /// The rotation identifier.
         /// </summary>
         public string rotationIdentifier = "enter the rotation identifier";
 
-        [Tooltip("You must specify a value for this to be able to save it.")]
+        [Tooltip("Score path.")]
         /// <summary>
         /// The score identifier.
         /// </summary>
         public string scoreIdentifier = "enter the score identifier";
 
-        [Tooltip("You must specify a value for this to be able to save it.")]
+        [Tooltip("Flag for save or load path.")]
         /// <summary>
         /// The score identifier.
         /// </summary>
         public string flagIdentifier = "enter the flag identifier";
 
-        [Tooltip("You must specify a value for this to be able to save it.")]
+        [Tooltip("stage path.")]
         /// <summary>
         /// The score identifier.
         /// </summary>
-        public string stageIdentifier = "enter the flag identifier";
+        public string stageIdentifier = "enter the stage identifier";
 
         [Tooltip("Encode the data?")]
         /// <summary>
@@ -239,14 +237,8 @@ namespace SpeedTutorMainMenuSystem
             }
             switch (format)
             {
-                case SaveFormat.Binary:
-                    serializer = new SaveGameBinarySerializer();
-                    break;
                 case SaveFormat.JSON:
                     serializer = new SaveGameJsonSerializer();
-                    break;
-                case SaveFormat.XML:
-                    serializer = new SaveGameXmlSerializer();
                     break;
             }
         }
@@ -299,10 +291,10 @@ namespace SpeedTutorMainMenuSystem
             menuNumber = 1;
         }
 
-        public void ClickQuitOptions()
-        {
-            GoBackToMainMenu();
-        }
+        //public void ClickQuitOptions()
+        //{
+        //    GoBackToMainMenu();
+        //}
 
         public void ClickNoSaveDialog()
         {

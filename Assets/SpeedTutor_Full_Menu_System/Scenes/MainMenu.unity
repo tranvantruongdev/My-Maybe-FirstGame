@@ -571,6 +571,10 @@ PrefabInstance:
       propertyPath: stageIdentifier
       value: save/stage
       objectReference: {fileID: 0}
+    - target: {fileID: 114754865640368622, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
+      propertyPath: format
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114866046668010596, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SpeedTutorMainMenuSystem.MenuController, Assembly-CSharp
