@@ -139,30 +139,7 @@ namespace SpeedTutorMainMenuSystem
         [Header("Save/Load Settings")]
         [Space]
 
-        [Tooltip("Position path.")]
-        /// <summary>
-        /// The position identifier.
-        /// </summary>
-        public string positionIdentifier = "enter the position identifier";
-
-        [Tooltip("Rotation path.")]
-        /// <summary>
-        /// The rotation identifier.
-        /// </summary>
-        public string rotationIdentifier = "enter the rotation identifier";
-
-        [Tooltip("Score path.")]
-        /// <summary>
-        /// The score identifier.
-        /// </summary>
-        public string scoreIdentifier = "enter the score identifier";
-
-        [Tooltip("Flag for save or load path.")]
-        /// <summary>
-        /// The score identifier.
-        /// </summary>
-        public string flagIdentifier = "enter the flag identifier";
-
+        
         [Tooltip("stage path.")]
         /// <summary>
         /// The score identifier.
@@ -252,8 +229,7 @@ namespace SpeedTutorMainMenuSystem
                 if (GameSetting.loadType == GameSetting.LoadType.Load)
                 {
                     Debug.Log("I WANT TO LOAD THE SAVED GAME");
-                    //LOAD LAST SAVED SCENE NOT DECODE
-                    levelToLoad = SaveGame.Load<string>(stageIdentifier, "", false, encodePassword,
+                    levelToLoad = SaveGame.Load<string>(stageIdentifier, "", encode, encodePassword,
                                                         serializer, encoder, encoding, savePath);
                     //if dont have any saved scene then show dialog and return
                     if (levelToLoad == "" || levelToLoad == null)

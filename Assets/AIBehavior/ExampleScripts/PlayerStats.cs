@@ -31,8 +31,6 @@ namespace AIBehaviorExamples
                 loopAudio.enabled = false;
                 //Play dead sound
                 audioSource.PlayOneShot(deadSound);
-                //Remove tag
-                //gameObject.tag = "Untagged";
                 //Find Game Manager and put an end to this
                 FindObjectOfType<GameManager>().GameOver();
             }

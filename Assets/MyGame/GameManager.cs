@@ -40,8 +40,13 @@ public class GameManager : MonoBehaviour
         StartCoroutine(EnemySpawn());
         // Get the root reference location of the database.
         reference = FirebaseDatabase.DefaultInstance.RootReference;
-        //reload player's position to prevent wrong position spawm
-        player.transform.position = playerSpawnPos.position;
+
+        if (GameSetting.loadType==GameSetting.LoadType.New)
+        {
+            //reload player's position and rotation to prevent wrong position spawm
+            player.transform.position = playerSpawnPos.position;
+            player.transform.rotation = Quaternion.identity;
+        }
     }
 
     public void SaveData()
@@ -311,11 +316,10 @@ public class GameManager : MonoBehaviour
 
         var stage = SceneManager.GetActiveScene();
 
-        //dont encode the stage name
         SaveGame.Save<string>(
             stageIdentifier,
             stage.name,
-            false,
+            encode,
             encodePassword,
             serializer,
             encoder,
@@ -405,6 +409,7 @@ public class GameManager : MonoBehaviour
             enemiesLeft--;
         }
 
+        //prevent freeze game after pause
         Time.timeScale = 1;
     }
 }

@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class swipe : MonoBehaviour
+public class Swipe : MonoBehaviour
 {
     public Color[] colors;
     public GameObject scrollbar, imageContent;
@@ -13,11 +11,6 @@ public class swipe : MonoBehaviour
     private float time;
     private Button takeTheBtn;
     int btnNumber;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -57,12 +50,13 @@ public class swipe : MonoBehaviour
             }
         }
 
-
         for (int i = 0; i < pos.Length; i++)
         {
             if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2))
             {
-                Debug.LogWarning("Current Selected Level" + i);
+#if UNITY_EDITOR
+                Debug.Log("Current Selected Level" + i);
+#endif
                 transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f, 1f), 0.1f);
                 imageContent.transform.GetChild(i).localScale = Vector2.Lerp(imageContent.transform.GetChild(i).localScale, new Vector2(1.2f, 1.2f), 0.1f);
                 imageContent.transform.GetChild(i).GetComponent<Image>().color = colors[1];
@@ -77,20 +71,15 @@ public class swipe : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     private void GecisiDuzenle(float distance, float[] pos, Button btn)
     {
-        // btnSayi = System.Int32.Parse(btn.transform.name);
-
         for (int i = 0; i < pos.Length; i++)
         {
             if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2))
             {
                 scrollbar.GetComponent<Scrollbar>().value = Mathf.Lerp(scrollbar.GetComponent<Scrollbar>().value, pos[btnNumber], 1f * Time.deltaTime);
-
             }
         }
 
@@ -98,8 +87,8 @@ public class swipe : MonoBehaviour
         {
             btn.transform.name = ".";
         }
-
     }
+
     public void WhichBtnClicked(Button btn)
     {
         btn.transform.name = "clicked";
@@ -114,8 +103,5 @@ public class swipe : MonoBehaviour
                 runIt = true;
             }
         }
-
-       
     }
-
 }
