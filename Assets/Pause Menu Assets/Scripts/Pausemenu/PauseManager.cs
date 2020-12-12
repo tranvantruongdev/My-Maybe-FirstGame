@@ -95,6 +95,8 @@ namespace GreatArcStudios
         public Slider audioMasterSlider;
         public Slider masterTexSlider;
 
+        [SerializeField] private GameManager gameManager;
+
         /// <summary>
         /// The preset text label.
         /// </summary>
@@ -245,6 +247,11 @@ namespace GreatArcStudios
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
         }
+        public void SaveAndQuitGame()
+        {
+            gameManager.Save();
+            quitGame();
+        }
         /// <summary>
         /// Cancels quittting by playing an animation.
         /// </summary>
@@ -259,6 +266,12 @@ namespace GreatArcStudios
         {
             SceneManager.LoadScene(mainMenu);
             uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
+        }
+
+        public void SaveAndReturnToMenu()
+        {
+            gameManager.Save();
+            returnToMenu();
         }
 
         // Update is called once per frame
@@ -864,6 +877,5 @@ namespace GreatArcStudios
             QualitySettings.shadowDistance = shadowDist[6];
             QualitySettings.lodBias = LODBias[6];
         }
-
     }
 }

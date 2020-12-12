@@ -341,7 +341,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Saved!");
 
-        pauseMenu.GetComponent<PauseManager>().returnToMenu();
+        //pauseMenu.GetComponent<PauseManager>().returnToMenu();
     }
 
     /// <summary>
