@@ -66,18 +66,27 @@ public class GameManager : MonoBehaviour
         }
         else if (task.IsCompleted)
         {
-            DataSnapshot snapshot = task.Result;
-            Debug.Log(snapshot.Value.ToString());
-            int score = int.Parse(snapshot.Value.ToString());
-            //send score to firebase
-            if (score < playerStats.Score1)
+            try
             {
+                DataSnapshot snapshot = task.Result;
+                Debug.Log(snapshot.Value.ToString());
+                int score = int.Parse(snapshot.Value.ToString());
+                //send score to firebase
+                if (score < playerStats.Score1)
+                {
+                    SetScore(playerStats.Score1, playerStats.Score1);
+                    SaveData();
+                }
+                else
+                {
+                    SetScore(score, playerStats.Score1);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.ToString());
                 SetScore(playerStats.Score1, playerStats.Score1);
                 SaveData();
-            }
-            else
-            {
-                SetScore(score, playerStats.Score1);
             }
         }
         yield return new WaitUntil(() => task.IsCompleted || task.IsFaulted);
