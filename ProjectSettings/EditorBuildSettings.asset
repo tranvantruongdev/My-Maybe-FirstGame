@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Mirror/Examples/Basic/Scenes/Example.unity
-    guid: b30904751905d3f4dacde62ac85ec7c2
   - enabled: 1
     path: Assets/Devion Games/Login System/Example/Scenes/Login Example.unity
     guid: 068cb1845a775634d9eb5773fe2d3eb3
