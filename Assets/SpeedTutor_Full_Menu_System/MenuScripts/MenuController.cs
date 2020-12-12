@@ -44,12 +44,6 @@ namespace SpeedTutorMainMenuSystem
         #endregion
 
         //MAIN SECTION
-        public IEnumerator ConfirmationBox() //hide confirm box after 2 sec visual
-        {
-            confirmationBox.SetActive(true);
-            yield return new WaitForSeconds(2);
-            confirmationBox.SetActive(false);
-        }
 
         private void Update()
         {
@@ -105,6 +99,7 @@ namespace SpeedTutorMainMenuSystem
             //Hide main menu and show stageCanvas
             if (ButtonType == "Yes")
             {
+                GameSetting.loadType = GameSetting.LoadType.New;
                 menuDefaultCanvas.SetActive(false);
                 stageCanvas.SetActive(true);
                 menuNumber = 9;
