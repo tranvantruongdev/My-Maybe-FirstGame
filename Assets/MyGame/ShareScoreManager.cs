@@ -38,9 +38,8 @@ public class ShareScoreManager : MonoBehaviour
 		new NativeShare()
 			.AddFile(path)
 			.SetSubject("This is my score")
-			.SetText("share your score with your friends")
+			.SetText("Check this awesome game!\nhttps://tranvantruongdev.itch.io/deadly-house")
 			.Share();
-
 
         Panel_share.SetActive(false); //hide the panel
     }

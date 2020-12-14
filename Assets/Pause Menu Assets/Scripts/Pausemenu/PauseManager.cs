@@ -202,6 +202,8 @@ namespace GreatArcStudios
         /// </summary>
         public void Restart()
         {
+            //make the reload stage is new prevent load game -> restart -> start new scene with save value
+            GameSetting.loadType = GameSetting.LoadType.New;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             uiEventSystem.firstSelectedGameObject = defualtSelectedMain;
             Time.timeScale = 1;
