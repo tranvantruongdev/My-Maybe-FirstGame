@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//Supress default null warning
+#pragma warning disable 0649
 
 public class MultiplayManager : MonoBehaviour
 {

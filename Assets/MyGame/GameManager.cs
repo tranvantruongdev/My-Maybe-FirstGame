@@ -13,6 +13,8 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+//Supress default null warning
+#pragma warning disable 0649
 
 public class GameManager : MonoBehaviour
 {

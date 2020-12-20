@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.IO;
 using UnityEngine.SceneManagement;
+//Supress default null warning
+#pragma warning disable 0649
 
 namespace GreatArcStudios
 {

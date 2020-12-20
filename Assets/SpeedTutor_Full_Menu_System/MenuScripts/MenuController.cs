@@ -4,6 +4,8 @@ using BayatGames.SaveGameFree.Serializers;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//Supress default null warning
+#pragma warning disable 0649
 
 namespace SpeedTutorMainMenuSystem
 {

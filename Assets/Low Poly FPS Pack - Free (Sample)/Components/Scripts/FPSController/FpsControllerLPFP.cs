@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+//Supress default null warning
+#pragma warning disable 0649
 
 namespace FPSControllerLPFP
 {

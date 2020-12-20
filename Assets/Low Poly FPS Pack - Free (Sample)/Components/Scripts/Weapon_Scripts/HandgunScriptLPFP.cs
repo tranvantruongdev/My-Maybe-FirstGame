@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+//Supress default null warning
+#pragma warning disable 0649
 
 public class HandgunScriptLPFP : MonoBehaviour {
 	//Crosshair ref

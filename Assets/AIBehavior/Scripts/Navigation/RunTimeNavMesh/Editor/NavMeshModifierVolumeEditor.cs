@@ -4,6 +4,8 @@ using UnityEngine.AI;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.AI;
+//Supress default null warning
+#pragma warning disable 0649
 
 namespace AIBehavior
 {

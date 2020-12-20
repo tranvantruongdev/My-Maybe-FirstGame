@@ -5,7 +5,9 @@ namespace AIBehaviorExamples
 {
     public class ExampleAttackComponent : MonoBehaviour
     {
-        [SerializeField] private float touchDmg = 5;
+        [SerializeField] private float touchDmg = 5.0f;
+
+        private GameObject player;
 
         private void Awake()
         {
@@ -14,22 +16,19 @@ namespace AIBehaviorExamples
 #else
             Debug.unityLogger.logEnabled = false;
 #endif
+            player = GameObject.FindGameObjectWithTag("Player");
         }
 
         public void MeleeAttack(AttackData attackData)
         {
             Debug.Log("Melee attack");
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.SendMessage("Damage", CalculateDamage(attackData));
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Player"))
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
                 player.SendMessage("Damage", touchDmg);
-            }
         }
 
         float CalculateDamage(AttackData attackData)
