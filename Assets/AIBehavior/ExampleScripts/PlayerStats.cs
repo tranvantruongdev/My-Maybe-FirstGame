@@ -16,7 +16,6 @@ namespace AIBehaviorExamples
         [SerializeField] private int score;
 
         private float health = 100.0f;
-        private Color imgColor;
 
         public int Score1 { get => score; set => score = value; }
 
@@ -29,7 +28,6 @@ namespace AIBehaviorExamples
 #else
             Debug.unityLogger.logEnabled = false;
 #endif
-            imgColor = hurtImg.GetComponent<Image>().color;
         }
 
         public void SubtractHealth(float amount)
@@ -55,9 +53,9 @@ namespace AIBehaviorExamples
                 if (health <= 50)
                 {
                     loopAudio.Play();
-                    Color color = imgColor;
+                    Color color = hurtImg.GetComponent<Image>().color;
                     color.a = 0.5f;
-                    imgColor = color;
+                    hurtImg.GetComponent<Image>().color = color;
                 }
             }
         }
