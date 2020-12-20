@@ -307,7 +307,7 @@ namespace GreatArcStudios
                 pauseMenu.text = "Pause Menu";
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape) && mainPanel.activeInHierarchy == false)
+            if (SimpleInput.GetButton("Escape") && mainPanel.activeInHierarchy == false)
             {
                 //Original code
                 uiEventSystem.SetSelectedGameObject(defualtSelectedMain);

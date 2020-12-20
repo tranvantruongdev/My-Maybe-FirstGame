@@ -1045,6 +1045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2964695632330105265, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
+      propertyPath: button.m_key
+      value: Escape
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a3785359836a594d8a13e991369aea9, type: 3}
 --- !u!114 &1518231419575073559 stripped
