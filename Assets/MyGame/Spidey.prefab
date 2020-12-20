@@ -193,9 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6261e2abc89f6438feb8e15409fe1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 0}
-  launchPointWeapon: {fileID: 0}
-  aimMetersAboveTarget: 1.5
   touchDmg: 5
 --- !u!65 &6281074839008633658
 BoxCollider:
@@ -558,7 +555,7 @@ MonoBehaviour:
     tags:
     - Player
     cachePoint: 0
-  movementSpeed: 2
+  movementSpeed: 1
   rotationSpeed: 360
   animationStatesComponent: {fileID: 6281074839008633662}
   animationStates:
@@ -601,7 +598,7 @@ MonoBehaviour:
     tags:
     - Player
     cachePoint: 0
-  movementSpeed: 2
+  movementSpeed: 1
   rotationSpeed: 360
   animationStatesComponent: {fileID: 6281074839008633662}
   animationStates:
@@ -1100,7 +1097,7 @@ MonoBehaviour:
     cachePoint: 0
   invertResult: 0
   audioCachePoint: 1
-  volumeTriggerLevel: 1
+  volumeTriggerLevel: 2
   setAudioTransformAsSeekTarget: 0
   seekState: {fileID: 0}
 --- !u!1001 &6281074839139182652

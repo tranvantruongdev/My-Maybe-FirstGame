@@ -330,6 +330,8 @@ namespace FPSControllerLPFP
 			
         /// Input mappings
         [Serializable]
+        //Supress default null warning
+#pragma warning disable 0649
         private class FpsInput
         {
             [Tooltip("The name of the virtual axis mapped to move the character back and forth."),

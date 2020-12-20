@@ -27,15 +27,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] private float minWaitTime;
     [SerializeField] private float maxWaitTime;
-
-    private string stageName;
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private GameObject player;
     [SerializeField] private int enemiesLeft;
-
-    DatabaseReference reference;
-
     [SerializeField] private Transform playerSpawnPos;
+
+    private DatabaseReference reference;
+    private string stageName;
 
     private void Start()
     {
