@@ -69,6 +69,15 @@ namespace FPSControllerLPFP
         private readonly RaycastHit[] _groundCastResults = new RaycastHit[8];
         private readonly RaycastHit[] _wallCastResults = new RaycastHit[8];
 
+        private void Awake()
+        {
+#if UNITY_EDITOR
+			Debug.unityLogger.logEnabled = true;
+#else
+            Debug.unityLogger.logEnabled = false;
+#endif
+        }
+
         /// Initializes the FpsController on start.
         private void Start()
         {

@@ -131,8 +131,13 @@ public class HandgunScriptLPFP : MonoBehaviour {
 
 	private bool soundHasPlayed = false;
 
-	private void Awake () 
+	private void Awake ()
 	{
+#if UNITY_EDITOR
+		Debug.unityLogger.logEnabled = true;
+#else
+		Debug.unityLogger.logEnabled = false;
+#endif
 		//Set the animator component
 		anim = GetComponent<Animator>();
 		//Set current ammo to total ammo value

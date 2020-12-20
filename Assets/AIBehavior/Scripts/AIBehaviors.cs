@@ -193,9 +193,15 @@ namespace AIBehavior
 
 		void Awake()
 		{
-			#if USE_ASTAR
+#if UNITY_EDITOR
+			Debug.unityLogger.logEnabled = true;
+#else
+			Debug.unityLogger.logEnabled = false;
+#endif
+
+#if USE_ASTAR
 			Debug.Log("Use Astar!");
-			#endif
+#endif
 
 			aiTransform = GetTransform();
 			animationStates = aiTransform.GetComponent<AIAnimationStates>();

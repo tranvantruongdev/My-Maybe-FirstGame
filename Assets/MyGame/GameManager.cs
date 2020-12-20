@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         // Get the root reference location of the database.
         reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        if (GameSetting.loadType==GameSetting.LoadType.New)
+        if (GameSetting.loadType == GameSetting.LoadType.New)
         {
             //reload player's position and rotation to prevent wrong position spawm
             player.transform.position = playerSpawnPos.position;
@@ -242,6 +242,11 @@ public class GameManager : MonoBehaviour
 
     protected virtual void Awake()
     {
+#if UNITY_EDITOR
+		Debug.unityLogger.logEnabled = true;
+#else
+        Debug.unityLogger.logEnabled = false;
+#endif
         if (resetBlanks)
         {
             if (string.IsNullOrEmpty(encodePassword))
@@ -349,8 +354,6 @@ public class GameManager : MonoBehaviour
             savePath);
 
         Debug.Log("Saved!");
-
-        //pauseMenu.GetComponent<PauseManager>().returnToMenu();
     }
 
     /// <summary>

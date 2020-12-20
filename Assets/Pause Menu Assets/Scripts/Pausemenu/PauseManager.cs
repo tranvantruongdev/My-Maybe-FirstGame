@@ -165,6 +165,15 @@ namespace GreatArcStudios
 
         [SerializeField] GameObject gunScript;
 
+        private void Awake()
+        {
+#if UNITY_EDITOR
+			Debug.unityLogger.logEnabled = true;
+#else
+            Debug.unityLogger.logEnabled = false;
+#endif
+        }
+
         /// <summary>
         /// The start method; you will need to place all of your inital value getting/setting here. 
         /// </summary>

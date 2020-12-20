@@ -33,6 +33,11 @@ namespace DevionGames.LoginSystem
         /// </summary>
         private void Awake()
         {
+#if UNITY_EDITOR
+			Debug.unityLogger.logEnabled = true;
+#else
+            Debug.unityLogger.logEnabled = false;
+#endif
             if (m_Current != null)
             {
                 if (DefaultSettings.debug)

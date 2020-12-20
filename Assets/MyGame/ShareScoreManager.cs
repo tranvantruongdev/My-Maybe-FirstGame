@@ -10,7 +10,16 @@ public class ShareScoreManager : MonoBehaviour
     [SerializeField] Text txtHomeScore;
     [SerializeField] Text txtDate;
 
-    public void ShareScore()
+    private void Awake()
+    {
+#if UNITY_EDITOR
+		Debug.unityLogger.logEnabled = true;
+#else
+		Debug.unityLogger.logEnabled = false;
+#endif
+	}
+
+	public void ShareScore()
 	{
         txtPanelScore.text = txtHomeScore.text; //get the same score in home sceen
         System.DateTime dt = System.DateTime.Now; //get the current date

@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using BayatGames.SaveGameFree;
+using BayatGames.SaveGameFree.Encoders;
+using BayatGames.SaveGameFree.Serializers;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using BayatGames.SaveGameFree;
-using BayatGames.SaveGameFree.Serializers;
-using BayatGames.SaveGameFree.Encoders;
-using System.Text;
 
 namespace SpeedTutorMainMenuSystem
 {
@@ -15,8 +11,8 @@ namespace SpeedTutorMainMenuSystem
     {
         #region Default Values
         [Header("Levels To Load")]
-        public string stage1; 
-        public string stage2; 
+        public string stage1;
+        public string stage2;
         public string stage3;
         private string levelToLoad; //use when load saved game
 
@@ -65,12 +61,12 @@ namespace SpeedTutorMainMenuSystem
 
         #region Menu Mouse Clicks
         public void MouseClick(string buttonType)
-        {            
+        {
             if (buttonType == "Exit")
             {
-                #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-                #endif
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
 
                 Application.Quit();
             }
@@ -92,7 +88,7 @@ namespace SpeedTutorMainMenuSystem
             }
         }
         #endregion
-        
+
         #region Dialog Options - This is where we load what has been saved in player prefs!
         public void ClickNewGameDialog(string ButtonType)
         {
@@ -134,7 +130,7 @@ namespace SpeedTutorMainMenuSystem
         [Header("Save/Load Settings")]
         [Space]
 
-        
+
         [Tooltip("stage path.")]
         /// <summary>
         /// The score identifier.
@@ -188,6 +184,11 @@ namespace SpeedTutorMainMenuSystem
 
         private void Awake()
         {
+#if UNITY_EDITOR
+			Debug.unityLogger.logEnabled = true;
+#else
+            Debug.unityLogger.logEnabled = false;
+#endif
             if (resetBlanks)
             {
                 if (string.IsNullOrEmpty(encodePassword))
@@ -261,11 +262,6 @@ namespace SpeedTutorMainMenuSystem
             stageCanvas.SetActive(false);
             menuNumber = 1;
         }
-
-        //public void ClickQuitOptions()
-        //{
-        //    GoBackToMainMenu();
-        //}
 
         public void ClickNoSaveDialog()
         {
