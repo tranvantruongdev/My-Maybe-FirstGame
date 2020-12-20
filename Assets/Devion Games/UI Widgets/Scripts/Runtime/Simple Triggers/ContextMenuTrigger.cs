@@ -11,6 +11,15 @@ public class ContextMenuTrigger : MonoBehaviour, IPointerDownHandler
 
     public string[] menu;
 
+    private void Awake()
+    {
+#if UNITY_EDITOR
+        Debug.unityLogger.logEnabled = true;
+#else
+		Debug.unityLogger.logEnabled = false;
+#endif
+    }
+
     // Start is called before the first frame update
     private void Start()
     {

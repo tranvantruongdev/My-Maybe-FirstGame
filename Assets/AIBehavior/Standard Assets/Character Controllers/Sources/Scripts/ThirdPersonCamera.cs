@@ -31,7 +31,12 @@ public class ThirdPersonCamera : MonoBehaviour
 
 	void Awake ()
 	{
-		if(!cameraTransform && Camera.main)
+#if UNITY_EDITOR
+		Debug.unityLogger.logEnabled = true;
+#else
+		Debug.unityLogger.logEnabled = false;
+#endif
+		if (!cameraTransform && Camera.main)
 			cameraTransform = Camera.main.transform;
 		if(!cameraTransform)
 		{

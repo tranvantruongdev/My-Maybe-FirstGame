@@ -7,6 +7,14 @@ namespace AIBehaviorExamples
 	{
 		public float health = 100.0f;
 
+        private void Awake()
+        {
+#if UNITY_EDITOR
+			Debug.unityLogger.logEnabled = true;
+#else
+			Debug.unityLogger.logEnabled = false;
+#endif
+		}
 
 		public void SubtractHealth(float amount)
 		{
