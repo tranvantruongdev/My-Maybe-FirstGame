@@ -75,16 +75,6 @@ public class BulletScript : MonoBehaviour {
 			//Destroy bullet object
 			Destroy(gameObject);
 		}
-
-		//If bullet collides with "ExplosiveBarrel" tag
-		if (collision.transform.tag == "ExplosiveBarrel") 
-		{
-			//Toggle "explode" on explosive barrel object
-			collision.transform.gameObject.GetComponent
-				<ExplosiveBarrelScript>().explode = true;
-			//Destroy bullet object
-			Destroy(gameObject);
-		}
 	}
 
 	private IEnumerator DestroyTimer () 
