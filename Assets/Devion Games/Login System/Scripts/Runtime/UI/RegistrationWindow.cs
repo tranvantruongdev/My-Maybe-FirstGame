@@ -15,6 +15,7 @@ namespace DevionGames.LoginSystem
                 List<string> callbacks = new List<string>(base.Callbacks);
                 callbacks.Add("OnAccountCreated");
                 callbacks.Add("OnFailedToCreateAccount");
+                callbacks.Add("OnNoInternet");
                 return callbacks.ToArray();
             }
         }
@@ -44,11 +45,6 @@ namespace DevionGames.LoginSystem
         /// Referenced UI field
         /// </summary>
         [SerializeField]
-        protected Toggle termsOfUse;
-        /// <summary>
-        /// Referenced UI field
-        /// </summary>
-        [SerializeField]
         protected Button registerButton;
 
         [SerializeField]
@@ -64,6 +60,7 @@ namespace DevionGames.LoginSystem
 
             EventHandler.Register("OnAccountCreated", OnAccountCreated);
             EventHandler.Register("OnFailedToCreateAccount", OnFailedToCreateAccount);
+            EventHandler.Register("OnNoInternet", OnNoInternet);
 
             registerButton.onClick.AddListener(CreateAccountUsingFields);
         }
@@ -130,6 +127,17 @@ namespace DevionGames.LoginSystem
         private void OnFailedToCreateAccount() {
             Execute("OnFailedToCreateAccount", new CallbackEventData());
             LoginManager.Notifications.userExists.Show( delegate (int result) { Show(); }, "OK");
+            registerButton.interactable = true;
+            if (loadingIndicator != null)
+            {
+                loadingIndicator.SetActive(false);
+            }
+            Close();
+        }
+
+        private void OnNoInternet() {
+            Execute("OnNoInternet", new CallbackEventData());
+            LoginManager.Notifications.noInternet.Show( delegate (int result) { Show(); }, "OK");
             registerButton.interactable = true;
             if (loadingIndicator != null)
             {

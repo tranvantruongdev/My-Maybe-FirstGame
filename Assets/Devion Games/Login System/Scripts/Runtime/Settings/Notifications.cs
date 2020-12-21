@@ -95,5 +95,11 @@ namespace DevionGames.LoginSystem.Configuration
             title = "Weak Password",
             text = "Your password need to be more than 6 characters."
         };
+
+        public NotificationOptions noInternet = new NotificationOptions()
+        {
+            title = "No Internet",
+            text = "Please check your Internet connection."
+        };
     }
 }

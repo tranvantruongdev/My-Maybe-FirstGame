@@ -16,6 +16,7 @@ namespace DevionGames.LoginSystem
                 callbacks.Add("OnLogin");
                 callbacks.Add("OnFailedToLogin");
                 callbacks.Add("OnFailedToLoginAccountNotExist");
+                callbacks.Add("OnNoInternetLogin");
                 return callbacks.ToArray();
             }
         }
@@ -61,6 +62,7 @@ namespace DevionGames.LoginSystem
             }
 
             EventHandler.Register("OnLogin", OnLogin);
+            EventHandler.Register("OnNoInternetLogin", OnNoInternet);
             EventHandler.Register("OnFailedToLogin", OnFailedToLogin);
             EventHandler.Register("OnFailedToLoginAccountNotExist", OnFailedToLoginAccountNotExist);
 
@@ -83,10 +85,13 @@ namespace DevionGames.LoginSystem
                 return;
             }
             LoginManager.LoginAccount(username.text, password.text);
-            loginButton.interactable = false;
-            if (loadingIndicator != null)
+            if (Application.internetReachability != NetworkReachability.NotReachable)
             {
-                loadingIndicator.SetActive(true);
+                loginButton.interactable = false;
+                if (loadingIndicator != null)
+                {
+                    loadingIndicator.SetActive(true);
+                }
             }
         }
 
@@ -114,6 +119,18 @@ namespace DevionGames.LoginSystem
             Execute("OnFailedToLogin", new CallbackEventData());
             password.text = "";
             LoginManager.Notifications.loginFailed.Show(delegate (int result) { Show(); }, "OK");
+            loginButton.interactable = true;
+            if (loadingIndicator != null)
+            {
+                loadingIndicator.SetActive(false);
+            }
+            Close();
+        }
+
+        private void OnNoInternet()
+        {
+            Execute("OnNoInternet", new CallbackEventData());
+            LoginManager.Notifications.noInternet.Show(delegate (int result) { Show(); }, "OK");
             loginButton.interactable = true;
             if (loadingIndicator != null)
             {

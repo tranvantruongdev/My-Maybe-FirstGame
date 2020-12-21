@@ -3,10 +3,8 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Networking;
 using Firebase;
 using Firebase.Auth;
-using UnityEditor;
 
 namespace DevionGames.LoginSystem
 {
@@ -157,6 +155,11 @@ namespace DevionGames.LoginSystem
                 EventHandler.Execute("OnFailedToCreateAccount");
                 yield break;
             }
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                EventHandler.Execute("OnNoInternetConnection");
+                yield break;
+            }
             if (DefaultSettings.debug)
                 Debug.Log("[CreateAccount]: Trying to register a new account with username: " + username + " and password: " + password + "!");
 
@@ -239,6 +242,11 @@ namespace DevionGames.LoginSystem
             if (LoginManager.Configurations == null)
             {
                 EventHandler.Execute("OnFailedToLogin");
+                yield break;
+            }
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                EventHandler.Execute("OnNoInternetLogin");
                 yield break;
             }
             if (LoginManager.DefaultSettings.debug)
