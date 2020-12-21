@@ -20,7 +20,7 @@ public class BulletScript : MonoBehaviour {
 	[Header("Impact Effect Prefabs")]
 	public Transform [] metalImpactPrefabs;
 
-	private void Start () 
+	private void OnEnable () 
 	{
 		//Start destroy timer
 		StartCoroutine (DestroyAfter ());
@@ -38,7 +38,8 @@ public class BulletScript : MonoBehaviour {
 		//Otherwise, destroy bullet on impact
 		else 
 		{
-			Destroy (gameObject);
+			//Destroy (gameObject);
+			gameObject.SetActive(false);
 		}
 
 		//If bullet collides with "Metal" tag
@@ -49,7 +50,8 @@ public class BulletScript : MonoBehaviour {
 				(0, metalImpactPrefabs.Length)], transform.position, 
 				Quaternion.LookRotation (collision.contacts [0].normal));
 			//Destroy bullet object
-			Destroy(gameObject);
+			//Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 
 		//If bullet collides with "Target" tag
@@ -59,7 +61,8 @@ public class BulletScript : MonoBehaviour {
 			collision.transform.gameObject.GetComponent
 				<TargetScript>().isHit = true;
 			//Destroy bullet object
-			Destroy(gameObject);
+			//Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 
 		//If bullet collides with "Enemy" tag
@@ -73,7 +76,8 @@ public class BulletScript : MonoBehaviour {
 			player.SendMessage("Score", 10);
 
 			//Destroy bullet object
-			Destroy(gameObject);
+			//Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 
@@ -83,7 +87,8 @@ public class BulletScript : MonoBehaviour {
 		yield return new WaitForSeconds
 			(Random.Range(minDestroyTime, maxDestroyTime));
 		//Destroy bullet object
-		Destroy(gameObject);
+		//Destroy(gameObject);
+		gameObject.SetActive(false);
 	}
 
 	private IEnumerator DestroyAfter () 
@@ -91,7 +96,8 @@ public class BulletScript : MonoBehaviour {
 		//Wait for set amount of time
 		yield return new WaitForSeconds (destroyAfter);
 		//Destroy bullet object
-		Destroy (gameObject);
+		//Destroy (gameObject);
+		gameObject.SetActive(false);
 	}
 }
 // ----- Low Poly FPS Pack Free Version -----

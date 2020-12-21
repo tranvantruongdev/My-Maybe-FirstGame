@@ -107,7 +107,11 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		public Transform casingPrefab;
 	}
 	public prefabs Prefabs;
-	
+
+	private ObjectPooler OP;
+	public int bulletIndex = 0;
+	public int bulletCaseIndex = 1;
+
 	[System.Serializable]
 	public class spawnpoints
 	{  
@@ -146,6 +150,9 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		currentAmmo = ammo;
 
 		muzzleflashLight.enabled = false;
+
+		OP = ObjectPooler.SharedInstance;
+
 	}
 
 	private void Start () {
@@ -289,21 +296,31 @@ public class HandgunScriptLPFP : MonoBehaviour {
 					}
 				}
 			}
-				
+
 			//Spawn bullet at bullet spawnpoint
-			var bullet = (Transform)Instantiate (
-				Prefabs.bulletPrefab,
-				Spawnpoints.bulletSpawnPoint.transform.position,
-				Spawnpoints.bulletSpawnPoint.transform.rotation);
+			//var bullet = (Transform)Instantiate (
+			//	Prefabs.bulletPrefab,
+			//	Spawnpoints.bulletSpawnPoint.transform.position,
+			//	Spawnpoints.bulletSpawnPoint.transform.rotation);
+
+			GameObject bullet = OP.GetPooledObject(bulletIndex);
+			bullet.transform.rotation = Spawnpoints.bulletSpawnPoint.transform.rotation;
+			bullet.transform.position = Spawnpoints.bulletSpawnPoint.transform.position;
+			bullet.SetActive(true);
 
 			//Add velocity to the bullet
 			bullet.GetComponent<Rigidbody>().velocity = 
 			bullet.transform.forward * bulletForce;
 
 			//Spawn casing prefab at spawnpoint
-			Instantiate (Prefabs.casingPrefab, 
-				Spawnpoints.casingSpawnPoint.transform.position, 
-				Spawnpoints.casingSpawnPoint.transform.rotation);
+			//Instantiate (Prefabs.casingPrefab, 
+			//	Spawnpoints.casingSpawnPoint.transform.position, 
+			//	Spawnpoints.casingSpawnPoint.transform.rotation);
+
+			GameObject bulletCase = OP.GetPooledObject(bulletCaseIndex);
+			bulletCase.transform.rotation = Spawnpoints.casingSpawnPoint.transform.rotation;
+			bulletCase.transform.position = Spawnpoints.casingSpawnPoint.transform.position;
+			bulletCase.SetActive(true);
 		}
 
 		//Reload 

@@ -54,7 +54,7 @@ public class CasingScript : MonoBehaviour {
 			Random.Range (minimumZForce, maximumZForce)); //Z Axis		     
 	}
 
-	private void Start () 
+	private void OnEnable () 
 	{
 		//Start the remove/destroy coroutine
 		StartCoroutine (RemoveCasing ());
@@ -87,7 +87,8 @@ public class CasingScript : MonoBehaviour {
 		//Destroy the casing after set amount of seconds
 		yield return new WaitForSeconds (despawnTime);
 		//Destroy casing object
-		Destroy (gameObject);
+		//Destroy (gameObject);
+		gameObject.SetActive(false);
 	}
 }
 // ----- Low Poly FPS Pack Free Version -----
