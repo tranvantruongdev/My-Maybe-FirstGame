@@ -157,7 +157,7 @@ namespace DevionGames.LoginSystem
             }
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
-                EventHandler.Execute("OnNoInternetConnection");
+                EventHandler.Execute("OnNoInternet");
                 yield break;
             }
             if (DefaultSettings.debug)
