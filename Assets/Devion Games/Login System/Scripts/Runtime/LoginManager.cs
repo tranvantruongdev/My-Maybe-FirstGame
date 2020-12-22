@@ -48,7 +48,6 @@ namespace DevionGames.LoginSystem
                 m_Current = this;
                 if (DefaultSettings.debug)
                     Debug.Log("LoginManager initialized.");
-
             }
         }
 

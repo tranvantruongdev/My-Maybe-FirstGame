@@ -1,14 +1,11 @@
-﻿using AIBehavior;
-using AIBehaviorExamples;
+﻿using AIBehaviorExamples;
 using BayatGames.SaveGameFree;
 using BayatGames.SaveGameFree.Encoders;
 using BayatGames.SaveGameFree.Serializers;
 using BayatGames.SaveGameFree.Types;
 using Firebase.Database;
-using GreatArcStudios;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;

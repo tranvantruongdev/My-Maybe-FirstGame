@@ -28,12 +28,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7b4a3f18d5af4438f6d743169d2b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddress: https://deviongames.com/modules/demo/LoginSystem/php/
-  createAccount: createAccount.php
-  login: login.php
-  recoverPassword: recoverPassword.php
-  resetPassword: resetPassword.php
-  accountKey: Account
+  serverAddress: 
+  createAccount: 
+  login: 
+  recoverPassword: 
+  resetPassword: 
+  accountKey: 
 --- !u!114 &-4750212059465769874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,14 +86,6 @@ MonoBehaviour:
     delay: 2
     duration: 2
     ignoreTimeScale: 1
-  termsOfUse:
-    title: Error
-    text: You need to accept the terms of use!
-    color: {r: 1, g: 1, b: 1, a: 1}
-    icon: {fileID: 0}
-    delay: 2
-    duration: 2
-    ignoreTimeScale: 1
   userExists:
     title: Error
     text: Email already exists!
@@ -129,6 +121,14 @@ MonoBehaviour:
   weakPassword:
     title: Weak Password
     text: Your password need to be 6 or more characters.
+    color: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    delay: 2
+    duration: 2
+    ignoreTimeScale: 1
+  noInternet:
+    title: No Internet
+    text: Please check your Internet connection.
     color: {r: 1, g: 1, b: 1, a: 1}
     icon: {fileID: 0}
     delay: 2
@@ -181,6 +181,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loginWindowName: Login
   registrationWindowName: Registration
-  recoverPasswordWindowName: Recover Password
   dialogBoxName: Dialog Box
   tooltipName: Tooltip
