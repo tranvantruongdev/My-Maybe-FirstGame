@@ -97,6 +97,7 @@ namespace DevionGames.LoginSystem
 
         private void OnLogin()
         {
+#if UNITY_EDITOR
             if (rememberMe != null && rememberMe.isOn)
             {
                 PlayerPrefs.SetString("username", username.text);
@@ -107,6 +108,7 @@ namespace DevionGames.LoginSystem
                 PlayerPrefs.DeleteKey("username");
                 PlayerPrefs.DeleteKey("password");
             }
+#endif
             Execute("OnLogin", new CallbackEventData());
             if (LoginManager.DefaultSettings.loadSceneOnLogin)
             {

@@ -1593,7 +1593,6 @@ GameObject:
   - component: {fileID: 1518231420540638941}
   - component: {fileID: 1519209600400639417}
   - component: {fileID: 1519209600400639398}
-  - component: {fileID: 4555643651615402806}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1983,26 +1982,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4555643651615402806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519209600400639416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4549dd7cd303aef4cb49b44894119595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsToPool:
-  - objectToPool: {fileID: 1086664671600574, guid: 5953171a59c27394e9ad5cbb564affa8, type: 3}
-    amountToPool: 9
-    shouldExpand: 1
-  - objectToPool: {fileID: 1492315059354262, guid: b1995a53a949fac4db5722fc1df9efe4, type: 3}
-    amountToPool: 9
-    shouldExpand: 1
-  pooledObjects: []
 --- !u!1 &1519222815836009246
 GameObject:
   m_ObjectHideFlags: 0

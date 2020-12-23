@@ -38,7 +38,7 @@ public class CasingScript : MonoBehaviour {
 	public float speed = 2500.0f;
 
 	//Launch the casing at start
-	private void Awake () 
+	private void Start () 
 	{
 		//Random rotation of the casing
 		GetComponent<Rigidbody>().AddRelativeTorque (
@@ -54,7 +54,7 @@ public class CasingScript : MonoBehaviour {
 			Random.Range (minimumZForce, maximumZForce)); //Z Axis		     
 	}
 
-	private void OnEnable () 
+	private void Awake () 
 	{
 		//Start the remove/destroy coroutine
 		StartCoroutine (RemoveCasing ());
@@ -86,9 +86,8 @@ public class CasingScript : MonoBehaviour {
 	{
 		//Destroy the casing after set amount of seconds
 		yield return new WaitForSeconds (despawnTime);
-		//Destroy casing object
-		//Destroy (gameObject);
-		gameObject.SetActive(false);
+        //Destroy casing object
+        Destroy(gameObject);
 	}
 }
 // ----- Low Poly FPS Pack Free Version -----

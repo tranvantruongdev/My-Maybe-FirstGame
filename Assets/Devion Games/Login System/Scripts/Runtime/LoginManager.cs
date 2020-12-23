@@ -137,8 +137,6 @@ namespace DevionGames.LoginSystem
             return default(T);
         }
 
-
-
         public static void CreateAccount(string username, string password, string email)
         {
             if (current != null)
