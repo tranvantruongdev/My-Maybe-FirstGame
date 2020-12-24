@@ -4,6 +4,7 @@ using BayatGames.SaveGameFree.Serializers;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 //Supress default null warning
 #pragma warning disable 0649
 
@@ -20,7 +21,7 @@ namespace SpeedTutorMainMenuSystem
 
         private int menuNumber; //1 - default menu || 2 - option || 3 - graphics
         #endregion              //4 - sounds || 5 - gameplay || 6 - controls
-                                //7 - new game || 8 - load game || 9 - stage select
+        //7 - new game || 8 - load game || 9 - stage select
 
         #region Menu Dialogs
         [Header("Main Menu Components")]
@@ -161,6 +162,12 @@ namespace SpeedTutorMainMenuSystem
         /// </summary>
         public string stageIdentifier = "enter the stage identifier";
 
+        [Tooltip("daily path.")]
+        /// <summary>
+        /// The score identifier.
+        /// </summary>
+        public string dailyIdentifier = "enter the daily identifier";
+
         [Tooltip("Encode the data?")]
         /// <summary>
         /// The encode.
@@ -209,7 +216,7 @@ namespace SpeedTutorMainMenuSystem
         private void Awake()
         {
 #if UNITY_EDITOR
-			Debug.unityLogger.logEnabled = true;
+            Debug.unityLogger.logEnabled = true;
 #else
             Debug.unityLogger.logEnabled = false;
 #endif
@@ -240,6 +247,9 @@ namespace SpeedTutorMainMenuSystem
             }
         }
 
+        public Text challengeName;
+        public Text challengeProgress;
+
         public void ClickLoadGameDialog(string ButtonType)
         {
             if (ButtonType == "Yes")
@@ -251,6 +261,62 @@ namespace SpeedTutorMainMenuSystem
                     Debug.Log("I WANT TO LOAD THE SAVED GAME");
                     levelToLoad = SaveGame.Load<string>(stageIdentifier, "", encode, encodePassword,
                                                         serializer, encoder, encoding, savePath);
+
+                    try
+                    {
+                        var a = SaveGame.Load<DailyChallenge>(dailyIdentifier, null, encode, encodePassword,
+                                                        serializer, encoder, encoding, savePath);
+
+                        if (a.challengeDate.Date != System.DateTime.Now.Date &&
+                            a.challengeDate.Month != System.DateTime.Now.Month &&
+                            a.challengeDate.Year != System.DateTime.Now.Year)
+                        {
+                            if (a.checkComplete == false)
+                            {
+                                challengeName.text = a.challengeName;
+                                challengeProgress.text = string.Format("Progress: {0}/{1}", a.numberEliminated, a.numberRequired);
+                                challengeProgress.enabled = true;
+                            }
+                            if (a.checkComplete == true)
+                            {
+                                challengeName.text = "You've complete Daily challenge";
+                                challengeProgress.enabled = false;
+                            }
+                        }
+                        else
+                        {
+                            challengeName.text = "Eliminate 15 monsters";
+                            challengeProgress.text = string.Format("Progress: 0/0");
+                            challengeProgress.enabled = true;
+                            SaveGame.Save<DailyChallenge>(
+                            dailyIdentifier,
+                            new DailyChallenge(),
+                            encode,
+                            encodePassword,
+                            serializer,
+                            encoder,
+                            encoding,
+                            savePath);
+                        }
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.Log(e.ToString());
+                        challengeName.text = "Eliminate 15 monsters";
+                        challengeProgress.text = string.Format("Progress: 0/0");
+                        challengeProgress.enabled = true;
+                        SaveGame.Save<DailyChallenge>(
+                            dailyIdentifier,
+                            new DailyChallenge(),
+                            encode,
+                            encodePassword,
+                            serializer,
+                            encoder,
+                            encoding,
+                            savePath);
+                        throw;
+                    }
+
                     //if dont have any saved scene then show dialog and return
                     if (levelToLoad == "" || levelToLoad == null)
                     {
@@ -313,4 +379,13 @@ public static class GameSetting
     public static string username = "test";
     public static string uid = "123456";
     public static Difficult difficult;
+}
+
+public class DailyChallenge
+{
+    public System.DateTime challengeDate = System.DateTime.Now;
+    public bool checkComplete = false;
+    public string challengeName = "Eliminate 15 monsters";
+    public int numberRequired = 15;
+    public int numberEliminated = 0;
 }
