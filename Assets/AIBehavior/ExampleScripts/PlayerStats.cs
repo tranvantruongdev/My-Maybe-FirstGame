@@ -9,7 +9,7 @@ namespace AIBehaviorExamples
     {
         [SerializeField] private AudioSource audioSource;
         //for breath scare sound
-        [SerializeField] private AudioSource loopAudio; 
+        [SerializeField] private AudioSource loopAudio;
         [SerializeField] AudioClip hurtSound;
         [SerializeField] AudioClip deadSound;
         [SerializeField] GameObject hurtImg;
@@ -17,10 +17,13 @@ namespace AIBehaviorExamples
         [SerializeField] private int score;
 
         private float health = 100.0f;
+        private float maxHealth = 100.0f;
 
         public int Score1 { get => score; set => score = value; }
 
-        public float Health { get => health; set => health = value; }
+        //health must not be allowed to be larger than maxHealth
+        public float Health { get => health; set => health = value > MaxHealth ? MaxHealth : value; }
+        public float MaxHealth { get => maxHealth; set => maxHealth = value; }
 
         private void Awake()
         {
@@ -51,7 +54,7 @@ namespace AIBehaviorExamples
                 Debug.Log("Health is now: " + health);
                 //Play hurt sound
                 audioSource.PlayOneShot(hurtSound);
-                if (health <= 50)
+                if (health <= (MaxHealth / 2))
                 {
                     loopAudio.Play();
                     Color color = hurtImg.GetComponent<Image>().color;

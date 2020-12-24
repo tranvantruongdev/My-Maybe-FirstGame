@@ -110,12 +110,14 @@ public class GameManager : MonoBehaviour
                     case GameSetting.Difficult.Normal:
                         ai.maxHealth *= 2;
                         ai.health = ai.maxHealth;
-                        playerStats.Health /= 2;
+                        playerStats.MaxHealth /= 2;
+                        playerStats.Health = playerStats.MaxHealth;
                         break;
                     case GameSetting.Difficult.Hard:
                         ai.maxHealth *= 3;
                         ai.health = ai.maxHealth;
-                        playerStats.Health /= 3;
+                        playerStats.MaxHealth /= 3;
+                        playerStats.Health = playerStats.MaxHealth;
                         break;
                     default:
                         break;
