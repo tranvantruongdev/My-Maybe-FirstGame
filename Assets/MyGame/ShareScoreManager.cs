@@ -23,13 +23,16 @@ public class ShareScoreManager : MonoBehaviour
 
     public void ShareScore()
     {
-        txtPanelScore.text = txtHomeScore.text; //get the same score in home sceen
-        System.DateTime dt = System.DateTime.Now; //get the current date
+        //get the same score in home sceen
+        txtPanelScore.text = txtHomeScore.text; 
+        //get the current date
+        System.DateTime dt = System.DateTime.Now; 
 
         txtDate.text = string.Format("{0}/{1}/{2}", dt.Day, dt.Month, dt.Year);
 
         //open the score panel
-        Panel_share.SetActive(true);//show the panel
+        //show the panel
+        Panel_share.SetActive(true);
         StartCoroutine("TakeScreenShotAndShare");
     }
 
@@ -40,18 +43,18 @@ public class ShareScoreManager : MonoBehaviour
         Texture2D tx = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         tx.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         tx.Apply();
-
-        string path = Path.Combine(Application.temporaryCachePath, "sharedImage.png");//image name
+        //image name
+        string path = Path.Combine(Application.temporaryCachePath, "sharedImage.png");
         File.WriteAllBytes(path, tx.EncodeToPNG());
-
-        Destroy(tx); //to avoid memory leaks
+        //avoid memory leaks
+        Destroy(tx); 
 
         new NativeShare()
             .AddFile(path)
             .SetSubject("This is my score")
             .SetText("Check this awesome game!\nhttps://tranvantruongdev.itch.io/deadly-house")
             .Share();
-
-        Panel_share.SetActive(false); //hide the panel
+        //hide the panel
+        Panel_share.SetActive(false); 
     }
 }

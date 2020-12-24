@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
             }
             catch (Exception e)
             {
+                //First time update highscore
                 Debug.LogError(e.ToString());
                 SetScore(playerStats.Score1, playerStats.Score1);
                 SaveData();
