@@ -95,9 +95,31 @@ namespace SpeedTutorMainMenuSystem
         public void ClickNewGameDialog(string ButtonType)
         {
             //Hide main menu and show stageCanvas
-            if (ButtonType == "Yes")
+            //Choose Easy difficult
+            if (ButtonType == "Easy")
             {
                 GameSetting.loadType = GameSetting.LoadType.New;
+                GameSetting.difficult = GameSetting.Difficult.Easy;
+                menuDefaultCanvas.SetActive(false);
+                stageCanvas.SetActive(true);
+                menuNumber = 9;
+            }
+
+            //Choose Normal difficult
+            if (ButtonType == "Normal")
+            {
+                GameSetting.loadType = GameSetting.LoadType.New;
+                GameSetting.difficult = GameSetting.Difficult.Normal;
+                menuDefaultCanvas.SetActive(false);
+                stageCanvas.SetActive(true);
+                menuNumber = 9;
+            }
+
+            //Choose Hard difficult
+            if (ButtonType == "Hard")
+            {
+                GameSetting.loadType = GameSetting.LoadType.New;
+                GameSetting.difficult = GameSetting.Difficult.Hard;
                 menuDefaultCanvas.SetActive(false);
                 stageCanvas.SetActive(true);
                 menuNumber = 9;
@@ -280,8 +302,15 @@ public static class GameSetting
         New,
         Load
     }
+    public enum Difficult
+    {
+        Easy,
+        Normal,
+        Hard
+    }
 
     public static LoadType loadType;
     public static string username = "test";
     public static string uid = "123456";
+    public static Difficult difficult;
 }
