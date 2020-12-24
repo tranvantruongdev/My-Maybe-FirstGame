@@ -10,6 +10,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using AIBehavior;
 //Supress default null warning
 #pragma warning disable 0649
 
@@ -101,7 +102,23 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
-            Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
+            var go = Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
+            if (go.TryGetComponent(out AIBehaviors ai))
+            {
+                switch (GameSetting.difficult)
+                {
+                    case GameSetting.Difficult.Normal:
+                        ai.maxHealth *= 2;
+                        ai.health *= ai.maxHealth;
+                        break;
+                    case GameSetting.Difficult.Hard:
+                        ai.maxHealth *= 3;
+                        ai.health *= ai.maxHealth;
+                        break;
+                    default:
+                        break;
+                }
+            }
             yield return new WaitForSeconds(UnityEngine.Random.Range(minWaitTime, maxWaitTime));
         }
     }

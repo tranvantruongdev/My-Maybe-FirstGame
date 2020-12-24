@@ -8,7 +8,8 @@ namespace AIBehaviorExamples
     public class PlayerStats : MonoBehaviour
     {
         [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioSource loopAudio; //for breath scare sound
+        //for breath scare sound
+        [SerializeField] private AudioSource loopAudio; 
         [SerializeField] AudioClip hurtSound;
         [SerializeField] AudioClip deadSound;
         [SerializeField] GameObject hurtImg;
