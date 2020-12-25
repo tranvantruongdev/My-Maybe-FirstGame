@@ -1,6 +1,7 @@
 ﻿using BayatGames.SaveGameFree;
 using BayatGames.SaveGameFree.Encoders;
 using BayatGames.SaveGameFree.Serializers;
+using System;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -52,7 +53,7 @@ namespace SpeedTutorMainMenuSystem
                     if (a.checkComplete == false)
                     {
                         challengeName.text = a.challengeName;
-                        challengeProgress.text = string.Format("Progress: {0}/{1}", a.numberEliminated, a.numberRequired);
+                        challengeProgress.text = string.Format("Last try: {0}/{1}", a.numberEliminated, a.numberRequired);
                         challengeProgress.enabled = true;
                     }
                     if (a.checkComplete == true)
@@ -64,7 +65,7 @@ namespace SpeedTutorMainMenuSystem
                 else
                 {
                     challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
-                    challengeProgress.text = string.Format("Progress: 0/15");
+                    challengeProgress.text = string.Format("Last try: 0/15");
                     challengeProgress.enabled = true;
                     //override data
                     SaveGame.Save<DailyChallenge>(
@@ -82,7 +83,7 @@ namespace SpeedTutorMainMenuSystem
             {
                 Debug.Log(e.ToString());
                 challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
-                challengeProgress.text = string.Format("Progress: 0/15");
+                challengeProgress.text = string.Format("Last try: 0/15");
                 challengeProgress.enabled = true;
                 //create new data
                 SaveGame.Save<DailyChallenge>(
@@ -225,6 +226,12 @@ namespace SpeedTutorMainMenuSystem
         /// </summary>
         public string dailyIdentifier = "enter the daily identifier";
 
+        [Tooltip("difficult path.")]
+        /// <summary>
+        /// The difficulty identifier in save folder.
+        /// </summary>
+        public string difficultyIdentifier = "enter the enemy difficulty identifier";
+
         [Tooltip("Encode the data?")]
         /// <summary>
         /// The encode.
@@ -325,6 +332,13 @@ namespace SpeedTutorMainMenuSystem
                         loadGameDialog.SetActive(false);
                         noSaveDialog.SetActive(true);
                         return;
+                    }
+                    var difficult = SaveGame.Load<int>(difficultyIdentifier, 0, encode, encodePassword,
+                                                        serializer, encoder, encoding, savePath);
+                    //easy to hard
+                    if (difficult >= 0 && difficult <= 2)
+                    {
+                        GameSetting.difficult = (GameSetting.Difficult)difficult;
                     }
                     SceneManager.LoadScene(levelToLoad);
                 }

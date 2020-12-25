@@ -35,6 +35,20 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        switch (GameSetting.difficult)
+        {
+            case GameSetting.Difficult.Normal:
+                playerStats.MaxHealth /= 2;
+                playerStats.Health = playerStats.MaxHealth;
+                break;
+            case GameSetting.Difficult.Hard:
+                playerStats.MaxHealth /= 3;
+                playerStats.Health = playerStats.MaxHealth;
+                break;
+            default:
+                break;
+        }
+
         StartCoroutine(EnemySpawn());
         // Get the root reference location of the database.
         reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -110,14 +124,10 @@ public class GameManager : MonoBehaviour
                     case GameSetting.Difficult.Normal:
                         ai.maxHealth *= 2;
                         ai.health = ai.maxHealth;
-                        playerStats.MaxHealth /= 2;
-                        playerStats.Health = playerStats.MaxHealth;
                         break;
                     case GameSetting.Difficult.Hard:
                         ai.maxHealth *= 3;
                         ai.health = ai.maxHealth;
-                        playerStats.MaxHealth /= 3;
-                        playerStats.Health = playerStats.MaxHealth;
                         break;
                     default:
                         break;
@@ -174,8 +184,54 @@ public class GameManager : MonoBehaviour
                     savePath);
                 break;
             case GameSetting.Difficult.Normal:
+                //1 bullet = 10 point, need 4 bullet to eleminate an enemy
+                var numberEnemiesEliminatedNormal = playerStats.Score1 / 40;
+                var saveClassNormal = new DailyChallenge
+                {
+                    numberEliminated = numberEnemiesEliminatedNormal
+                };
+                if (numberEnemiesEliminatedNormal < saveClassNormal.numberRequired)
+                {
+                    saveClassNormal.checkComplete = false;
+                }
+                else
+                {
+                    saveClassNormal.checkComplete = true;
+                }
+                SaveGame.Save<DailyChallenge>(
+                    dailyIdentifier,
+                    saveClassNormal,
+                    encode,
+                    encodePassword,
+                    serializer,
+                    encoder,
+                    encoding,
+                    savePath);
                 break;
             case GameSetting.Difficult.Hard:
+                //1 bullet = 10 point, need 6 bullet to eleminate an enemy
+                var numberEnemiesEliminatedHard = playerStats.Score1 / 60;
+                var saveClassHard = new DailyChallenge
+                {
+                    numberEliminated = numberEnemiesEliminatedHard
+                };
+                if (numberEnemiesEliminatedHard < saveClassHard.numberRequired)
+                {
+                    saveClassHard.checkComplete = false;
+                }
+                else
+                {
+                    saveClassHard.checkComplete = true;
+                }
+                SaveGame.Save<DailyChallenge>(
+                    dailyIdentifier,
+                    saveClassHard,
+                    encode,
+                    encodePassword,
+                    serializer,
+                    encoder,
+                    encoding,
+                    savePath);
                 break;
             default:
                 break;
@@ -230,9 +286,15 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("You must specify a value for this to be able to save it.")]
     /// <summary>
+    /// The difficulty identifier in save folder.
+    /// </summary>
+    public string difficultyIdentifier = "enter the enemy difficulty identifier";
+
+    [Tooltip("You must specify a value for this to be able to save it.")]
+    /// <summary>
     /// The daily challenge identifier in save folder.
     /// </summary>
-    public string dailyIdentifier = "enter the enemy counter identifier";
+    public string dailyIdentifier = "enter the enemy daily identifier";
 
     [Tooltip("Encode the data?")]
     /// <summary>
@@ -406,6 +468,16 @@ public class GameManager : MonoBehaviour
         SaveGame.Save<int>(
             enemyCounterIdentifier,
             enemiesLeft,
+            encode,
+            encodePassword,
+            serializer,
+            encoder,
+            encoding,
+            savePath);
+
+        SaveGame.Save<int>(
+            difficultyIdentifier,
+            (int) (GameSetting.difficult),
             encode,
             encodePassword,
             serializer,
