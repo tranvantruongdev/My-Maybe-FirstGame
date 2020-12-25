@@ -780,6 +780,18 @@ PrefabInstance:
       propertyPath: encode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114754865640368622, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
+      propertyPath: challengeName
+      value: 
+      objectReference: {fileID: 859193487}
+    - target: {fileID: 114754865640368622, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
+      propertyPath: challengeProgress
+      value: 
+      objectReference: {fileID: 575240710}
+    - target: {fileID: 114754865640368622, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
+      propertyPath: dailyIdentifier
+      value: save/daily
+      objectReference: {fileID: 0}
     - target: {fileID: 114866046668010596, guid: ed022c6eaaa372f498c83d69665e2adc, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SpeedTutorMainMenuSystem.MenuController, Assembly-CSharp
@@ -1550,7 +1562,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Progress: 0/0'
+  m_Text: Challege Progress
 --- !u!222 &575240711
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1746,9 +1758,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Your challenge today is:
-
-    Slay 15 monster.'
+  m_Text: Challenge Name
 --- !u!222 &859193488
 CanvasRenderer:
   m_ObjectHideFlags: 0
