@@ -146,6 +146,41 @@ public class GameManager : MonoBehaviour
         //Set time scale to 0
         Time.timeScale = 0;
 
+        switch (GameSetting.difficult)
+        {
+            case GameSetting.Difficult.Easy:
+                //1 bullet = 10 point, need 2 bullet to eleminate an enemy
+                var numberEnemiesEliminated = playerStats.Score1 / 20;
+                var saveClass = new DailyChallenge
+                {
+                    numberEliminated = numberEnemiesEliminated
+                };
+                if (numberEnemiesEliminated < saveClass.numberRequired)
+                {
+                    saveClass.checkComplete = false;
+                }
+                else
+                {
+                    saveClass.checkComplete = true;
+                }
+                SaveGame.Save<DailyChallenge>(
+                    dailyIdentifier,
+                    saveClass,
+                    encode,
+                    encodePassword,
+                    serializer,
+                    encoder,
+                    encoding,
+                    savePath);
+                break;
+            case GameSetting.Difficult.Normal:
+                break;
+            case GameSetting.Difficult.Hard:
+                break;
+            default:
+                break;
+        }
+
         StartCoroutine(LoadData());
     }
 
@@ -192,6 +227,12 @@ public class GameManager : MonoBehaviour
     /// The score identifier in save folder.
     /// </summary>
     public string enemyCounterIdentifier = "enter the enemy counter identifier";
+
+    [Tooltip("You must specify a value for this to be able to save it.")]
+    /// <summary>
+    /// The daily challenge identifier in save folder.
+    /// </summary>
+    public string dailyIdentifier = "enter the enemy counter identifier";
 
     [Tooltip("Encode the data?")]
     /// <summary>
@@ -262,7 +303,7 @@ public class GameManager : MonoBehaviour
     protected virtual void Awake()
     {
 #if UNITY_EDITOR
-		Debug.unityLogger.logEnabled = true;
+        Debug.unityLogger.logEnabled = true;
 #else
         Debug.unityLogger.logEnabled = false;
 #endif

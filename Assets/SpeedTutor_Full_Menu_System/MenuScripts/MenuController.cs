@@ -45,9 +45,9 @@ namespace SpeedTutorMainMenuSystem
                 var a = SaveGame.Load<DailyChallenge>(dailyIdentifier, null, encode, encodePassword,
                                                 serializer, encoder, encoding, savePath);
 
-                if (a.challengeDate.Date != System.DateTime.Now.Date &&
-                    a.challengeDate.Month != System.DateTime.Now.Month &&
-                    a.challengeDate.Year != System.DateTime.Now.Year)
+                if (a.challengeDate.Date == System.DateTime.Now.Date &&
+                    a.challengeDate.Month == System.DateTime.Now.Month &&
+                    a.challengeDate.Year == System.DateTime.Now.Year)
                 {
                     if (a.checkComplete == false)
                     {
@@ -63,9 +63,10 @@ namespace SpeedTutorMainMenuSystem
                 }
                 else
                 {
-                    challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters";
-                    challengeProgress.text = string.Format("Progress: 0/0");
+                    challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
+                    challengeProgress.text = string.Format("Progress: 0/15");
                     challengeProgress.enabled = true;
+                    //override data
                     SaveGame.Save<DailyChallenge>(
                     dailyIdentifier,
                     new DailyChallenge(),
@@ -80,9 +81,10 @@ namespace SpeedTutorMainMenuSystem
             catch (System.Exception e)
             {
                 Debug.Log(e.ToString());
-                challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters";
-                challengeProgress.text = string.Format("Progress: 0/0");
+                challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
+                challengeProgress.text = string.Format("Progress: 0/15");
                 challengeProgress.enabled = true;
+                //create new data
                 SaveGame.Save<DailyChallenge>(
                     dailyIdentifier,
                     new DailyChallenge(),
@@ -385,7 +387,7 @@ public class DailyChallenge
 {
     public System.DateTime challengeDate = System.DateTime.Now;
     public bool checkComplete = false;
-    public string challengeName = "Eliminate 15 monsters";
+    public string challengeName = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
     public int numberRequired = 15;
     public int numberEliminated = 0;
 }

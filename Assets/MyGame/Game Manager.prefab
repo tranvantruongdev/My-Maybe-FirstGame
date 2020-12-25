@@ -413,9 +413,10 @@ MonoBehaviour:
   scoreIdentifier: save/playerScore
   stageIdentifier: save/stage
   enemyCounterIdentifier: save/enemyCounter
-  encode: 0
+  dailyIdentifier: save/daily
+  encode: 1
   encodePassword: 
-  format: 1
+  format: 0
   savePath: 0
   resetBlanks: 1
   defaultPosition: {x: -1.239576, y: 1.53, z: -7.738159}
