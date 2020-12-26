@@ -974,7 +974,7 @@ MonoBehaviour:
   variables: []
   cooldownTime: 0
   startCooldownOnStateEnd: 1
-  hitStateDuration: 1
+  hitStateDuration: 0.5
   returnToPreviousState: 1
   changeToState: {fileID: 6281074840400526174}
 --- !u!114 &6281074840400526172

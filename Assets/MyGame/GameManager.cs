@@ -124,10 +124,16 @@ public class GameManager : MonoBehaviour
                     case GameSetting.Difficult.Normal:
                         ai.maxHealth *= 2;
                         ai.health = ai.maxHealth;
+                        //patrol & seek
+                        ai.states[1].movementSpeed = 1.5f;
+                        ai.states[2].movementSpeed = 1.5f;
                         break;
                     case GameSetting.Difficult.Hard:
                         ai.maxHealth *= 3;
                         ai.health = ai.maxHealth;
+                        //patrol & seek
+                        ai.states[1].movementSpeed = 2;
+                        ai.states[2].movementSpeed = 2;
                         break;
                     default:
                         break;
@@ -523,6 +529,18 @@ public class GameManager : MonoBehaviour
             encoding,
             savePath);
 
+        switch (GameSetting.difficult)
+        {
+            case GameSetting.Difficult.Normal:
+                playerStats.MaxHealth /= 2;
+                break;
+            case GameSetting.Difficult.Hard:
+                playerStats.MaxHealth /= 3;
+                break;
+            default:
+                break;
+        }
+
         playerStats.Score1 = SaveGame.Load<int>(
             scoreIdentifier,
             defaultScore,
@@ -549,7 +567,27 @@ public class GameManager : MonoBehaviour
         while (enemiesLeft > 0)
         {
             var enemySpawnPos = enemySpawnPosArr[UnityEngine.Random.Range(0, enemySpawnPosArr.Length)];
-            Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
+            var enemy = Instantiate(enemyPrefab, enemySpawnPos.position, Quaternion.identity);
+            var ai = enemy.GetComponent<AIBehaviors>();
+            switch (GameSetting.difficult)
+            {
+                case GameSetting.Difficult.Normal:
+                    ai.maxHealth *= 2;
+                    ai.health = ai.maxHealth;
+                    //patrol & seek
+                    ai.states[1].movementSpeed = 1.5f;
+                    ai.states[2].movementSpeed = 1.5f;
+                    break;
+                case GameSetting.Difficult.Hard:
+                    ai.maxHealth *= 3;
+                    ai.health = ai.maxHealth;
+                    //patrol & seek
+                    ai.states[1].movementSpeed = 2;
+                    ai.states[2].movementSpeed = 2;
+                    break;
+                default:
+                    break;
+            }
             enemiesLeft--;
         }
 
