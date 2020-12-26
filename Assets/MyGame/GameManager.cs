@@ -31,9 +31,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerSpawnPos;
 
     private DatabaseReference reference;
-    private string stageName;
 
     private void Start()
+    {
+        //handle when load and new game
+        SetPlayerHpBasedOnDifficulty();
+
+        StartCoroutine(EnemySpawn());
+
+        // Get the root reference location of the database.
+        reference = FirebaseDatabase.DefaultInstance.RootReference;
+
+        if (GameSetting.loadType == GameSetting.LoadType.New)
+        {
+            //reload player's position and rotation to prevent wrong position spawm
+            player.transform.position = playerSpawnPos.position;
+            player.transform.rotation = Quaternion.identity;
+        }
+    }
+
+    private void SetPlayerHpBasedOnDifficulty()
     {
         switch (GameSetting.difficult)
         {
@@ -47,17 +64,6 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
-        }
-
-        StartCoroutine(EnemySpawn());
-        // Get the root reference location of the database.
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
-
-        if (GameSetting.loadType == GameSetting.LoadType.New)
-        {
-            //reload player's position and rotation to prevent wrong position spawm
-            player.transform.position = playerSpawnPos.position;
-            player.transform.rotation = Quaternion.identity;
         }
     }
 
@@ -162,6 +168,15 @@ public class GameManager : MonoBehaviour
         //Set time scale to 0
         Time.timeScale = 0;
 
+        HandleDailyChallenge();
+
+        StopCoroutine(EnemySpawn());
+
+        StartCoroutine(LoadData());
+    }
+
+    private void HandleDailyChallenge()
+    {
         switch (GameSetting.difficult)
         {
             case GameSetting.Difficult.Easy:
@@ -242,8 +257,6 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-
-        StartCoroutine(LoadData());
     }
 
     public enum SaveFormat

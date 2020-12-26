@@ -40,15 +40,19 @@ namespace SpeedTutorMainMenuSystem
         private void Start()
         {
             menuNumber = 1;
+            DailyChallengeVerify();
+        }
 
+        private void DailyChallengeVerify()
+        {
             try
             {
                 var a = SaveGame.Load<DailyChallenge>(dailyIdentifier, null, encode, encodePassword,
                                                 serializer, encoder, encoding, savePath);
 
-                if (a.challengeDate.Date == System.DateTime.Now.Date &&
-                    a.challengeDate.Month == System.DateTime.Now.Month &&
-                    a.challengeDate.Year == System.DateTime.Now.Year)
+                if (a.challengeDate.Date == DateTime.Now.Date &&
+                    a.challengeDate.Month == DateTime.Now.Month &&
+                    a.challengeDate.Year == DateTime.Now.Year)
                 {
                     if (a.checkComplete == false)
                     {
@@ -79,7 +83,7 @@ namespace SpeedTutorMainMenuSystem
                     savePath);
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Debug.Log(e.ToString());
                 challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
@@ -96,7 +100,6 @@ namespace SpeedTutorMainMenuSystem
                     encoding,
                     savePath);
             }
-
         }
         #endregion
 
@@ -340,6 +343,11 @@ namespace SpeedTutorMainMenuSystem
                     {
                         GameSetting.difficult = (GameSetting.Difficult)difficult;
                     }
+                    else
+                    {
+                        //always default normal
+                        GameSetting.difficult = GameSetting.Difficult.Normal;
+                    }
                     SceneManager.LoadScene(levelToLoad);
                 }
                 else
@@ -375,33 +383,4 @@ namespace SpeedTutorMainMenuSystem
         }
         #endregion
     }
-}
-
-public static class GameSetting
-{
-    public enum LoadType
-    {
-        New,
-        Load
-    }
-    public enum Difficult
-    {
-        Easy,
-        Normal,
-        Hard
-    }
-
-    public static LoadType loadType;
-    public static string username = "test";
-    public static string uid = "123456";
-    public static Difficult difficult;
-}
-
-public class DailyChallenge
-{
-    public System.DateTime challengeDate = System.DateTime.Now;
-    public bool checkComplete = false;
-    public string challengeName = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
-    public int numberRequired = 15;
-    public int numberEliminated = 0;
 }
