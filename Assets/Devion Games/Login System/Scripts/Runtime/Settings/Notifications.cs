@@ -72,7 +72,7 @@ namespace DevionGames.LoginSystem.Configuration
         public NotificationOptions accountCreated = new NotificationOptions()
         {
             title = "Account Created",
-            text = "Your account was created and an activation link was sent to your email!"
+            text = "Your account was created! Use your email to login."
         };
 
         public NotificationOptions accountNotFound = new NotificationOptions()
