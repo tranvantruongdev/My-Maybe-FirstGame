@@ -183,11 +183,7 @@ public class GameManager : MonoBehaviour
                 {
                     numberEliminated = numberEnemiesEliminated
                 };
-                if (numberEnemiesEliminated < saveClass.numberRequired)
-                {
-                    saveClass.checkComplete = false;
-                }
-                else
+                if (numberEnemiesEliminated >= saveClass.numberRequired)
                 {
                     saveClass.checkComplete = true;
                 }
@@ -208,11 +204,7 @@ public class GameManager : MonoBehaviour
                 {
                     numberEliminated = numberEnemiesEliminatedNormal
                 };
-                if (numberEnemiesEliminatedNormal < saveClassNormal.numberRequired)
-                {
-                    saveClassNormal.checkComplete = false;
-                }
-                else
+                if (numberEnemiesEliminatedNormal >= saveClassNormal.numberRequired)
                 {
                     saveClassNormal.checkComplete = true;
                 }
@@ -233,11 +225,7 @@ public class GameManager : MonoBehaviour
                 {
                     numberEliminated = numberEnemiesEliminatedHard
                 };
-                if (numberEnemiesEliminatedHard < saveClassHard.numberRequired)
-                {
-                    saveClassHard.checkComplete = false;
-                }
-                else
+                if (numberEnemiesEliminatedHard >= saveClassHard.numberRequired)
                 {
                     saveClassHard.checkComplete = true;
                 }
