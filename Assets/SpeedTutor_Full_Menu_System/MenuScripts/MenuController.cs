@@ -68,7 +68,7 @@ namespace SpeedTutorMainMenuSystem
                 }
                 else
                 {
-                    challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
+                    challengeName.text = "Your today's challenge is:\nEliminate 15 monsters in one game at any difficulty";
                     challengeProgress.text = string.Format("Last try: 0/15");
                     challengeProgress.enabled = true;
                     //override data
@@ -86,7 +86,7 @@ namespace SpeedTutorMainMenuSystem
             catch (Exception e)
             {
                 Debug.Log(e.ToString());
-                challengeName.text = "Your Challenge to day is:\nEliminate 15 monsters in one game at any difficulty";
+                challengeName.text = "Your today's challenge is:\nEliminate 15 monsters in one game at any difficulty";
                 challengeProgress.text = string.Format("Last try: 0/15");
                 challengeProgress.enabled = true;
                 //create new data
