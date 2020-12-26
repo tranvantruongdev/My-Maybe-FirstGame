@@ -34,9 +34,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //handle when load and new game
-        SetPlayerHpBasedOnDifficulty();
-
         StartCoroutine(EnemySpawn());
 
         // Get the root reference location of the database.
@@ -420,6 +417,7 @@ public class GameManager : MonoBehaviour
                 Load();
                 break;
             case GameSetting.LoadType.New:
+                SetPlayerHpBasedOnDifficulty();
                 break;
         }
     }
@@ -496,7 +494,7 @@ public class GameManager : MonoBehaviour
 
         SaveGame.Save<int>(
             difficultyIdentifier,
-            (int) (GameSetting.difficult),
+            (int)(GameSetting.difficult),
             encode,
             encodePassword,
             serializer,
