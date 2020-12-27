@@ -62,7 +62,7 @@ namespace SpeedTutorMainMenuSystem
                     }
                     if (a.checkComplete == true)
                     {
-                        challengeName.text = "Good job! You've complete Daily challenge. Big respect from me :)";
+                        challengeName.text = "Good job! You've complete Daily challenge.\nYou got a Big respect from me :)";
                         challengeProgress.enabled = false;
                     }
                 }
