@@ -59,17 +59,20 @@ namespace SpeedTutorMainMenuSystem
                         challengeName.text = a.challengeName;
                         challengeProgress.text = string.Format("Last try: {0}/{1}", a.numberEliminated, a.numberRequired);
                         challengeProgress.enabled = true;
+                        GameSetting.dailyComplete = false;
                     }
                     if (a.checkComplete == true)
                     {
                         challengeName.text = "Good job! You've complete Daily challenge.\nYou got a Big respect from me :)";
                         challengeProgress.enabled = false;
+                        GameSetting.dailyComplete = true;
                     }
                 }
                 else
                 {
                     challengeName.text = "Today I challenge you to:\nEliminate 15 monsters in one game at any difficulty";
                     challengeProgress.text = string.Format("Last try: 0/15");
+                    GameSetting.dailyComplete = false;
                     challengeProgress.enabled = true;
                     //override data
                     SaveGame.Save<DailyChallenge>(
@@ -88,6 +91,7 @@ namespace SpeedTutorMainMenuSystem
                 Debug.Log(e.ToString());
                 challengeName.text = "Today I challenge you to:\nEliminate 15 monsters in one game at any difficulty";
                 challengeProgress.text = string.Format("Last try: 0/15");
+                GameSetting.dailyComplete = false;
                 challengeProgress.enabled = true;
                 //create new data
                 SaveGame.Save<DailyChallenge>(

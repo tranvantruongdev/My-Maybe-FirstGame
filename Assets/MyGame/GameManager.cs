@@ -165,7 +165,11 @@ public class GameManager : MonoBehaviour
         //Set time scale to 0
         Time.timeScale = 0;
 
-        HandleDailyChallenge();
+        //Only handle when daily challenge is incomplete
+        if (GameSetting.dailyComplete == false)
+        {
+            HandleDailyChallenge();
+        }
 
         StopCoroutine(EnemySpawn());
 

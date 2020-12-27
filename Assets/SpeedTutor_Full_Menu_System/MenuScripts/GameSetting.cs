@@ -16,4 +16,5 @@
     public static string username = "test";
     public static string uid = "123456";
     public static Difficult difficult;
+    public static bool dailyComplete;
 }
