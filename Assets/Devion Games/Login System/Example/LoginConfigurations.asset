@@ -96,7 +96,7 @@ MonoBehaviour:
     ignoreTimeScale: 1
   accountCreated:
     title: Account Created
-    text: Your account was created and an activation link was sent to your email!
+    text: Your account was created. Use your email and password to login.
     color: {r: 1, g: 1, b: 1, a: 1}
     icon: {fileID: 0}
     delay: 2
