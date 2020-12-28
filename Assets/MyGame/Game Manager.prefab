@@ -413,6 +413,7 @@ MonoBehaviour:
   scoreIdentifier: save/playerScore
   stageIdentifier: save/stage
   enemyCounterIdentifier: save/enemyCounter
+  difficultyIdentifier: save/difficulty
   dailyIdentifier: save/daily
   encode: 1
   encodePassword: 
